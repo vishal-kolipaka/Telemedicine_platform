@@ -1,0 +1,63 @@
+{
+  "document_id": "doc_crt-1.txt",
+  "source_file": "crt-1.txt",
+  "file_type": "text",
+  "mime_type": "text/plain",
+  "file_size_bytes": 300,
+  "page_count": 1,
+  "report_date": null,
+  "report_date_confidence": null,
+  "upload_timestamp": "2026-07-29T14:14:03.094Z",
+  "file_hash": "4de76fc7debc5568f45b366e4e57aaa293357e259c8d9e0c28e9fe033d2f9393",
+  "pages": [
+    {
+      "page_index": 0,
+      "extractor_used": "text_file_reader",
+      "raw_text": "Patient ID: TEST_C001\nAge: 48\nGender: Male\nHeight: 170 cm\nWeight: 87 kg\nBMI: 30.1\nWaist Circumference: 102 cm\n\nSystolic BP: 142 mmHg\nDiastolic BP: 91 mmHg\n\nFasting Blood Glucose: 132 mg/dL\nHbA1c: 6.8 %\n\nLDL: 145 mg/dL\nHDL: 38 mg/dL\nTriglycerides: 210 mg/dL\n\nALT: 58 U/L\nAST: 41 U/L",
+      "tables": [],
+      "average_page_confidence": null
+    }
+  ],
+  "extraction_log": [
+    {
+      "operation_id": "op_8b5e1b1b",
+      "timestamp": "2026-07-29T14:14:03.094Z",
+      "level": "INFO",
+      "module": "DocumentReader",
+      "message": "file hash computed"
+    },
+    {
+      "operation_id": "op_8b5e1b1b",
+      "timestamp": "2026-07-29T14:14:03.094Z",
+      "level": "INFO",
+      "module": "DocumentReader",
+      "message": "no duplicate match found, proceeding"
+    },
+    {
+      "operation_id": "op_8b5e1b1b",
+      "timestamp": "2026-07-29T14:14:03.094Z",
+      "level": "INFO",
+      "module": "DocumentReader",
+      "message": "file type detected: text (mime: text/plain)"
+    },
+    {
+      "operation_id": "op_8b5e1b1b",
+      "timestamp": "2026-07-29T14:14:03.094Z",
+      "level": "INFO",
+      "module": "DocumentReader",
+      "message": "read plain text file (281 chars)"
+    },
+    {
+      "operation_id": "op_8b5e1b1b",
+      "timestamp": "2026-07-29T14:14:03.095Z",
+      "level": "INFO",
+      "module": "DocumentReader",
+      "message": "quality check passed"
+    }
+  ],
+  "quality_check": {
+    "passed": true,
+    "reason": null
+  },
+  "extraction_confidence": "high"
+}

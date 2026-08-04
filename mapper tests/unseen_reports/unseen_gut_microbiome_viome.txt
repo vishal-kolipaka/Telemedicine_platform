@@ -1,0 +1,20 @@
+================ VIOME GUT HEALTH REPORT ================
+Sample ID: VIO-882194 | Date: 2026-07-25
+
+Patient Information:
+Age : 45 Years
+Gender : Male
+
+STOOL MICROBIOME TAXONOMIC COMPOSITION:
+Akkermansia muciniphila : 5.4 relative abundance %
+Faecalibacterium prausnitzii : 12.8 relative abundance %
+Bifidobacterium longum : 8.1 relative abundance %
+Roseburia hominis : 4.6 relative abundance %
+Alistipes putredinis : 3.5 relative abundance %
+Escherichia/Shigella : 0.9 relative abundance %
+Collinsella aerofaciens : 2.1 relative abundance %
+Prevotella copri : 5.8 relative abundance %
+Blautia hydrogenotrophica : 3.9 relative abundance %
+Alpha Diversity Index (Shannon) : 3.91
+
+=======================================================

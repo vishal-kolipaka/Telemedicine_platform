@@ -1,0 +1,106 @@
+================ APOLLO DIAGNOSTICS ================
+
+Patient Name : Rahul Sharma
+
+Age : 45 Years
+
+Gender : Male
+
+Height : 177 cm
+
+Weight : 81 kg
+
+Waist Circumference : 94 cm
+
+Blood Pressure : 126/82 mmHg
+
+Repeat Blood Pressure : 124/80 mmHg
+
+--------------------------------------------------
+
+Fasting Blood Glucose : 112 mg/dL
+
+Repeat Fasting Blood Glucose : 110 mg/dL
+
+HbA1c : 6.2 %
+
+Repeat HbA1c : 6.1 %
+
+LDL Cholesterol : 124 mg/dL
+
+Repeat LDL Cholesterol : 121 mg/dL
+
+HDL Cholesterol : 45 mg/dL
+
+Triglycerides : 156 mg/dL
+
+ALT : 31 U/L
+
+AST : 27 U/L
+
+====================================================
+================ APPLE HEALTH =================
+
+Average Daily Steps : 8200 steps/day
+
+Updated Average Daily Steps : 8350 steps/day
+
+Active Minutes : 61 minutes/day
+
+Resting Heart Rate : 66 bpm
+
+Resting Heart Rate (Latest) : 64 bpm
+
+Sleep Duration : 7.3 hours
+
+Calories Burned : 2415 kcal/day
+
+Average Glucose : 115 mg/dL
+
+Average Glucose (Latest) : 113 mg/dL
+
+Glucose Variability : 22 %
+
+Time In Range : 86 %
+
+Time Above Range : 10 %
+
+================================================
+================ MICROBIOME REPORT =================
+
+Akkermansia : 5.1 %
+
+Updated Akkermansia : 5.3 %
+
+Faecalibacterium : 11.6 %
+
+Bifidobacterium : 7.5 %
+
+Roseburia : 5.0 %
+
+Roseburia (Repeat) : 5.2 %
+
+Alistipes : 3.1 %
+
+Escherichia/Shigella : 1.2 %
+
+Collinsella : 2.2 %
+
+Prevotella : 6.0 %
+
+Blautia : 7.4 %
+
+Shannon Diversity Index : 3.84
+
+====================================================
+================ FAMILY HISTORY ================
+
+Diabetes : Yes
+
+Obesity : No
+
+Hypertension : Yes
+
+NAFLD : No
+
+================================================

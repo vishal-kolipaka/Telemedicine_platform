@@ -1,0 +1,84 @@
+================ APOLLO DIAGNOSTICS ================
+
+Patlent Name : Rahul Sharma
+
+Agc : 43 Years
+
+Gcnder : Female
+
+Helght : 165 cm
+
+Welght : 67 kg
+
+Walst Clrcumference : 81 cm
+
+Blood Pressurc : 118/76 mmHg
+
+Fastlng Blood Glucosc : 104 mg/dL
+
+HbAlc : 5.9 %
+
+LDL Ch0lesterol : 122 mg/dL
+
+HDL Ch0lesterol : 48 mg/dL
+
+Trlglycerldes : 136 mg/dL
+
+SGPT : 28 U/L
+
+SGOT : 24 U/L
+
+====================================================
+================ FITBIT SUMMARY ================
+
+Average Dally Steps : 8450 steps/day
+
+Actlve Mlnutes : 58 minutes/day
+
+Sedentary Tlme : 610 minutes/day
+
+Restlng Heart Rate : 65 bpm
+
+Sleep Duratlon : 7.4 hours
+
+Calorles Burned : 2395 kcal/day
+
+Average Glucosc : 116 mg/dL
+
+Glucose Varlablllty : 23 %
+
+Tlme In Range : 85 %
+
+Tlme Above Range : 11 %
+
+=================================================
+=============== GUT MICROBIOME REPORT ===============
+
+Akkermansla : 5.2 %
+
+Faecallbacterlum : 11.4 %
+
+Blfldobacterlum : 7.6 %
+
+Roseburla : 5.0 %
+
+Allstlpes : 3.2 %
+
+Escherlchla/Shlgella : 1.1 %
+
+Colllnsella : 2.4 %
+
+Prevotella : 6.3 %
+
+Blautla : 7.4 %
+
+Shannon Dlverslty Index : 3.85
+
+=====================================================
+Dlabetes : Yes
+
+Obeslty : No
+
+Hypertenslon : Yes
+
+NAFLD : No

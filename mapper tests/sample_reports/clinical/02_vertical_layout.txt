@@ -1,0 +1,184 @@
+================ CITY MULTISPECIALITY HOSPITAL ================
+
+Patient Name
+
+Rahul Sharma
+
+Age
+
+44 Years
+
+Gender
+
+Male
+
+Height
+
+175 cm
+
+Weight
+
+79 kg
+
+Waist Circumference
+
+93 cm
+
+Blood Pressure
+
+124
+
+/
+
+80
+
+mmHg
+
+Fasting Blood Glucose
+
+108
+
+mg/dL
+
+HbA1c
+
+6.0
+
+%
+
+LDL Cholesterol
+
+120
+
+mg/dL
+
+HDL Cholesterol
+
+47
+
+mg/dL
+
+Triglycerides
+
+149
+
+mg/dL
+
+ALT
+
+30
+
+U/L
+
+==============================================================
+================ APPLE HEALTH EXPORT ================
+
+Average Daily Steps
+
+8015
+
+steps/day
+
+Active Minutes
+
+63
+
+minutes/day
+
+Sedentary Time
+
+590
+
+minutes/day
+
+Resting Heart Rate
+
+64
+
+bpm
+
+Sleep Duration
+
+7.8
+
+hours
+
+Calories Burned
+
+2455
+
+kcal/day
+
+Average Glucose
+
+112
+
+mg/dL
+
+Glucose Variability
+
+21
+
+%
+
+Time Above Range
+
+9
+
+%
+
+=====================================================
+================ MICROBIOME REPORT ================
+
+Akkermansia
+
+5.3 %
+
+Faecalibacterium
+
+11.8 %
+
+Bifidobacterium
+
+7.6 %
+
+Roseburia
+
+5.4 %
+
+Alistipes
+
+3.1 %
+
+Escherichia/Shigella
+
+1.4 %
+
+Collinsella
+
+2.0 %
+
+Prevotella
+
+6.2 %
+
+Shannon Diversity Index
+
+3.74
+
+====================================================
+Family History Diabetes
+
+Yes
+
+Family History Obesity
+
+No
+
+Family History Hypertension
+
+Yes
+
+Family History NAFLD
+
+No

@@ -1,0 +1,118 @@
+{
+  "contract_version": "1.4.0",
+  "owner": "Document Reader module",
+  "_notes": "Contract 1 v1.4.0 -- adds page_width/page_height/rotation_degrees/detected_language and a richer quality_check (score + issues[]) per external review. Also explicitly documents WHY is_duplicate/duplicate_of_document_id are deliberately NOT included here (see duplicate_detection_boundary_note) -- a prior review suggested adding them, but that would violate the Reader/Duplicate-Detector separation already established in contract_duplicate_detection.json.",
+
+  "duplicate_detection_boundary_note": "This contract deliberately does NOT include is_duplicate or duplicate_of_document_id fields. Reasoning: (1) EXACT duplicates are caught by the Binary Duplicate Detector BEFORE the Reader ever runs -- the Reader produces no output at all for those, by design, to save extraction cost. (2) POSSIBLE duplicates (same report, different file) can only be detected AFTER extraction, and that is explicitly the Semantic Duplicate Detector's job (a separate component, see contract_duplicate_detection.json), kept apart from the Reader for Single Responsibility. Adding duplicate fields here would smuggle that responsibility back into the Reader.",
+
+  "shape": {
+    "document_id": "string",
+    "source_file": "string",
+    "file_type": "'pdf' | 'image' | 'csv' | 'xlsx'",
+    "mime_type": "string, e.g. 'application/pdf' -- actual detected MIME type",
+    "file_size_bytes": "integer",
+    "page_count": "integer -- 1 for csv/xlsx/image",
+    "report_date": "string (ISO 8601 date) or null",
+    "report_date_confidence": "'HIGH' | 'LOW' | null -- HIGH if unambiguous date format found, LOW if a date was found but format was ambiguous (day-first vs month-first) and was NOT guessed, null if no date pattern found at all",
+    "upload_timestamp": "string (ISO 8601 datetime)",
+    "file_hash": "string (SHA-256)",
+    "pages": [
+      {
+        "page_index": "integer, 0-based",
+        "extractor_used": "'pdfplumber' | 'tesseract' | 'vision_llm_fallback' | 'pandas' -- PER PAGE, since a single PDF can mix digital and scanned pages",
+        "raw_text": "string",
+        "tables": "list of tables; each a list of rows; each row a list of cell strings",
+        "average_page_confidence": "float 0-1 or null -- OCR confidence averaged over RECOGNIZED WORDS ONLY on this page; null if not an OCR page",
+        "page_width": "float or null -- enables future bounding-box/highlight features; null for csv/xlsx",
+        "page_height": "float or null",
+        "rotation_degrees": "0 | 90 | 180 | 270 | null -- if detectable",
+        "detected_language": "string or null, e.g. 'en' -- best-effort only, populate if trivially available, not used for routing in this build"
+      }
+    ],
+    "extraction_log": [
+      {
+        "operation_id": "string -- unique per read_document() call, consistent across all log entries for one document",
+        "timestamp": "ISO 8601 with milliseconds",
+        "level": "'INFO' | 'WARNING' | 'ERROR'",
+        "module": "string -- which component logged this",
+        "message": "string"
+      }
+    ],
+    "quality_check": {"passed": "boolean", "score": "float 0-1", "issues": "array of strings from fixed vocabulary: 'LOW_RESOLUTION' | 'LOW_TEXT_DENSITY' | 'OCR_FAILURE' | 'PARTIAL_PAGE' | 'REPEATED_CHARACTERS' | 'NEAR_EMPTY', empty if passed cleanly"},
+    "extraction_confidence": "'high' | 'low' -- document-level rollup"
+  },
+
+  "example_text_pdf": {
+    "document_id": "doc_7f3a1c",
+    "source_file": "clinical_report_jan2026.pdf",
+    "file_type": "pdf",
+    "mime_type": "application/pdf",
+    "file_size_bytes": 184320,
+    "page_count": 1,
+    "report_date": "2026-01-14",
+    "report_date_confidence": "HIGH",
+    "upload_timestamp": "2026-07-29T10:15:00Z",
+    "file_hash": "a3f5b8c9d0e1f2...",
+    "pages": [
+      {
+        "page_index": 0,
+        "extractor_used": "pdfplumber",
+        "raw_text": "Patient: John Doe\nAge: 45\nGender: Male\nCollection Date: 14-Jan-2026\nHeight: 5'10\"\nWeight: 180 lbs\nBP: 128/82 mmHg",
+        "tables": [
+          [["Test", "Result", "Unit", "Reference Range"],
+           ["HbA1c", "6.1", "%", "4.0-5.6"],
+           ["Fasting Glucose", "112", "mg/dL", "70-99"],
+           ["LDL", "118", "mg/dL", "<100"],
+           ["HDL", "42", "mg/dL", ">40"],
+           ["Triglycerides", "135", "mg/dL", "<150"],
+           ["ALT", "34", "U/L", "7-56"],
+           ["AST", "38", "U/L", "10-40"]]
+        ],
+        "average_page_confidence": null,
+        "page_width": 612.0, "page_height": 792.0, "rotation_degrees": 0, "detected_language": "en"
+      }
+    ],
+    "extraction_log": [
+      {"operation_id": "op_a1b2c3", "timestamp": "2026-07-29T10:15:00.100Z", "level": "INFO", "module": "DocumentReader", "message": "file hash computed, no match found, proceeding"},
+      {"operation_id": "op_a1b2c3", "timestamp": "2026-07-29T10:15:00.150Z", "level": "INFO", "module": "DocumentReader", "message": "page 0: text layer found, routed to pdfplumber"},
+      {"operation_id": "op_a1b2c3", "timestamp": "2026-07-29T10:15:00.210Z", "level": "INFO", "module": "PdfTextExtractor", "message": "table extraction succeeded: 1 table, 8 rows"},
+      {"operation_id": "op_a1b2c3", "timestamp": "2026-07-29T10:15:00.230Z", "level": "INFO", "module": "DocumentReader", "message": "quality check passed"}
+    ],
+    "quality_check": {"passed": true, "score": 0.96, "issues": []},
+    "extraction_confidence": "high"
+  },
+
+  "example_scanned_with_fallback": {
+    "document_id": "doc_9b2e44",
+    "source_file": "lab_scan_photo.jpg",
+    "file_type": "image",
+    "mime_type": "image/jpeg",
+    "file_size_bytes": 2451200,
+    "page_count": 1,
+    "report_date": null,
+    "report_date_confidence": null,
+    "upload_timestamp": "2026-07-29T10:20:00Z",
+    "file_hash": "b71e4d09aa...",
+    "pages": [
+      {
+        "page_index": 0,
+        "extractor_used": "tesseract",
+        "raw_text": "Patient: Jane Smith\nAge: 38\nWaist Circumference: 34 in\nFasting Blood Sugar: 98 mg/dL",
+        "tables": [],
+        "average_page_confidence": 0.81,
+        "page_width": 1024.0, "page_height": 1365.0, "rotation_degrees": 0, "detected_language": "en"
+      }
+    ],
+    "extraction_log": [
+      {"operation_id": "op_99c3d4", "timestamp": "2026-07-29T10:20:00.050Z", "level": "INFO", "module": "DocumentReader", "message": "image detected, routed to tesseract"},
+      {"operation_id": "op_99c3d4", "timestamp": "2026-07-29T10:20:00.400Z", "level": "INFO", "module": "DocumentReader", "message": "quality check passed"}
+    ],
+    "quality_check": {"passed": true, "score": 0.96, "issues": []},
+    "extraction_confidence": "high"
+  },
+
+  "reader_responsibilities": [
+    "See BUILD_PROMPT_document_reader.md for the full, authoritative build specification -- this file documents the exact OUTPUT SHAPE that becomes the Feature Mapper's input, kept as a standalone reference so the Mapper's build prompt can point to it without duplicating the entire Reader spec inline.",
+    "Do NOT attempt to identify which value belongs to which schema field -- entirely the Feature Mapper's job."
+  ]
+}

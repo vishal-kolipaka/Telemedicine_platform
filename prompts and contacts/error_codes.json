@@ -1,0 +1,53 @@
+{
+  "contract_version": "1.0.0",
+  "owner": "Shared across Reader, Mapper, Session Store",
+  "_notes": "NEW -- standardized error codes so the frontend/UI can key off a stable code instead of parsing prose messages, and so logs/observability are consistent across the whole preprocessing unit.",
+
+  "codes": {
+    "FIELD_NOT_FOUND": {
+      "meaning": "A required field's aliases were searched for across all uploaded documents for this session and none matched.",
+      "triggers": "Field added to missing_fields in Contract 2.",
+      "user_facing": "Shown as part of the consolidated missing-fields list once the user signals done uploading."
+    },
+    "OUT_OF_RANGE": {
+      "meaning": "A value was extracted and matched to a field, but falls outside that field's valid_range.",
+      "triggers": "Field added to flagged_for_reconfirm in Contract 2, validation_status = INVALID.",
+      "user_facing": "\"We found X: <value> in your report, but that's outside a realistic range. Please confirm or correct this value.\""
+    },
+    "OCR_LOW_CONFIDENCE": {
+      "meaning": "Contract 1's per-page ocr_confidence fell below an acceptable threshold for a page that contributed a value.",
+      "triggers": "Lowers mapping_confidence on any field extracted from that page; does not by itself invalidate the value, but should be surfaced in any review UI.",
+      "user_facing": "Optional -- a subtle 'this value was read from a low-quality scan, please double check' hint, not a hard block."
+    },
+    "INVALID_UNIT": {
+      "meaning": "A unit was detected in the text but it's not in that field's accepted_input_units list, so no conversion rule applies.",
+      "triggers": "Field cannot be auto-converted -- treated like FIELD_NOT_FOUND (ask the user directly, showing what was found).",
+      "user_facing": "\"We found a value for X but couldn't confirm its unit. Please enter it directly.\""
+    },
+    "MULTIPLE_VALUES_FOUND": {
+      "meaning": "Same field extracted from 2+ documents with conflicting values that differ by more than the 20% relative-difference threshold, even after date-based resolution.",
+      "triggers": "Entry added to conflict_log in Contract 2; NOT auto-resolved.",
+      "user_facing": "\"We found two different values for X: <value 1> (from <doc, date>) and <value 2> (from <doc, date>). Which is correct?\""
+    },
+    "DUPLICATE_REPORT": {
+      "meaning": "Binary Duplicate Detector found an exact file_hash match (EXACT_DUPLICATE), or Semantic Duplicate Detector's weighted score crossed the threshold (POSSIBLE_DUPLICATE). See contract_duplicate_detection.json for full detection logic.",
+      "triggers": "EXACT_DUPLICATE: document discarded automatically, Reader never invoked. POSSIBLE_DUPLICATE: user prompted with Replace / Keep Both / Skip Upload.",
+      "user_facing": "EXACT_DUPLICATE: \"This exact file was already uploaded, skipping.\" POSSIBLE_DUPLICATE: \"This report appears very similar to one you already uploaded. Replace, Keep Both, or Skip Upload?\""
+    },
+    "TYPE_MISMATCH": {
+      "meaning": "A resolved value's Python type doesn't match the schema's declared type for that field (e.g. a boolean field received a string, or a numeric field received non-numeric text) -- caught by the Feature Mapper's TypeValidator.",
+      "triggers": "Field's validation_status set to INVALID; NOT added to 'values', held for reconfirmation like an out-of-range value.",
+      "user_facing": "\"We found a value for X but it doesn't look like the expected type. Please confirm or re-enter it.\""
+    },
+    "AMBIGUOUS_MATCH": {
+      "meaning": "The Matching Engine (regex, then LLM fallback if enabled) could not confidently determine which candidate value corresponds to a schema field -- e.g. multiple plausible numbers found near an alias with no way to disambiguate.",
+      "triggers": "Field added to missing_fields (treated as unresolved, same as 'not found') rather than a guessed value being stored.",
+      "user_facing": "Shown as part of the consolidated missing-fields list, same as FIELD_NOT_FOUND."
+    },
+    "FASTING_STATUS_UNCONFIRMED": {
+      "meaning": "A glucose-related value was found in the report but the surrounding text did not explicitly confirm fasting status (e.g. report just says 'Glucose' not 'Fasting Glucose') -- per feature_schema.json's mandatory fasting confirmation rule for Fasting_Blood_Glucose.",
+      "triggers": "Value is NOT auto-accepted as Fasting_Blood_Glucose; field treated as unresolved pending user confirmation of fasting status.",
+      "user_facing": "\"We found a glucose reading, but couldn't confirm if it was a fasting test. Was this taken while fasting?\""
+    }
+  }
+}

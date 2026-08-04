@@ -1,0 +1,22 @@
+================ APPLE HEALTHKIT SUMMARY EXPORT ================
+Export Date: 2026-07-29
+
+User Profile:
+Age: 42 Yrs
+Sex: Male
+
+Activity Metrics (30-day Average):
+Daily Step Count : 9120 steps/day
+Exercise Time : 48 minutes/day
+Inactive Time : 580 minutes/day
+Resting Heart Rate : 62 bpm
+Total Sleep : 7.5 hours
+Active Energy Burned : 2480 kcal/day
+
+CGM Data Sync (Dexcom G7):
+Mean Glucose : 112 mg/dL
+Glucose CV : 21 %
+Time in Range (70-180 mg/dL) : 88 %
+Time High (>180 mg/dL) : 9 %
+
+===============================================================

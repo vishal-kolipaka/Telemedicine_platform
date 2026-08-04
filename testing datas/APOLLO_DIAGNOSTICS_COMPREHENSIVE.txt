@@ -1,0 +1,122 @@
+                    APOLLO DIAGNOSTICS
+          Comprehensive Metabolic Health Profile
+------------------------------------------------------------
+
+Patient Name      : Rahul Sharma
+Patient ID        : P000201
+Age               : 42 Years
+Gender            : Male
+
+Collection Date   : 30-Jul-2026
+
+============================================================
+PATIENT MEASUREMENTS
+============================================================
+
+Height            : 176 cm
+Weight            : 81 kg
+Waist Circumference : 96 cm
+
+Blood Pressure    : 126/82 mmHg
+
+============================================================
+BIOCHEMISTRY
+============================================================
+
+Fasting Blood Glucose : 110 mg/dL
+HbA1c                 : 6.1 %
+
+LDL Cholesterol       : 124 mg/dL
+HDL Cholesterol       : 44 mg/dL
+Triglycerides         : 168 mg/dL
+
+ALT (SGPT)            : 32 U/L
+
+------------------------------------------------------------
+Verified By:
+Dr. Priya Menon
+
+
+============================================================
+FITBIT HEALTH SUMMARY
+============================================================
+
+Reporting Period : Last 30 Days
+
+Average Daily Steps      : 8425 steps/day
+
+Active Minutes           : 56 minutes/day
+
+Sedentary Time           : 602 minutes/day
+
+Resting Heart Rate       : 67 bpm
+
+Sleep Duration           : 7.2 hours
+
+Calories Burned          : 2360 kcal/day
+
+Average Glucose          : 118 mg/dL
+
+Time In Range            : 84 %
+
+Time Above Range         : 12 %
+
+============================================================
+END REPORT
+============================================================
+
+============================================================
+GUT MICROBIOME ANALYSIS REPORT
+============================================================
+
+Patient : Rahul Sharma
+
+Akkermansia                : 4.8 %
+
+Faecalibacterium           : 11.6 %
+
+Bifidobacterium            : 7.4 %
+
+Roseburia                  : 5.1 %
+
+Alistipes                  : 3.0 %
+
+Escherichia/Shigella       : 1.2 %
+
+Collinsella                : 2.3 %
+
+Prevotella                 : 6.4 %
+
+Shannon Diversity Index    : 3.82
+
+============================================================
+End of Report
+============================================================
+
+============================================================
+FAMILY HISTORY QUESTIONNAIRE
+============================================================
+
+Does a close blood relative have diabetes?
+
+YES
+
+------------------------------------------------------------
+
+Does a close blood relative have obesity?
+
+NO
+
+------------------------------------------------------------
+
+Does a close blood relative have high blood pressure?
+
+YES
+
+------------------------------------------------------------
+
+Does a close blood relative have fatty liver disease (NAFLD)?
+
+NO
+
+============================================================

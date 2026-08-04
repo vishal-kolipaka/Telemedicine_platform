@@ -1,0 +1,20 @@
+================ METROPOLIS HEALTHCARE ================
+The Pathology Specialist | BARCODE: MET-77281
+
+Patient Name : Rajesh Varma
+Age : 51 Years | Sex : Male
+Height (cm) : 170
+Weight (kg) : 79
+Abdominal Circumference (cm) : 94
+Systolic / Diastolic BP : 132/86 mmHg
+
+SERUM BIOCHEMISTRY:
+Fasting Blood Sugar : 118 mg/dL
+Glyco Hb (HbA1c) : 6.5 %
+S. Cholesterol LDL : 138 mg/dL
+S. Cholesterol HDL : 39 mg/dL
+S. Triglycerides : 185 mg/dL
+S. ALT/SGPT : 42 U/L
+S. AST/SGOT : 36 U/L
+
+=======================================================

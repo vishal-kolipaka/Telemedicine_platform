@@ -1,0 +1,21 @@
+================ WHOOP STRAP 4.0 MONTHLY SUMMARY ================
+
+User Demographics:
+Age: 38 Years
+Gender: Female
+
+Biometric Averages:
+Step Count : 10250 steps/day
+Active Time : 65 minutes/day
+Sedentary Minutes : 540 minutes/day
+Resting HR : 56 bpm
+Sleep Hours : 7.8 hours
+Kcal Expended : 2150 kcal/day
+
+Abbott FreeStyle Libre 3 Sync:
+CGM Average Glucose : 104 mg/dL
+Glycemic Variability : 18 %
+TIR (70-180) : 92 %
+TAR (>180) : 6 %
+
+===============================================================

@@ -1,0 +1,189 @@
+Phase 2 – Advanced Regression Suite
+🧪 Master Test 15 – Ultimate Mixed Stress Test ⭐⭐⭐⭐⭐
+Check
+
+Everything together in one report.
+
+OCR mistakes
+Random order
+Compact format
+Noise
+Unit conversion
+Duplicate values
+Scientific microbiome names
+Aliases
+Multiple pages
+Header/Footer
+
+Goal:
+Can the mapper still extract everything correctly from a real-world messy report?
+
+🧪 Master Test 16 – Table-Based Reports ⭐⭐⭐⭐⭐
+Check
+
+Many labs use tables instead of key-value pairs.
+
+Example
+
+Test              Result      Unit
+HbA1c             6.1         %
+LDL               124         mg/dL
+HDL               45          mg/dL
+
+Goal
+
+table parsing
+column detection
+row mapping
+🧪 Master Test 17 – Reference Range Confusion ⭐⭐⭐⭐⭐
+Check
+
+Report
+
+HbA1c
+
+Result
+6.1 %
+
+Reference Range
+4.5–5.7 %
+
+Mapper should extract
+
+6.1
+
+NOT
+
+5.7
+
+Same for
+
+LDL
+HDL
+ALT
+AST
+🧪 Master Test 18 – Multiple Similar Labels ⭐⭐⭐⭐⭐
+
+Example
+
+Glucose Random
+
+Glucose Fasting
+
+Average Glucose
+
+Estimated Glucose
+
+Post Lunch Glucose
+
+Goal
+
+Your mapper should map only
+
+Fasting Blood Glucose
+
+to the clinical schema.
+
+Similarly
+
+Heart Rate
+
+Resting Heart Rate
+
+Maximum Heart Rate
+
+Average Heart Rate
+
+Only
+
+Resting Heart Rate
+
+should populate the wearable field.
+
+🧪 Master Test 19 – Corrected / Updated Reports ⭐⭐⭐⭐⭐
+
+Example
+
+HbA1c : 6.8 %
+
+----------------
+
+Corrected
+
+HbA1c : 6.2 %
+
+or
+
+Updated LDL
+
+Goal
+
+latest value
+corrected value
+version handling
+🧪 Master Test 20 – Extreme Edge Cases ⭐⭐⭐⭐⭐
+
+Examples
+
+Weight : eighty kg
+
+HbA1c : Pending
+
+AST : Sample Hemolyzed
+
+LDL : <120
+
+HDL : >40
+
+BP : Normal
+
+Height : Approx 178 cm
+
+Goal
+
+invalid values
+pending reports
+text instead of numbers
+comparison operators
+missing values
+graceful failure
+Final Regression Suite
+Core Tests
+
+✅ Test 1 — Standard Layout
+
+✅ Test 2 — Vertical OCR
+
+✅ Test 3 — Compact Layout
+
+✅ Test 4 — Random Order
+
+✅ Test 5 — Unit Conversion
+
+✅ Test 6 — OCR Errors
+
+✅ Test 7 — CSV / Excel
+
+✅ Test 8 — Scientific Gut Reports
+
+✅ Test 9 — Noise Filtering
+
+✅ Test 10 — Duplicate Values
+
+✅ Test 11 — Multi-page Reports
+
+✅ Test 12 — Missing Labels / Context Inference
+
+Advanced Tests
+
+🧪 Test 13 — Ultimate Mixed Stress Test
+
+🧪 Test 14 — Table-Based Reports
+
+🧪 Test 15 — Reference Range Confusion
+
+🧪 Test 16 — Multiple Similar Labels
+
+🧪 Test 17 — Corrected / Updated Reports
+
+🧪 Test 18 — Extreme Edge Cases

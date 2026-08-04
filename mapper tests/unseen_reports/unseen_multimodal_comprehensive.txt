@@ -1,0 +1,49 @@
+================ LAL PATH LABS ================
+Comprehensive Full Body Checkup + Wearable Sync + Gut Panel
+
+PATIENT RECORD:
+Patient Name : Sunita Rao
+Age : 49 Years
+Gender : Female
+Height : 162 cm
+Weight : 68 kg
+Waist : 86 cm
+Blood Pressure : 124/78 mmHg
+
+SECTION 1: CLINICAL BIOCHEMISTRY
+----------------------------------------------------------------------
+Fasting Blood Sugar : 106.0 mg/dL
+HbA1c : 6.0 %
+LDL Cholesterol : 126.0 mg/dL
+HDL Cholesterol : 48.0 mg/dL
+Triglycerides : 148.0 mg/dL
+ALT (SGPT) : 29.0 U/L
+AST (SGOT) : 26.0 U/L
+
+SECTION 2: GARMIN SMARTWATCH DATA
+----------------------------------------------------------------------
+Daily Steps : 7850 steps/day
+Active Minutes : 45 minutes/day
+Inactive Time : 620 minutes/day
+Resting HR : 64 bpm
+Sleep Duration : 7.1 hours
+Calories Burned : 2050 kcal/day
+Mean Glucose (CGM) : 110.0 mg/dL
+Glucose Variability : 19.0 %
+Time In Range : 89.0 %
+Time Above Range : 8.0 %
+
+SECTION 3: GUT TAXONOMY PANEL
+----------------------------------------------------------------------
+Akkermansia : 4.2 %
+Faecalibacterium : 10.9 %
+Bifidobacterium : 6.8 %
+Roseburia : 4.5 %
+Alistipes : 2.9 %
+Escherichia shigella : 1.4 %
+Collinsella : 2.5 %
+Prevotella : 6.0 %
+Blautia : 3.8 %
+Shannon Diversity Index : 3.75
+
+======================================================================

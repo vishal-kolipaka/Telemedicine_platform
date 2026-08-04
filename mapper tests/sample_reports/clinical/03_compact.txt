@@ -1,0 +1,47 @@
+=============== MEDICARE DIAGNOSTICS ===============
+
+Patient: Rahul Sharma
+Age:46Y  Sex:M
+Ht:179cm  Wt:83kg
+WC:98cm  BP:130/84mmHg
+
+FBS:113mg/dL
+HbA1c:6.3%
+LDL-C:127mg/dL
+HDL-C:42mg/dL
+TG:171mg/dL
+SGPT:35U/L
+SGOT:31U/L
+
+====================================================
+=============== GARMIN CONNECT ===============
+
+Steps:7642/day
+Active:52min/day
+Sedentary:640min/day
+RHR:68bpm
+Sleep:6.9hrs
+Calories:2295kcal/day
+Avg Glucose:121mg/dL
+GV:26%
+TIR:81%
+TAR:15%
+
+==============================================
+=============== GUT PROFILE ===============
+
+Akkermansia:4.4%
+Faecalibacterium:10.8%
+Bifidobacterium:7.2%
+Roseburia:4.6%
+Alistipes:3.4%
+Escherichia/Shigella:1.8%
+Collinsella:2.2%
+Prevotella:5.8%
+Blautia:7.1%
+
+===========================================
+Diabetes:No
+Obesity:Yes
+Hypertension:No
+NAFLD:Yes

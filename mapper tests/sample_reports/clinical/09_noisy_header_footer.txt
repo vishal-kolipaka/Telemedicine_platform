@@ -1,0 +1,188 @@
+                     APOLLO DIAGNOSTICS
+        NABL Accredited Laboratory (ISO 15189:2012)
+
+------------------------------------------------------------
+Address:
+Road No. 12, Banjara Hills, Hyderabad - 500034
+
+Phone:
+040-12345678
+
+Email:
+care@apollo.com
+
+Website:
+www.apollodiagnostics.in
+
+------------------------------------------------------------
+
+Invoice No : INV-202607300981
+
+Patient ID : AP786542
+
+UHID : UH2026345879
+
+Barcode : 981237645891
+
+QR Verification : QR-8DF73A91
+
+Collection Date : 30-Jul-2026 08:15 AM
+
+Report Date : 30-Jul-2026 02:46 PM
+
+Referring Doctor : Dr. S. Reddy
+
+------------------------------------------------------------
+
+Patient Name : Rahul Sharma
+
+Age : 46 Years
+
+Gender : Male
+
+Height : 178 cm
+
+Weight : 82 kg
+
+Waist Circumference : 96 cm
+
+Blood Pressure : 126/82 mmHg
+
+------------------------------------------------------------
+
+BIOCHEMISTRY
+
+Fasting Blood Glucose : 111 mg/dL
+
+HbA1c : 6.2 %
+
+LDL Cholesterol : 123 mg/dL
+
+HDL Cholesterol : 45 mg/dL
+
+Triglycerides : 162 mg/dL
+
+ALT : 33 U/L
+
+AST : 27 U/L
+
+------------------------------------------------------------
+
+Comments
+
+Sample received in good condition.
+
+------------------------------------------------------------
+
+Billing Amount : ₹2,450
+
+Payment Mode : UPI
+
+Technician ID : T-882
+
+Machine Serial : BIO-AU5800
+
+Page 1 of 3
+
+Authorized Signatory
+
+Dr. Anjali Rao
+
+------------------------------------------------------------
+================ FITBIT EXPORT ================
+
+User ID : FBT-98341
+
+Firmware Version : 4.1.7
+
+Device Serial : FB98237462
+
+Sync Date : 30-Jul-2026
+
+Average Daily Steps : 8310 steps/day
+
+Active Minutes : 59 minutes/day
+
+Sedentary Time : 608 minutes/day
+
+Resting Heart Rate : 66 bpm
+
+Sleep Duration : 7.2 hours
+
+Calories Burned : 2390 kcal/day
+
+Average Glucose : 117 mg/dL
+
+Glucose Variability : 23 %
+
+Time In Range : 85 %
+
+Time Above Range : 11 %
+
+Battery : 87%
+
+Bluetooth : Connected
+
+Last Sync : Today
+
+==============================================
+================ GUT MICROBIOME REPORT ================
+
+Laboratory : GutHealth Labs
+
+Sample ID : GM-983742
+
+Collection Kit : GK-22
+
+Sequencing Platform : Illumina MiSeq
+
+Run ID : RUN-872341
+
+Pipeline Version : v4.8
+
+------------------------------------------------------
+
+Akkermansia : 5.0 %
+
+Faecalibacterium : 11.4 %
+
+Bifidobacterium : 7.3 %
+
+Roseburia : 5.2 %
+
+Alistipes : 3.1 %
+
+Escherichia/Shigella : 1.2 %
+
+Collinsella : 2.2 %
+
+Prevotella : 6.1 %
+
+Blautia : 7.8 %
+
+Shannon Diversity Index : 3.92
+
+------------------------------------------------------
+
+Total Reads : 2,314,551
+
+Mapped Reads : 98.7%
+
+Reference Database : GTDB
+
+Report Version : 6.1
+
+Page 2 of 5
+
+======================================================
+================ FAMILY HISTORY ================
+
+Diabetes : Yes
+
+Obesity : No
+
+Hypertension : Yes
+
+NAFLD : No
+
+================================================

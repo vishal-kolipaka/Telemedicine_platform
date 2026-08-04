@@ -1,0 +1,28 @@
+================ HEALTHCARE LABS ================
+
+Patient Name : Rahul Sharma
+Age : 45 Years
+Gender : Male
+Height : 178 cm
+Weight : 82 kg
+Waist Circumference : 95 cm
+Blood Pressure : 128/82 mmHg
+
+Fasting Blood Glucose : 109 mg/dL
+
+HbA1c : 6.8 %
+--------------------------------------------------
+CORRECTED RESULT
+HbA1c : 6.2 %
+
+LDL Cholesterol : 135 mg/dL
+--------------------------------------------------
+UPDATED RESULT
+LDL Cholesterol : 122 mg/dL
+
+HDL Cholesterol : 46 mg/dL
+Triglycerides : 141 mg/dL
+ALT : 31 U/L
+AST : 28 U/L
+
+====================================================

@@ -1,0 +1,28 @@
+================ METRO LABS ================
+
+Patient Name : Rahul Sharma
+Age : 45 Years
+Gender : Male
+Height : 178 cm
+Weight : 82 kg
+Waist Circumference : 95 cm
+Blood Pressure : 128/82 mmHg
+
+Random Glucose : 145 mg/dL
+Post Lunch Glucose : 160 mg/dL
+Estimated Average Glucose : 128 mg/dL
+Fasting Blood Glucose : 108 mg/dL
+
+HbA1c : 6.1 %
+LDL Cholesterol : 124 mg/dL
+HDL Cholesterol : 44 mg/dL
+Triglycerides : 141 mg/dL
+ALT : 31 U/L
+AST : 28 U/L
+
+---------------- FITBIT DATA ----------------
+Maximum Heart Rate : 155 bpm
+Average Heart Rate : 78 bpm
+Resting Heart Rate : 66 bpm
+
+====================================================

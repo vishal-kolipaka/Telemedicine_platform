@@ -1,0 +1,114 @@
+{
+  "timestamp": "2026-08-02T03:13:05Z",
+  "total_unseen_reports": 7,
+  "overall_precision": 1.0,
+  "overall_recall": 0.9649,
+  "overall_f1": 0.9821,
+  "details": [
+    {
+      "filename": "unseen_clinical_max_health.txt",
+      "status": "\u2705 PERFECT",
+      "expected_count": 15,
+      "extracted_count": 15,
+      "tp": 15,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "missing_fields": [],
+      "spurious_fields": []
+    },
+    {
+      "filename": "unseen_clinical_metropolis.txt",
+      "status": "\u2705 PERFECT",
+      "expected_count": 15,
+      "extracted_count": 15,
+      "tp": 15,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "missing_fields": [],
+      "spurious_fields": []
+    },
+    {
+      "filename": "unseen_clinical_quest_diagnostics.txt",
+      "status": "\u26a0\ufe0f IMPERFECT",
+      "expected_count": 15,
+      "extracted_count": 14,
+      "tp": 14,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9333,
+      "f1": 0.9655,
+      "missing_fields": [
+        "Age"
+      ],
+      "spurious_fields": []
+    },
+    {
+      "filename": "unseen_gut_microbiome_viome.txt",
+      "status": "\u2705 PERFECT",
+      "expected_count": 11,
+      "extracted_count": 11,
+      "tp": 11,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "missing_fields": [],
+      "spurious_fields": []
+    },
+    {
+      "filename": "unseen_multimodal_comprehensive.txt",
+      "status": "\u2705 PERFECT",
+      "expected_count": 34,
+      "extracted_count": 34,
+      "tp": 34,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "missing_fields": [],
+      "spurious_fields": []
+    },
+    {
+      "filename": "unseen_wearable_apple_health.txt",
+      "status": "\u274c FAIL",
+      "expected_count": 12,
+      "extracted_count": 10,
+      "tp": 10,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1": 0.9091,
+      "missing_fields": [
+        "CGM_Time_Above_Range",
+        "Active_Minutes"
+      ],
+      "spurious_fields": []
+    },
+    {
+      "filename": "unseen_wearable_whoop_summary.txt",
+      "status": "\u26a0\ufe0f IMPERFECT",
+      "expected_count": 12,
+      "extracted_count": 11,
+      "tp": 11,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9167,
+      "f1": 0.9565,
+      "missing_fields": [
+        "Activity_Energy_Expenditure"
+      ],
+      "spurious_fields": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+Patient ID: TEST_C001
+Age: 48
+Gender: Male
+Height: 170 cm
+Weight: 87 kg
+BMI: 30.1
+Waist Circumference: 102 cm
+
+Systolic BP: 142 mmHg
+Diastolic BP: 91 mmHg
+
+Fasting Blood Glucose: 132 mg/dL
+HbA1c: 6.8 %
+
+LDL: 145 mg/dL
+HDL: 38 mg/dL
+Triglycerides: 210 mg/dL
+
+ALT: 58 U/L
+AST: 41 U/L

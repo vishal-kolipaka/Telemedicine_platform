@@ -1,0 +1,8 @@
+Starting Tesseract Diagnostic...
+pytesseract imported successfully
+Tesseract binary NOT FOUND on PATH or pytesseract default location: tesseract is not installed or it's not in your PATH. See README file for more information.
+  Checking C:\Program Files\Tesseract-OCR\tesseract.exe -> False
+  Checking C:\Program Files (x86)\Tesseract-OCR\tesseract.exe -> False
+  Checking C:\Users\HP PC\AppData\Local\Programs\Tesseract-OCR\tesseract.exe -> False
+  Checking C:\Users\HP PC\AppData\Local\Tesseract-OCR\tesseract.exe -> False
+RESULT: Tesseract OCR binary is NOT INSTALLED on this Windows system!

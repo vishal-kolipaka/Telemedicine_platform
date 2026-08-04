@@ -1,0 +1,82 @@
+================== SRL DIAGNOSTICS ==================
+
+Triglycerides : 162 mg/dL
+
+Weight : 78 kg
+
+AST : 27 U/L
+
+Age : 47 Years
+
+HbA1c : 6.1 %
+
+Gender : Female
+
+Waist Circumference : 91 cm
+
+HDL Cholesterol : 52 mg/dL
+
+Blood Pressure : 122/78 mmHg
+
+Height : 167 cm
+
+ALT : 29 U/L
+
+LDL Cholesterol : 116 mg/dL
+
+Fasting Blood Glucose : 107 mg/dL
+
+=====================================================
+================ GOOGLE FIT =================
+
+Sleep Duration : 7.6 hours
+
+Calories Burned : 2340 kcal/day
+
+Average Glucose : 114 mg/dL
+
+Average Daily Steps : 8910 steps/day
+
+Time Above Range : 10 %
+
+Sedentary Time : 598 minutes/day
+
+Resting Heart Rate : 66 bpm
+
+Glucose Variability : 22 %
+
+Time In Range : 85 %
+
+=============================================
+================ GUT REPORT =================
+
+Collinsella : 2.4 %
+
+Prevotella : 6.1 %
+
+Akkermansia : 4.9 %
+
+Blautia : 7.8 %
+
+Roseburia : 5.0 %
+
+Faecalibacterium : 11.5 %
+
+Shannon Diversity Index : 3.91
+
+Escherichia/Shigella : 1.3 %
+
+Alistipes : 2.9 %
+
+=============================================
+================ FAMILY HISTORY ================
+
+Hypertension : Yes
+
+NAFLD : No
+
+Diabetes : Yes
+
+Obesity : No
+
+================================================

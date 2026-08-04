@@ -1,0 +1,1077 @@
+{
+  "schema_version": "2.0.0",
+  "version_note": "v2.0.0 migration: Synchronized schema with dataset v3. Renamed Height_cm->Height, Weight_kg->Weight, Waist_Circumference_cm->Waist_Circumference, LDL_Cholesterol->LDL, HDL_Cholesterol->HDL. Updated Clinical Family History fields (removed Obesity/NAFLD, added Family_History_CVD). Expanded Gut features to 20 taxa (22 total with Age/Gender) and removed Shannon_Diversity_Index. Consolidated Wearable features to 17 total (renamed CGM & sleep metrics, added HRV/Stress/Sleep_Efficiency/Exercise_Frequency).",
+  "_notes": "Source of truth for the preprocessing unit's feature mapper.",
+  "default_conflict_relative_threshold": 0.2,
+  "metadata_fields": {
+    "Patient_ID": {
+      "type": "string",
+      "required": true,
+      "source": "system_generated",
+      "note": "Assigned by the platform (account/session ID). Never searched for in a report. Never fed to any model -- pure identifier only."
+    }
+  },
+  "shared_features": {
+    "_note": "Age and Gender are real input features (not metadata) -- they appear in EVERY model's column_order and directly affect predictions.",
+    "Age": {
+      "type": "integer",
+      "unit": "years",
+      "required": true,
+      "valid_range": [
+        18,
+        100
+      ],
+      "source": "report_extraction",
+      "aliases": [
+        "age",
+        "agc",
+        "patlent age"
+      ]
+    },
+    "Gender": {
+      "type": "categorical",
+      "categories": [
+        "Male",
+        "Female"
+      ],
+      "required": true,
+      "source": "report_extraction",
+      "aliases": [
+        "gender",
+        "sex",
+        "gcnder"
+      ],
+      "encoding": {
+        "Male": 1,
+        "Female": 0
+      }
+    }
+  },
+  "clinical": {
+    "column_order": [
+      "Age",
+      "Gender",
+      "Height",
+      "Weight",
+      "BMI",
+      "Waist_Circumference",
+      "Systolic_BP",
+      "Diastolic_BP",
+      "Fasting_Blood_Glucose",
+      "HbA1c",
+      "Triglycerides",
+      "HDL",
+      "LDL",
+      "ALT",
+      "AST",
+      "Family_History_Diabetes",
+      "Family_History_Hypertension",
+      "Family_History_CVD"
+    ],
+    "features": {
+      "Height": {
+        "type": "float",
+        "unit": "cm",
+        "required": true,
+        "valid_range": [
+          100,
+          230
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "height",
+          "ht",
+          "height (cm)",
+          "pt height",
+          "helght"
+        ],
+        "accepted_input_units": [
+          "cm",
+          "m",
+          "ft_in"
+        ]
+      },
+      "Weight": {
+        "type": "float",
+        "unit": "kg",
+        "required": true,
+        "valid_range": [
+          25,
+          250
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "weight",
+          "wt",
+          "weight (kg)",
+          "body weight",
+          "welght"
+        ],
+        "accepted_input_units": [
+          "kg",
+          "lbs"
+        ],
+        "conflict_relative_threshold": 0.05
+      },
+      "BMI": {
+        "type": "float",
+        "unit": "kg/m2",
+        "required": true,
+        "valid_range": [
+          10,
+          70
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "bmi",
+          "body mass index"
+        ],
+        "derivable_from": [
+          "Height",
+          "Weight"
+        ],
+        "derive_formula": "BMI = Weight / ((Height / 100) ** 2)"
+      },
+      "Waist_Circumference": {
+        "type": "float",
+        "unit": "cm",
+        "required": true,
+        "valid_range": [
+          50,
+          180
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "waist circumference",
+          "waistcircumference",
+          "waist-circumference",
+          "waist",
+          "abdominal circumference",
+          "wc",
+          "walst clrcumference",
+          "walstcircumference"
+        ],
+        "accepted_input_units": [
+          "cm",
+          "in"
+        ]
+      },
+      "Systolic_BP": {
+        "type": "float",
+        "unit": "mmHg",
+        "required": true,
+        "valid_range": [
+          70,
+          220
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "systolic",
+          "sbp",
+          "systolic bp",
+          "systolic blood pressure",
+          "blood pressurc",
+          "systolic bp(mm of hg)",
+          "systolic bp (mm of hg)"
+        ],
+        "conflict_relative_threshold": 0.1
+      },
+      "Diastolic_BP": {
+        "type": "float",
+        "unit": "mmHg",
+        "required": true,
+        "valid_range": [
+          40,
+          140
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "diastolic",
+          "dbp",
+          "diastolic bp",
+          "diastolic blood pressure",
+          "blood pressurc",
+          "diastolic bp(mm of hg)",
+          "diastolic bp (mm of hg)"
+        ],
+        "conflict_relative_threshold": 0.1
+      },
+      "Fasting_Blood_Glucose": {
+        "type": "float",
+        "unit": "mg/dL",
+        "required": true,
+        "valid_range": [
+          50,
+          400
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "fbs",
+          "fasting",
+          "fasting blood",
+          "fasting glucose",
+          "fasting blood glucose",
+          "fasting blood sugar",
+          "fpg",
+          "glucose fasting",
+          "fastlng blood glucosc",
+          "plasma glucose (fasting)",
+          "fasting plasma glucose",
+          "f.b.s"
+        ],
+        "accepted_input_units": [
+          "mg/dL",
+          "mmol/L"
+        ]
+      },
+      "HbA1c": {
+        "type": "float",
+        "unit": "%",
+        "required": true,
+        "valid_range": [
+          3,
+          15
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "hba1c",
+          "a1c",
+          "glycated hemoglobin",
+          "glycosylated hemoglobin",
+          "hemoglobin a1c",
+          "hbalc",
+          "glyco hb",
+          "glyco hb (hba1c)",
+          "hba1c (glycated hemoglobin)",
+          "glycosylated haemoglobin",
+          "glycosylated haemolobin",
+          "glycated haemoglobin",
+          "haemoglobin a1c",
+          "haemoglobin a1c (hba1c)",
+          "glycosylated haemoglobin (hba1c)",
+          "glycosylated haemolobin (hba1c)"
+        ],
+        "accepted_input_units": [
+          "%",
+          "mmol/mol"
+        ],
+        "conflict_relative_threshold": 0.05
+      },
+      "Triglycerides": {
+        "type": "float",
+        "unit": "mg/dL",
+        "required": true,
+        "valid_range": [
+          30,
+          1000
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "triglycerides",
+          "tryglycerides",
+          "tg",
+          "trigs",
+          "s. triglycerides",
+          "s. tryglycerides",
+          "serum tryglycerides",
+          "serum triglycerides"
+        ],
+        "accepted_input_units": [
+          "mg/dL",
+          "mmol/L"
+        ]
+      },
+      "HDL": {
+        "type": "float",
+        "unit": "mg/dL",
+        "required": true,
+        "valid_range": [
+          10,
+          120
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "hdl",
+          "hdl cholesterol",
+          "high density lipoprotein",
+          "hdl-c",
+          "hdl ch0lesterol",
+          "cholesterol - hdl (direct)",
+          "s. cholesterol hdl",
+          "cholesterol - hdl"
+        ],
+        "accepted_input_units": [
+          "mg/dL",
+          "mmol/L"
+        ]
+      },
+      "LDL": {
+        "type": "float",
+        "unit": "mg/dL",
+        "required": true,
+        "valid_range": [
+          20,
+          300
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "ldl",
+          "ldl cholesterol",
+          "low density lipoprotein",
+          "ldl-c",
+          "ldl ch0lesterol",
+          "cholesterol - ldl (direct)",
+          "s. cholesterol ldl",
+          "cholesterol - ldl"
+        ],
+        "accepted_input_units": [
+          "mg/dL",
+          "mmol/L"
+        ]
+      },
+      "ALT": {
+        "type": "float",
+        "unit": "U/L",
+        "required": true,
+        "valid_range": [
+          5,
+          300
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "alt",
+          "sgpt",
+          "alanine aminotransferase",
+          "alanine transaminase",
+          "alanine aminotransferase (alt/sgpt)",
+          "s. alt/sgpt",
+          "alt/sgpt",
+          "sgpt (alt)"
+        ]
+      },
+      "AST": {
+        "type": "float",
+        "unit": "U/L",
+        "required": true,
+        "valid_range": [
+          5,
+          300
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "ast",
+          "sgot",
+          "aspartate aminotransferase",
+          "aspartate transaminase",
+          "aspartate aminotransferase (ast/sgot)",
+          "s. ast/sgot",
+          "ast/sgot",
+          "sgot (ast)"
+        ]
+      },
+      "Family_History_Diabetes": {
+        "type": "boolean",
+        "required": true,
+        "source": "user_form",
+        "question_text": "Does a close blood relative (parent/sibling) have diabetes?",
+        "encoding": {
+          "Yes": 1,
+          "No": 0
+        }
+      },
+      "Family_History_Hypertension": {
+        "type": "boolean",
+        "required": true,
+        "source": "user_form",
+        "question_text": "Does a close blood relative (parent/sibling) have high blood pressure?",
+        "encoding": {
+          "Yes": 1,
+          "No": 0
+        }
+      },
+      "Family_History_CVD": {
+        "type": "boolean",
+        "required": true,
+        "source": "user_form",
+        "question_text": "Does a close blood relative (parent/sibling) have cardiovascular disease?",
+        "encoding": {
+          "Yes": 1,
+          "No": 0
+        }
+      }
+    }
+  },
+  "wearable": {
+    "column_order": [
+      "Age",
+      "Gender",
+      "Average_Daily_Steps",
+      "Active_Minutes",
+      "Sedentary_Time_Minutes",
+      "Resting_Heart_Rate",
+      "Heart_Rate_Variability_RMSSD",
+      "Sleep_Duration_Hours",
+      "Sleep_Efficiency_Score",
+      "Autonomic_Stress_Score",
+      "Activity_Energy_Expenditure",
+      "Exercise_Frequency_Days",
+      "CGM_Average_Glucose",
+      "CGM_Glucose_CV",
+      "CGM_Time_In_Range",
+      "CGM_Time_Above_Range",
+      "CGM_Time_Below_Range"
+    ],
+    "features": {
+      "Average_Daily_Steps": {
+        "type": "float",
+        "unit": "steps/day",
+        "required": true,
+        "valid_range": [
+          0,
+          40000
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "average daily steps",
+          "daily steps",
+          "steps",
+          "step count"
+        ]
+      },
+      "Active_Minutes": {
+        "type": "float",
+        "unit": "minutes/day",
+        "required": true,
+        "valid_range": [
+          0,
+          300
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "active minutes",
+          "exercise minutes",
+          "active time"
+        ]
+      },
+      "Sedentary_Time_Minutes": {
+        "type": "float",
+        "unit": "minutes/day",
+        "required": true,
+        "valid_range": [
+          0,
+          1440
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "sedentary time",
+          "sedentary minutes",
+          "inactive time"
+        ]
+      },
+      "Resting_Heart_Rate": {
+        "type": "float",
+        "unit": "bpm",
+        "required": true,
+        "valid_range": [
+          35,
+          130
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "resting heart rate",
+          "resting hr",
+          "rhr"
+        ]
+      },
+      "Heart_Rate_Variability_RMSSD": {
+        "type": "float",
+        "unit": "ms",
+        "required": true,
+        "valid_range": [
+          0,
+          200
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "heart rate variability",
+          "hrv",
+          "rmssd",
+          "heart_rate_variability_rmssd",
+          "hrv (rmssd)"
+        ]
+      },
+      "Sleep_Duration_Hours": {
+        "type": "float",
+        "unit": "hours",
+        "required": true,
+        "valid_range": [
+          0,
+          14
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "sleep duration",
+          "sleep hours",
+          "total sleep",
+          "hours slept",
+          "sleep_duration_hours"
+        ]
+      },
+      "Sleep_Efficiency_Score": {
+        "type": "float",
+        "unit": "score",
+        "required": true,
+        "valid_range": [
+          0,
+          100
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "sleep efficiency",
+          "sleep score",
+          "sleep_efficiency_score"
+        ]
+      },
+      "Autonomic_Stress_Score": {
+        "type": "float",
+        "unit": "score",
+        "required": true,
+        "valid_range": [
+          0,
+          100
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "autonomic stress score",
+          "stress score",
+          "stress level",
+          "autonomic_stress_score"
+        ]
+      },
+      "Activity_Energy_Expenditure": {
+        "type": "float",
+        "unit": "kcal/day",
+        "required": true,
+        "valid_range": [
+          800,
+          6000
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "activity energy expenditure",
+          "calories burned",
+          "total calories",
+          "energy expenditure",
+          "kcal burned",
+          "active energy burned",
+          "activity_energy_expenditure"
+        ]
+      },
+      "Exercise_Frequency_Days": {
+        "type": "float",
+        "unit": "days/week",
+        "required": true,
+        "valid_range": [
+          0,
+          7
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "exercise frequency",
+          "workout days",
+          "active days",
+          "exercise_frequency_days"
+        ]
+      },
+      "CGM_Average_Glucose": {
+        "type": "float",
+        "unit": "mg/dL",
+        "required": true,
+        "valid_range": [
+          50,
+          400
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "cgm average glucose",
+          "average glucose",
+          "mean glucose",
+          "avg glucose (cgm)",
+          "cgm_average_glucose"
+        ],
+        "accepted_input_units": [
+          "mg/dL",
+          "mmol/L"
+        ]
+      },
+      "CGM_Glucose_CV": {
+        "type": "float",
+        "unit": "% CV",
+        "required": true,
+        "valid_range": [
+          0,
+          100
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "cgm glucose cv",
+          "glucose variability",
+          "glycemic variability",
+          "cv glucose",
+          "glucose cv",
+          "cgm_glucose_cv"
+        ],
+        "accepted_input_units": [
+          "%",
+          "% CV",
+          "cv"
+        ]
+      },
+      "CGM_Time_In_Range": {
+        "type": "float",
+        "unit": "%",
+        "required": true,
+        "valid_range": [
+          0,
+          100
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "cgm time in range",
+          "time in range",
+          "tir",
+          "% time in range",
+          "cgm_time_in_range"
+        ]
+      },
+      "CGM_Time_Above_Range": {
+        "type": "float",
+        "unit": "%",
+        "required": true,
+        "valid_range": [
+          0,
+          100
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "cgm time above range",
+          "time above range",
+          "tar",
+          "% time above range",
+          "hyperglycemia time",
+          "cgm_time_above_range"
+        ]
+      },
+      "CGM_Time_Below_Range": {
+        "type": "float",
+        "unit": "%",
+        "required": true,
+        "valid_range": [
+          0,
+          100
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "cgm time below range",
+          "time below range",
+          "tbr",
+          "% time below range",
+          "hypoglycemia time",
+          "cgm_time_below_range"
+        ]
+      }
+    }
+  },
+  "gut": {
+    "column_order": [
+      "Age",
+      "Gender",
+      "Akkermansia",
+      "Faecalibacterium",
+      "Roseburia",
+      "Bifidobacterium",
+      "Bacteroides",
+      "Prevotella",
+      "Ruminococcus",
+      "Blautia",
+      "Collinsella",
+      "Escherichia_Shigella",
+      "Coprococcus",
+      "Alistipes",
+      "Subdoligranulum",
+      "Enterococcus",
+      "Eubacterium",
+      "Parabacteroides",
+      "Lactobacillus",
+      "Klebsiella",
+      "Streptococcus",
+      "Eggerthella",
+      "Other_Taxa"
+    ],
+    "features": {
+      "Akkermansia": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "akkermansia",
+          "akkermansia muciniphila"
+        ]
+      },
+      "Faecalibacterium": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "faecalibacterium",
+          "faecalibacterium prausnitzii"
+        ]
+      },
+      "Roseburia": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "roseburia"
+        ]
+      },
+      "Bifidobacterium": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "bifidobacterium"
+        ]
+      },
+      "Bacteroides": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "bacteroides"
+        ]
+      },
+      "Prevotella": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "prevotella"
+        ]
+      },
+      "Ruminococcus": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "ruminococcus"
+        ]
+      },
+      "Blautia": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "blautia"
+        ]
+      },
+      "Collinsella": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "collinsella"
+        ]
+      },
+      "Escherichia_Shigella": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "escherichia/shigella",
+          "escherichia shigella",
+          "e. coli/shigella",
+          "escherichia coli"
+        ]
+      },
+      "Coprococcus": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "coprococcus"
+        ]
+      },
+      "Alistipes": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "alistipes"
+        ]
+      },
+      "Subdoligranulum": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "subdoligranulum"
+        ]
+      },
+      "Enterococcus": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "enterococcus"
+        ]
+      },
+      "Eubacterium": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "eubacterium"
+        ]
+      },
+      "Parabacteroides": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "parabacteroides"
+        ]
+      },
+      "Lactobacillus": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "lactobacillus"
+        ]
+      },
+      "Klebsiella": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "klebsiella"
+        ]
+      },
+      "Streptococcus": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "streptococcus"
+        ]
+      },
+      "Eggerthella": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "eggerthella"
+        ]
+      },
+      "Other_Taxa": {
+        "type": "float",
+        "unit": "relative abundance %",
+        "accepted_input_units": [
+          "%",
+          "relative abundance %"
+        ],
+        "required": true,
+        "valid_range": [
+          0,
+          30
+        ],
+        "source": "report_extraction",
+        "aliases": [
+          "other taxa",
+          "other_taxa"
+        ]
+      }
+    }
+  }
+}

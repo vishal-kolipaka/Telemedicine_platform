@@ -1,0 +1,48 @@
+================ APOLLO DIAGNOSTICS ================
+Accredited Laboratory (ISO 15189:2012)
+Address: Road No. 12, Banjara Hills, Hyderabad
+Phone: 040-12345678 | Email: care@apollo.com
+
+Patient Name : Rahul Sharma
+Patlent ID : AP-987654
+
+Agc : 45 Years
+Gcnder : Male
+
+Ht:178cm  Wt:82kg
+Walst Clrcumference : 95 cm
+
+Blood Pressurc : 128/82 mmHg
+
+--------------- BIOCHEMISTRY ----------------
+Test Name               Result      Unit       Reference Range
+Fastlng Blood Glucosc   109         mg/dL      70 - 99
+HbAlc                   6.2         %          4.5 - 5.7
+LDL Ch0lesterol         118         mg/dL      < 100
+HDL Ch0lesterol         46          mg/dL      > 40
+Trlglycerldes           141         mg/dL      < 150
+SGPT (ALT)              31          U/L        7 - 56
+SGOT (AST)              28          U/L        10 - 40
+
+--------------- FITBIT SUMMARY ----------------
+Average Dally Steps : 8425 steps/day
+Actlve Mlnutes : 56 minutes/day
+Sedentary Tlme : 602 minutes/day
+Restlng Heart Rate : 67 bpm
+Sleep Duration : 7.2 hours
+Calories Burned : 2360 kcal/day
+
+--------------- GUT MICROBIOME REPORT ----------------
+Akkermansia muciniphila : 4.8 %
+Faecalibacterium prausnitzii : 11.6 %
+Bifidobacterium longum : 7.4 %
+Roseburia hominis : 5.1 %
+Alistipes putredinis : 3.0 %
+Escherichia_Shigella : 1.2 %
+Collinsella aerofaciens : 2.3 %
+Prevotella copri : 6.4 %
+Blautia hydrogenotrophica : 4.2 %
+Shannon Diversity Index : 3.82
+
+====================================================
+End of Report - Verified by Dr. Anil Kumar

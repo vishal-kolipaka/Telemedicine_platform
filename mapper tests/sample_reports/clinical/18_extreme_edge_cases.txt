@@ -1,0 +1,22 @@
+================ EDGE CASE TESTING LAB ================
+
+Patient Name : Rahul Sharma
+Age : 45 Years
+Gender : Male
+
+Weight : eighty kg
+HbA1c : Pending
+AST : Sample Hemolyzed
+Blood Pressure : Normal
+
+Height : Approx 178 cm
+Waist Circumference : 95 cm
+Blood Pressure Reading : 128/82 mmHg
+
+Fasting Blood Glucose : 108 mg/dL
+LDL Cholesterol : < 120 mg/dL
+HDL Cholesterol : 44 mg/dL
+Triglycerides : 141 mg/dL
+ALT : 31 U/L
+
+====================================================

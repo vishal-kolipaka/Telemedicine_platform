@@ -1,0 +1,22 @@
+================ QUEST DIAGNOSTICS ================
+Client: Main Street Medical Practice | Acc: QD-991204
+
+Patient: Sarah Jenkins
+DOB: 05/14/1981 (Age 45) | Sex: Female
+Pt Height: 5 ft 6 in
+Body Weight: 145 lbs
+Waist Circumference: 31 in
+Blood Pressure: 118/74 mmHg
+
+LABORATORY TEST RESULTS:
+----------------------------------------------------------------------
+Test Name                  Result    In Range    Units     Reference Range
+----------------------------------------------------------------------
+Fasting Plasma Glucose     96        Yes         mg/dL     65-99
+Hemoglobin A1c             5.4       Yes         %         <5.7
+LDL-Cholesterol            105       No          mg/dL     <100
+HDL-Cholesterol            58        Yes         mg/dL     >50
+Triglycerides              110       Yes         mg/dL     <150
+SGPT (ALT)                 22        Yes         U/L       6-29
+SGOT (AST)                 19        Yes         U/L       10-30
+----------------------------------------------------------------------

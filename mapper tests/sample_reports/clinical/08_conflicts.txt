@@ -1,0 +1,86 @@
+================= CLINICAL REPORT =================
+
+Patient Name : Rahul Sharma
+
+Age : 44 Years
+
+Gender : Male
+
+Height : 176 cm
+
+Weight : 80 kg
+
+Waist Circumference : 94 cm
+
+Blood Pressure : 124/80 mmHg
+
+Fasting Blood Glucose : 106 mg/dL
+
+HbA1c : 5.8 %
+
+LDL Cholesterol : 115 mg/dL
+
+HDL Cholesterol : 48 mg/dL
+
+Triglycerides : 138 mg/dL
+
+ALT : 30 U/L
+
+AST : 26 U/L
+
+===================================================
+================ WEARABLE SUMMARY ================
+
+Average Daily Steps : 8540 steps/day
+
+Active Minutes : 60 minutes/day
+
+Sedentary Time : 590 minutes/day
+
+Resting Heart Rate : 64 bpm
+
+Sleep Duration : 7.5 hours
+
+Calories Burned : 2430 kcal/day
+
+Average Glucose : 114 mg/dL
+
+Glucose Variability : 21 %
+
+Time In Range : 88 %
+
+Time Above Range : 8 %
+
+==================================================
+================ GUT MICROBIOME ANALYSIS ================
+
+Taxon                                   Relative Abundance
+
+Akkermansia muciniphila                 5.2 %
+
+Faecalibacterium prausnitzii            11.9 %
+
+Bifidobacterium longum                  7.5 %
+
+Roseburia intestinalis                  5.0 %
+
+Alistipes onderdonkii                   3.2 %
+
+Escherichia/Shigella                    1.1 %
+
+Collinsella aerofaciens                 2.3 %
+
+Prevotella copri                        6.0 %
+
+Blautia wexlerae                        7.6 %
+
+Shannon Diversity Index                 3.87
+
+=========================================================
+Family History Diabetes : Yes
+
+Family History Obesity : No
+
+Family History Hypertension : Yes
+
+Family History NAFLD : No

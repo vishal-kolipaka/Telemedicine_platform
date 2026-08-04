@@ -1,0 +1,84 @@
+================= THYROCARE LABS =================
+
+Patient Name : Rahul Sharma
+
+Age : 45 Years
+
+Gender : Male
+
+Height : 5 ft 10 in
+
+Weight : 181 lbs
+
+Waist Circumference : 38 inches
+
+Blood Pressure : 128/82 mmHg
+
+Fasting Blood Glucose : 6.2 mmol/L
+
+HbA1c : 44 mmol/mol
+
+LDL Cholesterol : 3.15 mmol/L
+
+HDL Cholesterol : 1.18 mmol/L
+
+Triglycerides : 1.74 mmol/L
+
+ALT : 34 U/L
+
+AST : 29 U/L
+
+==================================================
+================== FITBIT ==================
+
+Average Daily Steps : 8.4k steps/day
+
+Active Minutes : 1.1 hours/day
+
+Sedentary Time : 10.2 hours/day
+
+Resting Heart Rate : 66 bpm
+
+Sleep Duration : 425 minutes
+
+Calories Burned : 2.45 kcal ×10³/day
+
+Average Glucose : 6.4 mmol/L
+
+Glucose Variability : 1.5 mmol/L
+
+Time In Range : 87 %
+
+Time Above Range : 9 %
+
+============================================
+=============== MICROBIOME REPORT ===============
+
+Akkermansia : 0.051 fraction
+
+Faecalibacterium : 0.118 fraction
+
+Bifidobacterium : 0.074 fraction
+
+Roseburia : 0.049 fraction
+
+Alistipes : 0.031 fraction
+
+Escherichia/Shigella : 0.012 fraction
+
+Collinsella : 0.021 fraction
+
+Prevotella : 0.059 fraction
+
+Blautia : 0.073 fraction
+
+Shannon Diversity Index : 3.82
+
+=================================================
+Family History Diabetes : Yes
+
+Family History Obesity : No
+
+Family History Hypertension : Yes
+
+Family History NAFLD : No

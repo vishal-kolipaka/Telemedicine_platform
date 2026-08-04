@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.1.0",
+  "version_note": "Bump this whenever a field is added/removed/renamed, a column_order changes, or a unit/encoding rule changes. Every value stored downstream (Contract 2/3) should record which schema_version produced it -- otherwise a schema change later makes old stored predictions impossible to audit correctly. v1.1.0 changes from v1.0.0: fixed Gut column_order to match actual CSV sequence; separated Age/Gender into shared_features (previously miscategorized as metadata).",
+
+  "_notes": "Source of truth for the preprocessing unit's feature mapper. Labels are NOT included here on purpose -- they are the model's OUTPUT, not input, and appear only in training CSVs, never in this schema. 'metadata_fields' contains ONLY Patient_ID -- a pure identifier, never a model input. 'shared_features' contains Age and Gender -- these ARE real model inputs (present in every model's column_order), just identical across all three models so defined once instead of three times. Every feature has a 'source' that tells the mapper how to obtain it: 'report_extraction' (search uploaded documents, ask user only if missing/out-of-range), 'user_form' (always a direct question, never searched for in a document), or 'system_generated' (never touched by the mapper -- assigned by the platform itself). A model only fires if every 'required': true field in its column_order resolves to a valid value or is confirmed unavailable (in which case that model is excluded from fusion for this run, not sent partial data).",
+
+  "design_decision_kept_declarative": "Reviews suggested adding regex patterns and complex matching rules directly into this schema. Deliberately NOT doing that -- this file describes WHAT each field is (type, unit, range, aliases), not HOW to find it in messy text. Matching logic belongs in the mapper's code/Matching Engine (see contract_2b_feature_mapper_pipeline.json), which can be tested/versioned/debugged like normal code.",
+
+  "valid_range_clarification": "Every 'valid_range' in this schema is a PLAUSIBILITY range (catches OCR misreads and extraction errors), NOT a clinical reference/normal range. Real extreme-but-true values exist (e.g. ALT can genuinely reach 800+ U/L in acute hepatitis) and must not be rejected -- ranges here are set wide enough to allow genuine medical extremes through while still catching obvious extraction errors (e.g. HbA1c=65 from a misread decimal).",
+
+  "default_conflict_relative_threshold": 0.20,
+  "conflict_threshold_note": "Per external review: a single global 20% threshold is wrong for medical data -- HbA1c changing 10% is clinically significant, Weight changing 1% is not. 'default_conflict_relative_threshold' above is the fallback for any field without an explicit override. Fields below with an explicit 'conflict_relative_threshold' override that default. NOTE: only the clinically highest-priority fields have been explicitly tuned so far (HbA1c, Systolic/Diastolic BP, Weight) as a demonstrated pattern -- a full clinical review to set appropriate thresholds for every remaining field is still recommended before production use.",
+
+  "canonical_unit_note": "Every field's 'unit' value (already present throughout this schema) IS the canonical_unit referenced in Contract 2/3 -- i.e. the target unit a value is converted TO, not necessarily the unit it arrived in. No separate field needed; 'unit' already serves this purpose and is used as such downstream.",
+
+  "metadata_fields": {
+    "Patient_ID": {
+      "type": "string", "required": true, "source": "system_generated",
+      "note": "Assigned by the platform (account/session ID). Never searched for in a report. Never fed to any model -- pure identifier only."
+    }
+  },
+
+  "shared_features": {
+    "_note": "Age and Gender are real input features (not metadata) -- they appear in EVERY model's column_order and directly affect predictions. Defined once here since identical across Clinical, Wearable, and Gut.",
+    "Age": {
+      "type": "integer", "unit": "years", "required": true, "valid_range": [0, 120],
+      "source": "report_extraction", "aliases": ["age", "age (years)", "patient age"]
+    },
+    "Gender": {
+      "type": "categorical", "categories": ["Male", "Female"], "required": true,
+      "source": "report_extraction", "aliases": ["gender", "sex"],
+      "encoding": {"Male": 1, "Female": 0},
+      "encoding_note": "FINALIZED. This exact mapping must be used in BOTH the training script (df['Gender'].map({'Male': 1, 'Female': 0}), not LabelEncoder -- LabelEncoder picks alphabetically and could silently give the opposite mapping) and the feature mapper's Gender encoding step. This schema file is the single source of truth for the mapping -- both places should read from here rather than hardcoding it twice."
+    }
+  },
+
+  "clinical": {
+    "column_order": [
+      "Age", "Gender",
+      "Height_cm", "Weight_kg", "BMI", "Waist_Circumference_cm", "Systolic_BP", "Diastolic_BP",
+      "Fasting_Blood_Glucose", "HbA1c", "LDL_Cholesterol", "HDL_Cholesterol", "Triglycerides",
+      "ALT", "AST", "Family_History_Diabetes", "Family_History_Obesity",
+      "Family_History_Hypertension", "Family_History_NAFLD"
+    ],
+    "features": {
+      "Height_cm": {
+        "type": "float", "unit": "cm", "required": true, "valid_range": [100, 230],
+        "source": "report_extraction", "aliases": ["height", "ht", "height (cm)", "pt height"],
+        "accepted_input_units": ["cm", "m", "ft_in"],
+        "unit_note": "Reports may give feet/inches (e.g. 5'10\") or meters. Detect unit from the text and convert to cm before storing."
+      },
+      "Weight_kg": {
+        "type": "float", "unit": "kg", "required": true, "valid_range": [25, 250],
+        "source": "report_extraction", "aliases": ["weight", "wt", "weight (kg)", "body weight"],
+        "accepted_input_units": ["kg", "lbs"],
+        "unit_note": "US-sourced reports/scales often use lbs. Detect and convert to kg before storing.",
+        "conflict_relative_threshold": 0.05
+      },
+      "BMI": {
+        "type": "float", "unit": "kg/m2", "required": true, "valid_range": [10, 70],
+        "source": "report_extraction", "aliases": ["bmi", "body mass index"],
+        "derivable_from": ["Height_cm", "Weight_kg"],
+        "derive_note": "If not found directly, auto-compute instead of asking the user.",
+        "derive_formula": "BMI = Weight_kg / ((Height_cm / 100) ** 2)",
+        "derive_rounding_policy": "Round to 1 decimal place using standard round-half-up (e.g. 25.849 -> 25.8, 25.85 -> 25.9). Store the full-precision computed value in 'converted_value' per Contract 2, and the rounded value in 'values' -- this matches how the training CSV's BMI column was almost certainly generated, so rounding must match to avoid a systematic offset between training-time and inference-time BMI."
+      },
+      "Waist_Circumference_cm": {
+        "type": "float", "unit": "cm", "required": true, "valid_range": [50, 180],
+        "source": "report_extraction", "aliases": ["waist circumference", "waist", "abdominal circumference", "wc"],
+        "accepted_input_units": ["cm", "in"],
+        "unit_note": "Often reported in inches on US forms. Detect and convert to cm."
+      },
+      "Systolic_BP": {
+        "type": "float", "unit": "mmHg", "required": true, "valid_range": [70, 220],
+        "source": "report_extraction", "aliases": ["systolic", "sbp", "systolic bp", "systolic blood pressure"],
+        "extraction_note": "Rarely listed as a separate labeled field. Usually appears as a single combined reading like 'BP: 128/82 mmHg' -- parse and split into Systolic (first number) and Diastolic (second number).",
+        "conflict_relative_threshold": 0.10
+      },
+      "Diastolic_BP": {
+        "type": "float", "unit": "mmHg", "required": true, "valid_range": [40, 140],
+        "source": "report_extraction", "aliases": ["diastolic", "dbp", "diastolic bp", "diastolic blood pressure"],
+        "extraction_note": "See Systolic_BP -- comes from the same combined 'sys/dia' reading, second number.",
+        "conflict_relative_threshold": 0.10
+      },
+      "Fasting_Blood_Glucose": {
+        "type": "float", "unit": "mg/dL", "required": true, "valid_range": [50, 400],
+        "source": "report_extraction", "aliases": ["fbs", "fasting glucose", "fasting blood sugar", "fpg", "glucose fasting"],
+        "accepted_input_units": ["mg/dL", "mmol/L"],
+        "unit_note": "International reports often use mmol/L. Detect and convert to mg/dL (mg/dL = mmol/L x 18.0).",
+        "fasting_status_note": "MANDATORY confirmation rule: if the matched alias text does not explicitly contain the word 'fasting' (e.g. report just says 'Glucose' or 'Random Glucose'), the mapper must NOT accept the value as Fasting_Blood_Glucose automatically -- treat it as unresolved and confirm fasting status with the user before storing, since a non-fasting reading is a different clinical measurement entirely."
+      },
+      "HbA1c": {
+        "type": "float", "unit": "%", "required": true, "valid_range": [3, 15],
+        "source": "report_extraction", "aliases": ["hba1c", "a1c", "glycated hemoglobin", "glycosylated hemoglobin", "hemoglobin a1c"],
+        "accepted_input_units": ["%", "mmol/mol"],
+        "unit_note": "Some countries report IFCC units (mmol/mol) instead of NGSP % (e.g. 48 mmol/mol = 6.5%). Detect and convert to %: % = (mmol/mol / 10.929) + 2.15.",
+        "conflict_relative_threshold": 0.05
+      },
+      "LDL_Cholesterol": {
+        "type": "float", "unit": "mg/dL", "required": true, "valid_range": [20, 300],
+        "source": "report_extraction", "aliases": ["ldl", "ldl cholesterol", "low density lipoprotein", "ldl-c"],
+        "accepted_input_units": ["mg/dL", "mmol/L"],
+        "unit_note": "Detect and convert to mg/dL (mg/dL = mmol/L x 38.67)."
+      },
+      "HDL_Cholesterol": {
+        "type": "float", "unit": "mg/dL", "required": true, "valid_range": [10, 120],
+        "source": "report_extraction", "aliases": ["hdl", "hdl cholesterol", "high density lipoprotein", "hdl-c"],
+        "accepted_input_units": ["mg/dL", "mmol/L"],
+        "unit_note": "Detect and convert to mg/dL (mg/dL = mmol/L x 38.67)."
+      },
+      "Triglycerides": {
+        "type": "float", "unit": "mg/dL", "required": true, "valid_range": [30, 1000],
+        "source": "report_extraction", "aliases": ["triglycerides", "tg", "trigs"],
+        "accepted_input_units": ["mg/dL", "mmol/L"],
+        "unit_note": "Detect and convert to mg/dL (mg/dL = mmol/L x 88.57)."
+      },
+      "ALT": {
+        "type": "float", "unit": "U/L", "required": true, "valid_range": [5, 300],
+        "source": "report_extraction", "aliases": ["alt", "sgpt", "alanine aminotransferase", "alanine transaminase"]
+      },
+      "AST": {
+        "type": "float", "unit": "U/L", "required": true, "valid_range": [5, 300],
+        "source": "report_extraction", "aliases": ["ast", "sgot", "aspartate aminotransferase", "aspartate transaminase"]
+      },
+      "Family_History_Diabetes": {
+        "type": "boolean", "required": true, "source": "user_form",
+        "question_text": "Does a close blood relative (parent/sibling) have diabetes?",
+        "form_note": "Direct Yes/No question shown to the user. Never searched for in an uploaded report. No 'unsure' option -- only Yes or No.",
+        "encoding": {"Yes": 1, "No": 0}
+      },
+      "Family_History_Obesity": {
+        "type": "boolean", "required": true, "source": "user_form",
+        "question_text": "Does a close blood relative (parent/sibling) have obesity?",
+        "form_note": "Direct Yes/No question. No 'unsure' option.",
+        "encoding": {"Yes": 1, "No": 0}
+      },
+      "Family_History_Hypertension": {
+        "type": "boolean", "required": true, "source": "user_form",
+        "question_text": "Does a close blood relative (parent/sibling) have high blood pressure?",
+        "form_note": "Direct Yes/No question. No 'unsure' option.",
+        "encoding": {"Yes": 1, "No": 0}
+      },
+      "Family_History_NAFLD": {
+        "type": "boolean", "required": true, "source": "user_form",
+        "question_text": "Does a close blood relative (parent/sibling) have fatty liver disease (NAFLD)?",
+        "form_note": "Direct Yes/No question. No 'unsure' option.",
+        "encoding": {"Yes": 1, "No": 0}
+      }
+    }
+  },
+
+  "wearable": {
+    "column_order": [
+      "Age", "Gender",
+      "Average_Daily_Steps", "Active_Minutes", "Sedentary_Time_Minutes", "Resting_Heart_Rate",
+      "Sleep_Duration", "Calories_Burned", "Average_Glucose", "Glucose_Variability",
+      "Time_In_Range", "Time_Above_Range"
+    ],
+    "source_note": "Two supported paths, user's choice: (1) 'device_sync' -- live connection via a free API (e.g. Google Fit, Fitbit Web API) or a self-hosted aggregator (Open Wearables); (2) 'report_extraction' -- manual file upload (CSV/export), same document reader pipeline as Clinical/Gut. If the user has no wearable device at all, Wearable model is skipped for that run (same rule as Gut) -- fusion proceeds with whichever of Clinical/Gut are complete. Whichever path is attempted, the same missing-field question, out-of-range reject-and-reconfirm, and all-or-nothing completeness rules apply.",
+    "features": {
+      "Average_Daily_Steps": {"type": "float", "unit": "steps/day", "required": true, "valid_range": [0, 40000], "source": "report_extraction", "aliases": ["average daily steps", "daily steps", "steps", "step count"]},
+      "Active_Minutes": {"type": "float", "unit": "minutes/day", "required": true, "valid_range": [0, 300], "source": "report_extraction", "aliases": ["active minutes", "exercise minutes", "active time"]},
+      "Sedentary_Time_Minutes": {"type": "float", "unit": "minutes/day", "required": true, "valid_range": [0, 1440], "source": "report_extraction", "aliases": ["sedentary time", "sedentary minutes", "inactive time"]},
+      "Resting_Heart_Rate": {"type": "float", "unit": "bpm", "required": true, "valid_range": [35, 130], "source": "report_extraction", "aliases": ["resting heart rate", "resting hr", "rhr"]},
+      "Sleep_Duration": {"type": "float", "unit": "hours", "required": true, "valid_range": [0, 14], "source": "report_extraction", "aliases": ["sleep duration", "sleep hours", "total sleep", "hours slept"]},
+      "Calories_Burned": {"type": "float", "unit": "kcal/day", "required": true, "valid_range": [800, 6000], "source": "report_extraction", "aliases": ["calories burned", "total calories", "energy expenditure", "kcal burned"]},
+      "Average_Glucose": {
+        "type": "float", "unit": "mg/dL", "required": true, "valid_range": [50, 400], "source": "report_extraction",
+        "aliases": ["average glucose", "cgm average", "mean glucose", "avg glucose (cgm)"],
+        "accepted_input_units": ["mg/dL", "mmol/L"], "unit_note": "Detect and convert to mg/dL (mg/dL = mmol/L x 18.0)."
+      },
+      "Glucose_Variability": {"type": "float", "unit": "% CV", "required": true, "valid_range": [0, 100], "source": "report_extraction", "aliases": ["glucose variability", "glycemic variability", "cv glucose", "glucose cv"]},
+      "Time_In_Range": {"type": "float", "unit": "%", "required": true, "valid_range": [0, 100], "source": "report_extraction", "aliases": ["time in range", "tir", "% time in range"]},
+      "Time_Above_Range": {"type": "float", "unit": "%", "required": true, "valid_range": [0, 100], "source": "report_extraction", "aliases": ["time above range", "tar", "% time above range", "hyperglycemia time"]}
+    }
+  },
+
+  "gut": {
+    "column_order": [
+      "Age", "Gender",
+      "Akkermansia", "Faecalibacterium", "Bifidobacterium", "Roseburia", "Alistipes",
+      "Escherichia_Shigella", "Collinsella", "Prevotella", "Blautia", "Shannon_Diversity_Index"
+    ],
+    "availability_note": "Gut microbiome sequencing is a specialized test many users won't have. Platform should display upfront, before upload, which named test to bring (e.g. 'Gut Microbiome Test / stool sequencing panel'). If unavailable, Gut model is skipped for that run -- fusion proceeds with whichever of Clinical/Wearable are complete.",
+    "features": {
+      "Akkermansia": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["akkermansia", "akkermansia muciniphila"]},
+      "Faecalibacterium": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["faecalibacterium", "faecalibacterium prausnitzii"]},
+      "Bifidobacterium": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["bifidobacterium"]},
+      "Escherichia_Shigella": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["escherichia/shigella", "escherichia shigella", "e. coli/shigella", "escherichia coli"]},
+      "Roseburia": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["roseburia"]},
+      "Blautia": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["blautia"]},
+      "Prevotella": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["prevotella"]},
+      "Collinsella": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["collinsella"]},
+      "Alistipes": {"type": "float", "unit": "relative abundance %", "required": true, "valid_range": [0, 30], "source": "report_extraction", "aliases": ["alistipes"]},
+      "Shannon_Diversity_Index": {"type": "float", "unit": "index", "required": true, "valid_range": [0, 5], "source": "report_extraction", "aliases": ["shannon diversity index", "shannon index", "alpha diversity", "gut diversity index"]}
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "contract_version": "2.1.0",
+  "owner": "Feature Mapper module",
+  "_notes": "Contract 2 v2.1.0 -- fixes a real architectural contradiction found by external review: v2.0.0's example_conflict_log_entry included 'resolution'/'resolved_value'/'resolved_from_document_id', which directly contradicted this same file's own stated rule that the Mapper never resolves conflicts. That data has been REMOVED from this contract entirely and now belongs to a separate Conflict Resolver output (out of scope here). Also: renamed value/converted_value to canonical_value+canonical_unit (previous naming was redundant and didn't state the unit), separated ocr_confidence from mapping_confidence, added mapping_engine_version, reader_operation_id, confidence_breakdown, and replaced prompt_to_user with a language-independent message_code.",
+
+  "schema_version_used": "1.1.0",
+
+  "validation_status_enum": [
+    "VALID -- extracted/derived, passed valid_range check, ready to use",
+    "INVALID -- extracted but failed valid_range check, held for reconfirmation, NOT used in 'values'",
+    "USER_ENTERED -- value came directly from the user, not from a document",
+    "DERIVED -- computed from other fields (e.g. BMI), not directly extracted or entered"
+  ],
+
+  "architectural_boundary_note": "The Feature Mapper only DETECTS conflicts and populates conflict_log with all candidate values -- it does NOT decide which value wins, and this contract must NEVER contain a resolved_value/winner field. That decision belongs to a separate Conflict Resolution Policy component, applied afterward by the Session/Router layer. This is a hard rule, not a style preference -- v2.0.0 violated it, v2.1.0 corrects it.",
+
+  "field_value_shape": {
+    "canonical_value": "the final, usable value, already unit-converted to the schema's target unit -- this is what Contract 3 reads. Replaces the previous redundant 'value'/'converted_value' pair.",
+    "canonical_unit": "the schema's target unit this value is now expressed in (e.g. 'kg', 'mg/dL', '%') -- previously missing; a bare number like 81.6 doesn't tell a later reader whether that's kg or lbs.",
+    "source": "'report_extraction' | 'user_form' | 'system_generated' | 'derived' -- matches feature_schema.json's source tag",
+    "validation_status": "one of the validation_status_enum values above",
+    "original_value": "the value exactly as found in the report/typed by the user, BEFORE any unit conversion -- null if source is system_generated or derived",
+    "original_unit": "the unit detected in the source, before conversion -- null if not applicable",
+    "mapping_method": "'regex_rule_match' | 'llm_fallback' | 'user' | 'derived'",
+    "mapping_engine_version": "string, e.g. 'RegexMatchingEngine 1.0' -- identifies which matching implementation/version produced this value, so a later engine swap (e.g. to a ClinicalBERT-based matcher) doesn't make old results ambiguous to interpret",
+    "mapping_confidence": "float 0-1 -- confidence in the MATCH itself (correct field identified). Deliberately SEPARATE from ocr_confidence below -- conflating them made it impossible to tell whether a low score was caused by bad OCR or bad matching.",
+    "confidence_breakdown": "dict -- the five raw component scores (alias, distance, unit, ambiguity, context) before weighting, e.g. {'alias': 1.0, 'distance': 0.8, 'unit': 1.0, 'ambiguity': 0.9, 'context': 0.8} -- lets a developer see exactly which factor drove a low score rather than one opaque number",
+    "ocr_confidence": "float 0-1 or null -- SEPARATE from mapping_confidence. This is a DIRECT, UNCHANGED pass-through of Contract 1's average_page_confidence for the page this value was extracted from -- the Mapper does not recompute or reinterpret this number, just copies it. Null if the source page was not OCR'd (e.g. a clean digital PDF).",
+    "document_id": "which uploaded document this value came from -- null if source is user_form or system_generated",
+    "reader_operation_id": "the Document Reader's operation_id for the run that produced this document's extraction -- enables full Reader-to-Mapper-to-Model traceability",
+    "page_index": "which page within that document -- null if not applicable",
+    "matched_alias": "the exact alias string from feature_schema.json that matched (e.g. 'Glycated Hemoglobin' rather than canonical 'HbA1c') -- null for derived/user-provided values. Mandatory for traceability and clinician trust.",
+    "extracted_at": "ISO 8601 timestamp of when this value was captured"
+  },
+
+  "shape_per_model": {
+    "status": "'complete' | 'incomplete' | 'not_available'",
+    "values": "dict -- field_name: field_value_shape object, only for fields with validation_status VALID, USER_ENTERED, or DERIVED",
+    "missing_fields": "array of field names",
+    "flagged_for_reconfirm": "array of objects with validation_status INVALID, a 'message_code' (NOT a user-facing sentence -- see below), and 'valid_range'",
+    "conflict_log": "array -- candidate values ONLY, no resolution. See architectural_boundary_note above."
+  },
+
+  "flagged_for_reconfirm_shape": {
+    "field": "string",
+    "canonical_value": "the out-of-range value",
+    "original_value": "string, as found",
+    "original_unit": "string or null",
+    "valid_range": "[min, max]",
+    "message_code": "string, e.g. 'OUT_OF_RANGE' -- matches error_codes.json's existing codes. The UI layer generates the actual user-facing sentence in whatever language/channel needed (web, mobile, voice) -- this contract stays language- and presentation-independent, never embedding English prose directly.",
+    "validation_status": "'INVALID'"
+  },
+
+  "example_full_run": {
+    "clinical": {
+      "status": "incomplete",
+      "values": {
+        "HbA1c": {
+          "canonical_value": 6.1, "canonical_unit": "%",
+          "source": "report_extraction", "validation_status": "VALID",
+          "original_value": "6.1", "original_unit": "%",
+          "mapping_method": "regex_rule_match", "mapping_engine_version": "RegexMatchingEngine 1.0",
+          "mapping_confidence": 0.97,
+          "confidence_breakdown": {"alias": 1.0, "distance": 1.0, "unit": 1.0, "ambiguity": 1.0, "context": 0.8},
+          "ocr_confidence": null,
+          "document_id": "doc_7f3a1c", "reader_operation_id": "op_a1b2c3", "page_index": 0,
+          "matched_alias": "HbA1c", "extracted_at": "2026-07-29T10:16:02Z"
+        },
+        "Weight_kg": {
+          "canonical_value": 81.6, "canonical_unit": "kg",
+          "source": "report_extraction", "validation_status": "VALID",
+          "original_value": "180", "original_unit": "lbs",
+          "mapping_method": "regex_rule_match", "mapping_engine_version": "RegexMatchingEngine 1.0",
+          "mapping_confidence": 0.91,
+          "confidence_breakdown": {"alias": 1.0, "distance": 0.8, "unit": 1.0, "ambiguity": 0.9, "context": 0.8},
+          "ocr_confidence": 0.85,
+          "document_id": "doc_7f3a1c", "reader_operation_id": "op_a1b2c3", "page_index": 0,
+          "matched_alias": "Weight", "extracted_at": "2026-07-29T10:16:02Z"
+        },
+        "BMI": {
+          "canonical_value": 25.8, "canonical_unit": "kg/m2",
+          "source": "derived", "validation_status": "DERIVED",
+          "original_value": null, "original_unit": null,
+          "mapping_method": "derived", "mapping_engine_version": "BMICalculator 1.0",
+          "mapping_confidence": 1.0, "confidence_breakdown": null, "ocr_confidence": null,
+          "document_id": null, "reader_operation_id": null, "page_index": null,
+          "matched_alias": null, "extracted_at": "2026-07-29T10:16:03Z"
+        }
+      },
+      "missing_fields": ["Waist_Circumference_cm", "Family_History_Diabetes", "Family_History_Obesity", "Family_History_Hypertension", "Family_History_NAFLD"],
+      "flagged_for_reconfirm": [
+        {
+          "field": "ALT", "canonical_value": 340, "original_value": "340", "original_unit": "U/L",
+          "valid_range": [5, 300], "message_code": "OUT_OF_RANGE", "validation_status": "INVALID"
+        }
+      ],
+      "conflict_log": []
+    },
+    "wearable": {"status": "not_available", "values": {}, "missing_fields": [], "flagged_for_reconfirm": [], "conflict_log": []},
+    "gut": {
+      "status": "complete", "missing_fields": [], "flagged_for_reconfirm": [], "conflict_log": [],
+      "values": {
+        "Shannon_Diversity_Index": {
+          "canonical_value": 2.63, "canonical_unit": "index",
+          "source": "report_extraction", "validation_status": "VALID",
+          "original_value": "2.63", "original_unit": "index",
+          "mapping_method": "regex_rule_match", "mapping_engine_version": "RegexMatchingEngine 1.0",
+          "mapping_confidence": 0.99,
+          "confidence_breakdown": {"alias": 1.0, "distance": 1.0, "unit": 1.0, "ambiguity": 1.0, "context": 1.0},
+          "ocr_confidence": null,
+          "document_id": "doc_5c81aa", "reader_operation_id": "op_44f1b2", "page_index": 0,
+          "matched_alias": "Shannon Diversity Index", "extracted_at": "2026-07-29T10:22:11Z"
+        }
+      }
+    }
+  },
+
+  "example_conflict_log_entry": {
+    "_note": "CANDIDATES ONLY -- no resolution, no winner. This is exactly the fix applied in v2.1.0.",
+    "field": "Fasting_Blood_Glucose",
+    "candidates": [
+      {"canonical_value": 112, "document_id": "doc_7f3a1c", "reader_operation_id": "op_a1b2c3", "report_date": "2026-01-14", "extracted_at": "2026-07-29T10:16:02Z"},
+      {"canonical_value": 98, "document_id": "doc_a41b02", "reader_operation_id": "op_99c3d4", "report_date": "2026-06-02", "extracted_at": "2026-07-29T10:19:40Z"}
+    ],
+    "field_conflict_relative_threshold_used": "read from feature_schema.json's per-field 'conflict_relative_threshold' for Fasting_Blood_Glucose, NOT a global config number -- different biomarkers need different tolerances (e.g. HbA1c needs a tighter threshold than Weight).",
+    "note": "Both candidates retained for the Conflict Resolver (a separate component, out of scope for this contract) to resolve later. This module does not and must not decide which one is correct."
+  },
+
+  "source_priority_note": "When the SAME field has values from different SOURCES within the same session (not cross-document conflicts, which is the case above) -- e.g. a report said Weight=81kg but the user later manually entered 80kg -- MapperConfig.source_priority_order defines default trust: derived < report_extraction < user_form < user_reconfirm. A user_reconfirm (explicit correction) always wins over an automatic extraction. This is a configurable default, not hardcoded logic."
+}
