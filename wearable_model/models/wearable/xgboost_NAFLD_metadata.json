@@ -1,0 +1,44 @@
+{
+  "model_type": "xgboost",
+  "model_version": "wearable_v3",
+  "label": "NAFLD",
+  "features": [
+    "Average_Daily_Steps",
+    "Active_Minutes",
+    "Sedentary_Time_Minutes",
+    "Resting_Heart_Rate",
+    "Heart_Rate_Variability_RMSSD",
+    "Sleep_Duration_Hours",
+    "Sleep_Efficiency_Score",
+    "Autonomic_Stress_Score",
+    "Activity_Energy_Expenditure",
+    "Exercise_Frequency_Days",
+    "CGM_Average_Glucose",
+    "CGM_Glucose_CV",
+    "CGM_Time_In_Range",
+    "CGM_Time_Above_Range",
+    "CGM_Time_Below_Range"
+  ],
+  "feature_count": 15,
+  "threshold": 0.5,
+  "scale_pos_weight": 5.746987951807229,
+  "training_seed": 42,
+  "hyperparameters": {
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 1.0,
+    "n_estimators_used": 28
+  },
+  "eval_metric": "aucpr",
+  "training_rows": 14000,
+  "validation_rows": 3000,
+  "test_rows": 3000,
+  "train_date": "2026-08-04T09:48:52.543699+00:00",
+  "python_version": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+  "package_versions": {
+    "scikit-learn": "1.8.0",
+    "shap": "0.52.0",
+    "xgboost": "3.3.0"
+  }
+}

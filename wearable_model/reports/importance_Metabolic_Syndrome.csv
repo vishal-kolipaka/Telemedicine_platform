@@ -1,0 +1,16 @@
+Feature,Mean_Abs_SHAP
+CGM_Average_Glucose,0.15622376
+Sedentary_Time_Minutes,0.073963255
+Activity_Energy_Expenditure,0.027899299
+CGM_Glucose_CV,0.015321101
+Resting_Heart_Rate,0.015215291
+CGM_Time_In_Range,0.009639459
+CGM_Time_Above_Range,0.009111897
+Average_Daily_Steps,0.007172295
+Heart_Rate_Variability_RMSSD,0.0049746055
+Sleep_Efficiency_Score,0.004028559
+CGM_Time_Below_Range,0.003957408
+Active_Minutes,0.0038402353
+Autonomic_Stress_Score,0.0022690406
+Sleep_Duration_Hours,0.00051752274
+Exercise_Frequency_Days,0.000269668
