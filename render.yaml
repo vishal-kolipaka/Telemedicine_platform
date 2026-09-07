@@ -1,11 +1,14 @@
 services:
   - type: web
-    name: telemedicine-platform
-    env: docker
+    name: telemedicine-platform-api
+    env: python
     plan: free
     region: oregon
-    dockerfilePath: ./Dockerfile
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api_server:app --host 0.0.0.0 --port $PORT
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: PYTHONUNBUFFERED
         value: "1"
       - key: ENVIRONMENT
