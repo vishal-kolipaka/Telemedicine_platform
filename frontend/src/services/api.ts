@@ -1,13 +1,15 @@
 import type { DocumentAnalysisResult, HealthAssessmentResponse, RunAssessmentRequest } from '../types/reader';
 import type { ProgressPlanRecord } from '../types/progress_plan';
 
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
 export async function analyzeDocuments(files: File[]): Promise<DocumentAnalysisResult[]> {
   const formData = new FormData();
   files.forEach((file) => {
     formData.append('files', file);
   });
 
-  const response = await fetch('/api/analyze', {
+  const response = await fetch(`${API_BASE_URL}/api/analyze`, {
     method: 'POST',
     body: formData,
   });
@@ -21,7 +23,7 @@ export async function analyzeDocuments(files: File[]): Promise<DocumentAnalysisR
 }
 
 export async function runHealthAssessment(request: RunAssessmentRequest): Promise<HealthAssessmentResponse> {
-  const response = await fetch('/api/run-assessment', {
+  const response = await fetch(`${API_BASE_URL}/api/run-assessment`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -47,7 +49,7 @@ export async function generateProgressPlan(payload: {
   duration: '1_week' | '1_month' | '3_months';
   health_plan: any;
 }): Promise<ProgressPlanRecord> {
-  const response = await fetch('/api/progress-plan/generate', {
+  const response = await fetch(`${API_BASE_URL}/api/progress-plan/generate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -62,7 +64,7 @@ export async function generateProgressPlan(payload: {
 }
 
 export async function getProgressPlan(planId: string): Promise<ProgressPlanRecord> {
-  const response = await fetch(`/api/progress-plan/${planId}`);
+  const response = await fetch(`${API_BASE_URL}/api/progress-plan/${planId}`);
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({ detail: 'Failed to load progress plan' }));
     throw new Error(errorData.detail || `Server error (${response.status})`);
@@ -75,7 +77,7 @@ export async function toggleProgressPlanTask(
   taskId: string,
   completed?: boolean
 ): Promise<ProgressPlanRecord> {
-  const response = await fetch(`/api/progress-plan/${planId}/toggle-task`, {
+  const response = await fetch(`${API_BASE_URL}/api/progress-plan/${planId}/toggle-task`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ task_id: taskId, completed }),
@@ -90,7 +92,7 @@ export async function toggleProgressPlanTask(
 }
 
 export async function resetProgressPlan(planId: string): Promise<ProgressPlanRecord> {
-  const response = await fetch(`/api/progress-plan/${planId}/reset`, {
+  const response = await fetch(`${API_BASE_URL}/api/progress-plan/${planId}/reset`, {
     method: 'POST',
   });
 
@@ -103,7 +105,7 @@ export async function resetProgressPlan(planId: string): Promise<ProgressPlanRec
 }
 
 export async function downloadProgressPlanPdf(planId: string, filename: string = 'progress_plan.pdf'): Promise<void> {
-  const response = await fetch(`/api/progress-plan/${planId}/pdf`);
+  const response = await fetch(`${API_BASE_URL}/api/progress-plan/${planId}/pdf`);
   if (!response.ok) {
     throw new Error('Failed to download PDF');
   }
