@@ -48,6 +48,10 @@ export interface MapperOutputState {
 interface MappedFeaturesDashboardProps {
   mapperOutput?: MapperOutputState | null;
   error?: string | null;
+  userAddedValues?: Record<string, MappedFeatureValue>;
+  onUserAddedValuesChange?: (values: Record<string, MappedFeatureValue>) => void;
+  triggerCategoryQueue?: 'clinical' | 'wearable' | 'gut' | 'family' | null;
+  onQueueDismissed?: () => void;
 }
 
 interface FieldMeta {
@@ -134,9 +138,14 @@ const FAMILY_HISTORY_FIELDS: FieldMeta[] = [
 export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = ({
   mapperOutput,
   error,
+  userAddedValues: externalUserAddedValues,
+  onUserAddedValuesChange,
+  triggerCategoryQueue,
+  onQueueDismissed,
 }) => {
   // Local state to store user-entered values live
-  const [userAddedValues, setUserAddedValues] = useState<Record<string, MappedFeatureValue>>({});
+  const [internalUserAddedValues, setInternalUserAddedValues] = useState<Record<string, MappedFeatureValue>>({});
+  const userAddedValues = externalUserAddedValues || internalUserAddedValues;
 
   // Feature Tables Collapsible Visibility State (Default: False)
   const [showTables, setShowTables] = useState<boolean>(false);
@@ -231,12 +240,22 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
     }
   };
 
+  // Trigger wizard queue externally if requested
+  React.useEffect(() => {
+    if (triggerCategoryQueue) {
+      handleStartQueue(triggerCategoryQueue);
+    }
+  }, [triggerCategoryQueue]);
+
   // Close Wizard Queue Modal
   const handleCloseModal = () => {
     setQueue([]);
     setQueueIndex(0);
     setInputValue('');
     setValidationError(null);
+    if (onQueueDismissed) {
+      onQueueDismissed();
+    }
   };
 
   // Current active question item in queue
@@ -347,8 +366,8 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
     }
 
     // Validation passed — store feature in userAddedValues live
-    setUserAddedValues((prev) => ({
-      ...prev,
+    const updated = {
+      ...userAddedValues,
       [meta.key]: {
         canonical_value: parsedVal,
         canonical_unit: meta.unit || null,
@@ -356,7 +375,11 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
         mapping_method: 'user_entry',
         is_user_added: true,
       },
-    }));
+    };
+    setInternalUserAddedValues(updated);
+    if (onUserAddedValuesChange) {
+      onUserAddedValuesChange(updated);
+    }
 
     // Check if there are remaining missing questions in the queue sequence!
     if (queueIndex < queue.length - 1) {

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: telemed-platform
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: ENVIRONMENT
+        value: production
+    healthCheckPath: /api/health

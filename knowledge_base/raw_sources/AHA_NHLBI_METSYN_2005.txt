@@ -1,0 +1,19 @@
+DIAGNOSIS AND MANAGEMENT OF THE METABOLIC SYNDROME: AHA/NHLBI SCIENTIFIC STATEMENT (2005)
+Published by: American Heart Association & National Heart, Lung, and Blood Institute, Grundy SM, Cleeman JI, Daniels SR, et al. Circulation 2005;112:2735-2752.
+RESTRICTION NOTICE: Restricted strictly to diagnostic criteria explanation and biomarker context. Strictly prohibited from serving as primary authority for modern lifestyle recommendations or drug therapy.
+
+CRITERIA FOR CLINICAL DIAGNOSIS OF THE METABOLIC SYNDROME:
+Metabolic syndrome is clinically identified when a patient presents with 3 or more of the following 5 risk factors:
+1. Elevated Waist Circumference (Abdominal Adiposity):
+   - Men: Waist circumference >= 102 cm (>= 40 inches).
+   - Women: Waist circumference >= 88 cm (>= 35 inches).
+   (Note: Lower ethnic-specific thresholds, e.g. >= 90 cm men and >= 80 cm women, apply to Asian populations).
+2. Elevated Triglycerides:
+   - Serum triglycerides >= 150 mg/dL (>= 1.7 mmol/L), or drug treatment for elevated triglycerides.
+3. Reduced HDL Cholesterol:
+   - Men: Serum HDL < 40 mg/dL (< 1.03 mmol/L).
+   - Women: Serum HDL < 50 mg/dL (< 1.29 mmol/L), or drug treatment for reduced HDL.
+4. Elevated Blood Pressure:
+   - Systolic blood pressure >= 130 mmHg and/or Diastolic blood pressure >= 85 mmHg, or antihypertensive drug therapy in a patient with a history of hypertension.
+5. Elevated Fasting Glucose:
+   - Fasting blood glucose >= 100 mg/dL (>= 5.6 mmol/L), or drug treatment for elevated glucose.

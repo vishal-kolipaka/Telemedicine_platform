@@ -12,7 +12,7 @@
     }
   },
   "shared_features": {
-    "_note": "Age and Gender are real input features (not metadata) -- they appear in EVERY model's column_order and directly affect predictions.",
+    "_note": "Age and Gender are real input features -- they appear in the clinical model's column_order (18 features) and directly affect clinical predictions. The wearable and gut v3 models do NOT include Age/Gender in their feature vectors; those fields are excluded from wearable.column_order and gut.column_order to match the trained artifacts.",
     "Age": {
       "type": "integer",
       "unit": "years",
@@ -403,8 +403,6 @@
   },
   "wearable": {
     "column_order": [
-      "Age",
-      "Gender",
       "Average_Daily_Steps",
       "Active_Minutes",
       "Sedentary_Time_Minutes",
@@ -520,6 +518,10 @@
       "Sleep_Efficiency_Score": {
         "type": "float",
         "unit": "score",
+        "accepted_input_units": [
+          "score",
+          "%"
+        ],
         "required": true,
         "valid_range": [
           0,
@@ -684,8 +686,6 @@
   },
   "gut": {
     "column_order": [
-      "Age",
-      "Gender",
       "Akkermansia",
       "Faecalibacterium",
       "Roseburia",
@@ -1071,6 +1071,34 @@
           "other taxa",
           "other_taxa"
         ]
+      }
+    }
+  },
+  "patient_info": {
+    "_note": "UI display metadata only — NOT an ML domain. Fields here are extracted from reports for display purposes (e.g. patient dashboard header). patient_info is never iterated as a domain in map_features(), its fields do NOT appear in any model column_order, and its presence or absence does NOT affect domain status (complete/incomplete/not_available).",
+    "fields": {
+      "Name": {
+        "type": "string",
+        "required": false,
+        "source": "report_extraction",
+        "aliases": [
+          "patient name",
+          "patient",
+          "name",
+          "pt. name",
+          "pt name",
+          "patlent name",
+          "pt.",
+          "patient:"
+        ]
+      },
+      "Age": {
+        "$ref": "shared_features.Age",
+        "_note": "Reuses Age extraction logic from shared_features. Value sourced from the same candidate the clinical model uses."
+      },
+      "Gender": {
+        "$ref": "shared_features.Gender",
+        "_note": "Reuses Gender extraction logic from shared_features. Value sourced from the same candidate the clinical model uses."
       }
     }
   }

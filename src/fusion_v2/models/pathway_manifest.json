@@ -1,0 +1,1498 @@
+{
+  "version": "2.1.0",
+  "description": "Adaptive 7-Pathway Late-Fusion Stacking Meta-Models Manifest",
+  "diseases": [
+    "Type2_Diabetes",
+    "Prediabetes",
+    "High_Adiposity_Risk",
+    "Metabolic_Syndrome",
+    "NAFLD"
+  ],
+  "pathways": [
+    "C",
+    "W",
+    "G",
+    "C_W",
+    "C_G",
+    "W_G",
+    "C_W_G"
+  ],
+  "models": {
+    "C": {
+      "modalities": [
+        "Clinical"
+      ],
+      "dimension": 1,
+      "diseases": {
+        "Type2_Diabetes": {
+          "disease": "Type2_Diabetes",
+          "pathway": "C",
+          "modalities": [
+            "Clinical"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "clinical": 1.0
+          },
+          "platt_scaling": {
+            "A": 2.945627,
+            "B": 1.569166
+          },
+          "threshold": 0.43,
+          "formula": "sigmoid(0.0000 + 1.0000 * Clinical)",
+          "validation_metrics": {
+            "roc_auc": 0.9996,
+            "pr_auc": 0.9994,
+            "f1": 0.9963,
+            "precision": 1.0,
+            "recall": 0.9927,
+            "specificity": 1.0,
+            "brier_score": 0.0028,
+            "ece": 0.0014,
+            "threshold": 0.43
+          },
+          "test_metrics": {
+            "roc_auc": 0.9997,
+            "pr_auc": 0.9994,
+            "f1": 0.9936,
+            "precision": 0.9945,
+            "recall": 0.9927,
+            "specificity": 0.9968,
+            "brier_score": 0.0043,
+            "ece": 0.0022,
+            "threshold": 0.43
+          }
+        },
+        "Prediabetes": {
+          "disease": "Prediabetes",
+          "pathway": "C",
+          "modalities": [
+            "Clinical"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "clinical": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.169974,
+            "B": -0.861145
+          },
+          "threshold": 0.34,
+          "formula": "sigmoid(0.0000 + 1.0000 * Clinical)",
+          "validation_metrics": {
+            "roc_auc": 0.9993,
+            "pr_auc": 0.9985,
+            "f1": 0.9918,
+            "precision": 0.9878,
+            "recall": 0.9959,
+            "specificity": 0.9941,
+            "brier_score": 0.0053,
+            "ece": 0.0021,
+            "threshold": 0.34
+          },
+          "test_metrics": {
+            "roc_auc": 0.9992,
+            "pr_auc": 0.9981,
+            "f1": 0.9861,
+            "precision": 0.9893,
+            "recall": 0.983,
+            "specificity": 0.9951,
+            "brier_score": 0.0082,
+            "ece": 0.0056,
+            "threshold": 0.34
+          }
+        },
+        "High_Adiposity_Risk": {
+          "disease": "High_Adiposity_Risk",
+          "pathway": "C",
+          "modalities": [
+            "Clinical"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "clinical": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.069954,
+            "B": -0.785765
+          },
+          "threshold": 0.4,
+          "formula": "sigmoid(0.0000 + 1.0000 * Clinical)",
+          "validation_metrics": {
+            "roc_auc": 0.9665,
+            "pr_auc": 0.9327,
+            "f1": 0.8493,
+            "precision": 0.8163,
+            "recall": 0.8851,
+            "specificity": 0.9078,
+            "brier_score": 0.0683,
+            "ece": 0.0087,
+            "threshold": 0.4
+          },
+          "test_metrics": {
+            "roc_auc": 0.9674,
+            "pr_auc": 0.934,
+            "f1": 0.8465,
+            "precision": 0.8237,
+            "recall": 0.8706,
+            "specificity": 0.9115,
+            "brier_score": 0.0683,
+            "ece": 0.0164,
+            "threshold": 0.4
+          }
+        },
+        "Metabolic_Syndrome": {
+          "disease": "Metabolic_Syndrome",
+          "pathway": "C",
+          "modalities": [
+            "Clinical"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "clinical": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.42593,
+            "B": -2.444039
+          },
+          "threshold": 0.32,
+          "formula": "sigmoid(0.0000 + 1.0000 * Clinical)",
+          "validation_metrics": {
+            "roc_auc": 0.9089,
+            "pr_auc": 0.4665,
+            "f1": 0.489,
+            "precision": 0.4552,
+            "recall": 0.5281,
+            "specificity": 0.9473,
+            "brier_score": 0.0527,
+            "ece": 0.0082,
+            "threshold": 0.32
+          },
+          "test_metrics": {
+            "roc_auc": 0.8873,
+            "pr_auc": 0.4383,
+            "f1": 0.4497,
+            "precision": 0.4468,
+            "recall": 0.4526,
+            "specificity": 0.953,
+            "brier_score": 0.0547,
+            "ece": 0.0123,
+            "threshold": 0.32
+          }
+        },
+        "NAFLD": {
+          "disease": "NAFLD",
+          "pathway": "C",
+          "modalities": [
+            "Clinical"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "clinical": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.002853,
+            "B": -1.668131
+          },
+          "threshold": 0.36,
+          "formula": "sigmoid(0.0000 + 1.0000 * Clinical)",
+          "validation_metrics": {
+            "roc_auc": 0.9109,
+            "pr_auc": 0.6534,
+            "f1": 0.6142,
+            "precision": 0.5746,
+            "recall": 0.6596,
+            "specificity": 0.9192,
+            "brier_score": 0.0766,
+            "ece": 0.0134,
+            "threshold": 0.36
+          },
+          "test_metrics": {
+            "roc_auc": 0.9005,
+            "pr_auc": 0.6129,
+            "f1": 0.5911,
+            "precision": 0.5409,
+            "recall": 0.6514,
+            "specificity": 0.911,
+            "brier_score": 0.079,
+            "ece": 0.0133,
+            "threshold": 0.36
+          }
+        }
+      }
+    },
+    "W": {
+      "modalities": [
+        "Wearable"
+      ],
+      "dimension": 1,
+      "diseases": {
+        "Type2_Diabetes": {
+          "disease": "Type2_Diabetes",
+          "pathway": "W",
+          "modalities": [
+            "Wearable"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "wearable": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.144657,
+            "B": -0.729068
+          },
+          "threshold": 0.44,
+          "formula": "sigmoid(0.0000 + 1.0000 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.9909,
+            "pr_auc": 0.9848,
+            "f1": 0.9309,
+            "precision": 0.9137,
+            "recall": 0.9488,
+            "specificity": 0.9486,
+            "brier_score": 0.0369,
+            "ece": 0.007,
+            "threshold": 0.44
+          },
+          "test_metrics": {
+            "roc_auc": 0.9915,
+            "pr_auc": 0.9859,
+            "f1": 0.9292,
+            "precision": 0.9177,
+            "recall": 0.941,
+            "specificity": 0.951,
+            "brier_score": 0.0363,
+            "ece": 0.0114,
+            "threshold": 0.44
+          }
+        },
+        "Prediabetes": {
+          "disease": "Prediabetes",
+          "pathway": "W",
+          "modalities": [
+            "Wearable"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "wearable": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.047064,
+            "B": -0.539008
+          },
+          "threshold": 0.36,
+          "formula": "sigmoid(0.0000 + 1.0000 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.9648,
+            "pr_auc": 0.9295,
+            "f1": 0.8517,
+            "precision": 0.8074,
+            "recall": 0.9012,
+            "specificity": 0.8969,
+            "brier_score": 0.0696,
+            "ece": 0.0152,
+            "threshold": 0.36
+          },
+          "test_metrics": {
+            "roc_auc": 0.9623,
+            "pr_auc": 0.9229,
+            "f1": 0.8328,
+            "precision": 0.7782,
+            "recall": 0.8957,
+            "specificity": 0.8835,
+            "brier_score": 0.0731,
+            "ece": 0.0225,
+            "threshold": 0.36
+          }
+        },
+        "High_Adiposity_Risk": {
+          "disease": "High_Adiposity_Risk",
+          "pathway": "W",
+          "modalities": [
+            "Wearable"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "wearable": 1.0
+          },
+          "platt_scaling": {
+            "A": 0.945972,
+            "B": -0.730889
+          },
+          "threshold": 0.28,
+          "formula": "sigmoid(0.0000 + 1.0000 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.7959,
+            "pr_auc": 0.6178,
+            "f1": 0.6213,
+            "precision": 0.5101,
+            "recall": 0.7945,
+            "specificity": 0.647,
+            "brier_score": 0.1664,
+            "ece": 0.0167,
+            "threshold": 0.28
+          },
+          "test_metrics": {
+            "roc_auc": 0.8106,
+            "pr_auc": 0.6432,
+            "f1": 0.6469,
+            "precision": 0.5328,
+            "recall": 0.823,
+            "specificity": 0.6573,
+            "brier_score": 0.162,
+            "ece": 0.0191,
+            "threshold": 0.28
+          }
+        },
+        "Metabolic_Syndrome": {
+          "disease": "Metabolic_Syndrome",
+          "pathway": "W",
+          "modalities": [
+            "Wearable"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "wearable": 1.0
+          },
+          "platt_scaling": {
+            "A": 4.126371,
+            "B": -2.446295
+          },
+          "threshold": 0.12,
+          "formula": "sigmoid(0.0000 + 1.0000 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.7387,
+            "pr_auc": 0.1658,
+            "f1": 0.2616,
+            "precision": 0.1823,
+            "recall": 0.4632,
+            "specificity": 0.8267,
+            "brier_score": 0.0675,
+            "ece": 0.0008,
+            "threshold": 0.12
+          },
+          "test_metrics": {
+            "roc_auc": 0.7274,
+            "pr_auc": 0.1724,
+            "f1": 0.2439,
+            "precision": 0.1701,
+            "recall": 0.431,
+            "specificity": 0.8237,
+            "brier_score": 0.0679,
+            "ece": 0.0057,
+            "threshold": 0.12
+          }
+        },
+        "NAFLD": {
+          "disease": "NAFLD",
+          "pathway": "W",
+          "modalities": [
+            "Wearable"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "wearable": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.295571,
+            "B": -1.776535
+          },
+          "threshold": 0.12,
+          "formula": "sigmoid(0.0000 + 1.0000 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.5914,
+            "pr_auc": 0.1912,
+            "f1": 0.2743,
+            "precision": 0.1675,
+            "recall": 0.7559,
+            "specificity": 0.3784,
+            "brier_score": 0.1203,
+            "ece": 0.0024,
+            "threshold": 0.12
+          },
+          "test_metrics": {
+            "roc_auc": 0.6009,
+            "pr_auc": 0.1796,
+            "f1": 0.2688,
+            "precision": 0.1631,
+            "recall": 0.7644,
+            "specificity": 0.3684,
+            "brier_score": 0.1178,
+            "ece": 0.0054,
+            "threshold": 0.12
+          }
+        }
+      }
+    },
+    "G": {
+      "modalities": [
+        "Gut"
+      ],
+      "dimension": 1,
+      "diseases": {
+        "Type2_Diabetes": {
+          "disease": "Type2_Diabetes",
+          "pathway": "G",
+          "modalities": [
+            "Gut"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "gut": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.151627,
+            "B": -0.520738
+          },
+          "threshold": 0.36,
+          "formula": "sigmoid(0.0000 + 1.0000 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.8236,
+            "pr_auc": 0.7277,
+            "f1": 0.677,
+            "precision": 0.5761,
+            "recall": 0.8207,
+            "specificity": 0.6539,
+            "brier_score": 0.1621,
+            "ece": 0.0178,
+            "threshold": 0.36
+          },
+          "test_metrics": {
+            "roc_auc": 0.8286,
+            "pr_auc": 0.7214,
+            "f1": 0.6839,
+            "precision": 0.5877,
+            "recall": 0.8176,
+            "specificity": 0.667,
+            "brier_score": 0.1613,
+            "ece": 0.0199,
+            "threshold": 0.36
+          }
+        },
+        "Prediabetes": {
+          "disease": "Prediabetes",
+          "pathway": "G",
+          "modalities": [
+            "Gut"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "gut": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.303569,
+            "B": -0.692071
+          },
+          "threshold": 0.24,
+          "formula": "sigmoid(0.0000 + 1.0000 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.617,
+            "pr_auc": 0.4202,
+            "f1": 0.5143,
+            "precision": 0.3579,
+            "recall": 0.9136,
+            "specificity": 0.2145,
+            "brier_score": 0.2112,
+            "ece": 0.0102,
+            "threshold": 0.24
+          },
+          "test_metrics": {
+            "roc_auc": 0.6146,
+            "pr_auc": 0.4058,
+            "f1": 0.4919,
+            "precision": 0.3383,
+            "recall": 0.9011,
+            "specificity": 0.1956,
+            "brier_score": 0.2086,
+            "ece": 0.0251,
+            "threshold": 0.24
+          }
+        },
+        "High_Adiposity_Risk": {
+          "disease": "High_Adiposity_Risk",
+          "pathway": "G",
+          "modalities": [
+            "Gut"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "gut": 1.0
+          },
+          "platt_scaling": {
+            "A": 0.995426,
+            "B": -0.700442
+          },
+          "threshold": 0.34,
+          "formula": "sigmoid(0.0000 + 1.0000 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.8061,
+            "pr_auc": 0.6738,
+            "f1": 0.6275,
+            "precision": 0.6,
+            "recall": 0.6575,
+            "specificity": 0.7972,
+            "brier_score": 0.159,
+            "ece": 0.0123,
+            "threshold": 0.34
+          },
+          "test_metrics": {
+            "roc_auc": 0.8049,
+            "pr_auc": 0.6842,
+            "f1": 0.6166,
+            "precision": 0.6006,
+            "recall": 0.6335,
+            "specificity": 0.7999,
+            "brier_score": 0.1599,
+            "ece": 0.0142,
+            "threshold": 0.34
+          }
+        },
+        "Metabolic_Syndrome": {
+          "disease": "Metabolic_Syndrome",
+          "pathway": "G",
+          "modalities": [
+            "Gut"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "gut": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.233613,
+            "B": -2.366125
+          },
+          "threshold": 0.18,
+          "formula": "sigmoid(0.0000 + 1.0000 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.8359,
+            "pr_auc": 0.369,
+            "f1": 0.4352,
+            "precision": 0.3531,
+            "recall": 0.5671,
+            "specificity": 0.9133,
+            "brier_score": 0.0583,
+            "ece": 0.0062,
+            "threshold": 0.18
+          },
+          "test_metrics": {
+            "roc_auc": 0.8086,
+            "pr_auc": 0.2908,
+            "f1": 0.3506,
+            "precision": 0.2861,
+            "recall": 0.4526,
+            "specificity": 0.9053,
+            "brier_score": 0.0629,
+            "ece": 0.013,
+            "threshold": 0.18
+          }
+        },
+        "NAFLD": {
+          "disease": "NAFLD",
+          "pathway": "G",
+          "modalities": [
+            "Gut"
+          ],
+          "intercept": 0.0,
+          "coefficients": {
+            "gut": 1.0
+          },
+          "platt_scaling": {
+            "A": 1.154735,
+            "B": -1.726326
+          },
+          "threshold": 0.25,
+          "formula": "sigmoid(0.0000 + 1.0000 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.815,
+            "pr_auc": 0.4859,
+            "f1": 0.4904,
+            "precision": 0.4508,
+            "recall": 0.5376,
+            "specificity": 0.8916,
+            "brier_score": 0.0961,
+            "ece": 0.0093,
+            "threshold": 0.25
+          },
+          "test_metrics": {
+            "roc_auc": 0.8089,
+            "pr_auc": 0.4554,
+            "f1": 0.4449,
+            "precision": 0.4072,
+            "recall": 0.4904,
+            "specificity": 0.8851,
+            "brier_score": 0.0964,
+            "ece": 0.0109,
+            "threshold": 0.25
+          }
+        }
+      }
+    },
+    "C_W": {
+      "modalities": [
+        "Clinical",
+        "Wearable"
+      ],
+      "dimension": 2,
+      "diseases": {
+        "Type2_Diabetes": {
+          "disease": "Type2_Diabetes",
+          "pathway": "C_W",
+          "modalities": [
+            "Clinical",
+            "Wearable"
+          ],
+          "intercept": -6.762142,
+          "coefficients": {
+            "clinical": 10.290842,
+            "wearable": 3.245018
+          },
+          "platt_scaling": {
+            "A": 1.274403,
+            "B": 0.860453
+          },
+          "threshold": 0.48,
+          "formula": "sigmoid(-6.7621 + 10.2908 * Clinical + 3.2450 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.9993,
+            "pr_auc": 0.9991,
+            "f1": 0.9963,
+            "precision": 1.0,
+            "recall": 0.9927,
+            "specificity": 1.0,
+            "brier_score": 0.0028,
+            "ece": 0.0014,
+            "threshold": 0.48
+          },
+          "test_metrics": {
+            "roc_auc": 0.9994,
+            "pr_auc": 0.9991,
+            "f1": 0.9941,
+            "precision": 0.9955,
+            "recall": 0.9927,
+            "specificity": 0.9974,
+            "brier_score": 0.0042,
+            "ece": 0.0022,
+            "threshold": 0.48
+          }
+        },
+        "Prediabetes": {
+          "disease": "Prediabetes",
+          "pathway": "C_W",
+          "modalities": [
+            "Clinical",
+            "Wearable"
+          ],
+          "intercept": -6.268885,
+          "coefficients": {
+            "clinical": 8.929672,
+            "wearable": 2.26411
+          },
+          "platt_scaling": {
+            "A": 1.126878,
+            "B": -0.264434
+          },
+          "threshold": 0.61,
+          "formula": "sigmoid(-6.2689 + 8.9297 * Clinical + 2.2641 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.9985,
+            "pr_auc": 0.9959,
+            "f1": 0.9913,
+            "precision": 0.9877,
+            "recall": 0.9949,
+            "specificity": 0.9941,
+            "brier_score": 0.0055,
+            "ece": 0.0012,
+            "threshold": 0.61
+          },
+          "test_metrics": {
+            "roc_auc": 0.9983,
+            "pr_auc": 0.9958,
+            "f1": 0.9861,
+            "precision": 0.9893,
+            "recall": 0.983,
+            "specificity": 0.9951,
+            "brier_score": 0.0084,
+            "ece": 0.0045,
+            "threshold": 0.61
+          }
+        },
+        "High_Adiposity_Risk": {
+          "disease": "High_Adiposity_Risk",
+          "pathway": "C_W",
+          "modalities": [
+            "Clinical",
+            "Wearable"
+          ],
+          "intercept": -4.459542,
+          "coefficients": {
+            "clinical": 6.645828,
+            "wearable": 0.546186
+          },
+          "platt_scaling": {
+            "A": 1.021815,
+            "B": -0.021303
+          },
+          "threshold": 0.44,
+          "formula": "sigmoid(-4.4595 + 6.6458 * Clinical + 0.5462 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.9657,
+            "pr_auc": 0.9303,
+            "f1": 0.8508,
+            "precision": 0.8208,
+            "recall": 0.883,
+            "specificity": 0.9108,
+            "brier_score": 0.0711,
+            "ece": 0.0285,
+            "threshold": 0.44
+          },
+          "test_metrics": {
+            "roc_auc": 0.9676,
+            "pr_auc": 0.9344,
+            "f1": 0.8509,
+            "precision": 0.8312,
+            "recall": 0.8716,
+            "specificity": 0.9159,
+            "brier_score": 0.0698,
+            "ece": 0.0301,
+            "threshold": 0.44
+          }
+        },
+        "Metabolic_Syndrome": {
+          "disease": "Metabolic_Syndrome",
+          "pathway": "C_W",
+          "modalities": [
+            "Clinical",
+            "Wearable"
+          ],
+          "intercept": -6.230865,
+          "coefficients": {
+            "clinical": 5.724788,
+            "wearable": 2.126879
+          },
+          "platt_scaling": {
+            "A": 1.173951,
+            "B": 0.194478
+          },
+          "threshold": 0.34,
+          "formula": "sigmoid(-6.2309 + 5.7248 * Clinical + 2.1269 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.9087,
+            "pr_auc": 0.4582,
+            "f1": 0.4929,
+            "precision": 0.4654,
+            "recall": 0.5238,
+            "specificity": 0.9498,
+            "brier_score": 0.0529,
+            "ece": 0.0116,
+            "threshold": 0.34
+          },
+          "test_metrics": {
+            "roc_auc": 0.8867,
+            "pr_auc": 0.4568,
+            "f1": 0.4635,
+            "precision": 0.4615,
+            "recall": 0.4655,
+            "specificity": 0.9545,
+            "brier_score": 0.0548,
+            "ece": 0.0143,
+            "threshold": 0.34
+          }
+        },
+        "NAFLD": {
+          "disease": "NAFLD",
+          "pathway": "C_W",
+          "modalities": [
+            "Clinical",
+            "Wearable"
+          ],
+          "intercept": -4.094435,
+          "coefficients": {
+            "clinical": 5.331579,
+            "wearable": -0.424936
+          },
+          "platt_scaling": {
+            "A": 1.076184,
+            "B": -0.032163
+          },
+          "threshold": 0.43,
+          "formula": "sigmoid(-4.0944 + 5.3316 * Clinical + -0.4249 * Wearable)",
+          "validation_metrics": {
+            "roc_auc": 0.911,
+            "pr_auc": 0.6552,
+            "f1": 0.6126,
+            "precision": 0.5887,
+            "recall": 0.6385,
+            "specificity": 0.9262,
+            "brier_score": 0.0784,
+            "ece": 0.0229,
+            "threshold": 0.43
+          },
+          "test_metrics": {
+            "roc_auc": 0.9002,
+            "pr_auc": 0.61,
+            "f1": 0.5908,
+            "precision": 0.5563,
+            "recall": 0.6298,
+            "specificity": 0.9191,
+            "brier_score": 0.0806,
+            "ece": 0.0228,
+            "threshold": 0.43
+          }
+        }
+      }
+    },
+    "C_G": {
+      "modalities": [
+        "Clinical",
+        "Gut"
+      ],
+      "dimension": 2,
+      "diseases": {
+        "Type2_Diabetes": {
+          "disease": "Type2_Diabetes",
+          "pathway": "C_G",
+          "modalities": [
+            "Clinical",
+            "Gut"
+          ],
+          "intercept": -7.137339,
+          "coefficients": {
+            "clinical": 12.208635,
+            "gut": 2.378081
+          },
+          "platt_scaling": {
+            "A": 1.643056,
+            "B": 2.703006
+          },
+          "threshold": 0.49,
+          "formula": "sigmoid(-7.1373 + 12.2086 * Clinical + 2.3781 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9992,
+            "pr_auc": 0.9991,
+            "f1": 0.9963,
+            "precision": 1.0,
+            "recall": 0.9927,
+            "specificity": 1.0,
+            "brier_score": 0.0027,
+            "ece": 0.0009,
+            "threshold": 0.49
+          },
+          "test_metrics": {
+            "roc_auc": 0.9989,
+            "pr_auc": 0.9985,
+            "f1": 0.9936,
+            "precision": 0.9945,
+            "recall": 0.9927,
+            "specificity": 0.9968,
+            "brier_score": 0.0043,
+            "ece": 0.0023,
+            "threshold": 0.49
+          }
+        },
+        "Prediabetes": {
+          "disease": "Prediabetes",
+          "pathway": "C_G",
+          "modalities": [
+            "Clinical",
+            "Gut"
+          ],
+          "intercept": -6.579925,
+          "coefficients": {
+            "clinical": 10.003844,
+            "gut": 1.970039
+          },
+          "platt_scaling": {
+            "A": 1.14154,
+            "B": -0.295876
+          },
+          "threshold": 0.37,
+          "formula": "sigmoid(-6.5799 + 10.0038 * Clinical + 1.9700 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9991,
+            "pr_auc": 0.9978,
+            "f1": 0.9918,
+            "precision": 0.9878,
+            "recall": 0.9959,
+            "specificity": 0.9941,
+            "brier_score": 0.0052,
+            "ece": 0.001,
+            "threshold": 0.37
+          },
+          "test_metrics": {
+            "roc_auc": 0.9988,
+            "pr_auc": 0.997,
+            "f1": 0.9861,
+            "precision": 0.9893,
+            "recall": 0.983,
+            "specificity": 0.9951,
+            "brier_score": 0.0085,
+            "ece": 0.0049,
+            "threshold": 0.37
+          }
+        },
+        "High_Adiposity_Risk": {
+          "disease": "High_Adiposity_Risk",
+          "pathway": "C_G",
+          "modalities": [
+            "Clinical",
+            "Gut"
+          ],
+          "intercept": -5.459671,
+          "coefficients": {
+            "clinical": 6.330917,
+            "gut": 2.97609
+          },
+          "platt_scaling": {
+            "A": 1.038227,
+            "B": -0.023923
+          },
+          "threshold": 0.46,
+          "formula": "sigmoid(-5.4597 + 6.3309 * Clinical + 2.9761 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9677,
+            "pr_auc": 0.9319,
+            "f1": 0.8664,
+            "precision": 0.8426,
+            "recall": 0.8915,
+            "specificity": 0.923,
+            "brier_score": 0.0644,
+            "ece": 0.013,
+            "threshold": 0.46
+          },
+          "test_metrics": {
+            "roc_auc": 0.969,
+            "pr_auc": 0.9345,
+            "f1": 0.8585,
+            "precision": 0.8476,
+            "recall": 0.8696,
+            "specificity": 0.9258,
+            "brier_score": 0.0648,
+            "ece": 0.0169,
+            "threshold": 0.46
+          }
+        },
+        "Metabolic_Syndrome": {
+          "disease": "Metabolic_Syndrome",
+          "pathway": "C_G",
+          "modalities": [
+            "Clinical",
+            "Gut"
+          ],
+          "intercept": -6.356079,
+          "coefficients": {
+            "clinical": 4.665941,
+            "gut": 3.430688
+          },
+          "platt_scaling": {
+            "A": 1.138642,
+            "B": 0.161285
+          },
+          "threshold": 0.29,
+          "formula": "sigmoid(-6.3561 + 4.6659 * Clinical + 3.4307 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9198,
+            "pr_auc": 0.55,
+            "f1": 0.5346,
+            "precision": 0.481,
+            "recall": 0.6017,
+            "specificity": 0.9458,
+            "brier_score": 0.0481,
+            "ece": 0.0109,
+            "threshold": 0.29
+          },
+          "test_metrics": {
+            "roc_auc": 0.8972,
+            "pr_auc": 0.4565,
+            "f1": 0.495,
+            "precision": 0.461,
+            "recall": 0.5345,
+            "specificity": 0.9476,
+            "brier_score": 0.0529,
+            "ece": 0.0084,
+            "threshold": 0.29
+          }
+        },
+        "NAFLD": {
+          "disease": "NAFLD",
+          "pathway": "C_G",
+          "modalities": [
+            "Clinical",
+            "Gut"
+          ],
+          "intercept": -5.872463,
+          "coefficients": {
+            "clinical": 4.664969,
+            "gut": 3.949086
+          },
+          "platt_scaling": {
+            "A": 1.06451,
+            "B": -0.055329
+          },
+          "threshold": 0.36,
+          "formula": "sigmoid(-5.8725 + 4.6650 * Clinical + 3.9491 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9272,
+            "pr_auc": 0.7115,
+            "f1": 0.6571,
+            "precision": 0.6213,
+            "recall": 0.6972,
+            "specificity": 0.9297,
+            "brier_score": 0.0679,
+            "ece": 0.0102,
+            "threshold": 0.36
+          },
+          "test_metrics": {
+            "roc_auc": 0.9245,
+            "pr_auc": 0.6992,
+            "f1": 0.6512,
+            "precision": 0.6037,
+            "recall": 0.7067,
+            "specificity": 0.9253,
+            "brier_score": 0.068,
+            "ece": 0.0137,
+            "threshold": 0.36
+          }
+        }
+      }
+    },
+    "W_G": {
+      "modalities": [
+        "Wearable",
+        "Gut"
+      ],
+      "dimension": 2,
+      "diseases": {
+        "Type2_Diabetes": {
+          "disease": "Type2_Diabetes",
+          "pathway": "W_G",
+          "modalities": [
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -6.509757,
+          "coefficients": {
+            "wearable": 8.001922,
+            "gut": 3.445648
+          },
+          "platt_scaling": {
+            "A": 1.048684,
+            "B": -0.110634
+          },
+          "threshold": 0.53,
+          "formula": "sigmoid(-6.5098 + 8.0019 * Wearable + 3.4456 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9904,
+            "pr_auc": 0.9831,
+            "f1": 0.9414,
+            "precision": 0.935,
+            "recall": 0.9478,
+            "specificity": 0.9622,
+            "brier_score": 0.0341,
+            "ece": 0.0125,
+            "threshold": 0.53
+          },
+          "test_metrics": {
+            "roc_auc": 0.992,
+            "pr_auc": 0.9854,
+            "f1": 0.9318,
+            "precision": 0.9211,
+            "recall": 0.9428,
+            "specificity": 0.9531,
+            "brier_score": 0.0349,
+            "ece": 0.021,
+            "threshold": 0.53
+          }
+        },
+        "Prediabetes": {
+          "disease": "Prediabetes",
+          "pathway": "W_G",
+          "modalities": [
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -5.507795,
+          "coefficients": {
+            "wearable": 6.586163,
+            "gut": 2.966739
+          },
+          "platt_scaling": {
+            "A": 1.023964,
+            "B": 0.103851
+          },
+          "threshold": 0.5,
+          "formula": "sigmoid(-5.5078 + 6.5862 * Wearable + 2.9667 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9634,
+            "pr_auc": 0.9253,
+            "f1": 0.8532,
+            "precision": 0.8484,
+            "recall": 0.858,
+            "specificity": 0.9265,
+            "brier_score": 0.071,
+            "ece": 0.0256,
+            "threshold": 0.5
+          },
+          "test_metrics": {
+            "roc_auc": 0.9612,
+            "pr_auc": 0.9202,
+            "f1": 0.8345,
+            "precision": 0.8146,
+            "recall": 0.8553,
+            "specificity": 0.9112,
+            "brier_score": 0.0756,
+            "ece": 0.0258,
+            "threshold": 0.5
+          }
+        },
+        "High_Adiposity_Risk": {
+          "disease": "High_Adiposity_Risk",
+          "pathway": "W_G",
+          "modalities": [
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -4.54085,
+          "coefficients": {
+            "wearable": 3.720386,
+            "gut": 4.041314
+          },
+          "platt_scaling": {
+            "A": 0.980955,
+            "B": -0.061375
+          },
+          "threshold": 0.33,
+          "formula": "sigmoid(-4.5409 + 3.7204 * Wearable + 4.0413 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.8551,
+            "pr_auc": 0.7344,
+            "f1": 0.6804,
+            "precision": 0.6127,
+            "recall": 0.765,
+            "specificity": 0.7762,
+            "brier_score": 0.1406,
+            "ece": 0.0139,
+            "threshold": 0.33
+          },
+          "test_metrics": {
+            "roc_auc": 0.8624,
+            "pr_auc": 0.7625,
+            "f1": 0.6963,
+            "precision": 0.6354,
+            "recall": 0.7702,
+            "specificity": 0.7901,
+            "brier_score": 0.1366,
+            "ece": 0.0208,
+            "threshold": 0.33
+          }
+        },
+        "Metabolic_Syndrome": {
+          "disease": "Metabolic_Syndrome",
+          "pathway": "W_G",
+          "modalities": [
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -6.550404,
+          "coefficients": {
+            "wearable": 3.125147,
+            "gut": 5.215994
+          },
+          "platt_scaling": {
+            "A": 1.108581,
+            "B": 0.226773
+          },
+          "threshold": 0.26,
+          "formula": "sigmoid(-6.5504 + 3.1251 * Wearable + 5.2160 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.8416,
+            "pr_auc": 0.3726,
+            "f1": 0.444,
+            "precision": 0.4126,
+            "recall": 0.4805,
+            "specificity": 0.9429,
+            "brier_score": 0.0581,
+            "ece": 0.0094,
+            "threshold": 0.26
+          },
+          "test_metrics": {
+            "roc_auc": 0.8158,
+            "pr_auc": 0.3106,
+            "f1": 0.3373,
+            "precision": 0.3125,
+            "recall": 0.3664,
+            "specificity": 0.9324,
+            "brier_score": 0.0624,
+            "ece": 0.0121,
+            "threshold": 0.26
+          }
+        },
+        "NAFLD": {
+          "disease": "NAFLD",
+          "pathway": "W_G",
+          "modalities": [
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -2.058503,
+          "coefficients": {
+            "wearable": -5.241066,
+            "gut": 6.024904
+          },
+          "platt_scaling": {
+            "A": 1.08291,
+            "B": 0.048913
+          },
+          "threshold": 0.28,
+          "formula": "sigmoid(-2.0585 + -5.2411 * Wearable + 6.0249 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.8252,
+            "pr_auc": 0.4967,
+            "f1": 0.5082,
+            "precision": 0.4764,
+            "recall": 0.5446,
+            "specificity": 0.9009,
+            "brier_score": 0.0946,
+            "ece": 0.0136,
+            "threshold": 0.28
+          },
+          "test_metrics": {
+            "roc_auc": 0.8168,
+            "pr_auc": 0.4745,
+            "f1": 0.4554,
+            "precision": 0.425,
+            "recall": 0.4904,
+            "specificity": 0.8932,
+            "brier_score": 0.0953,
+            "ece": 0.0135,
+            "threshold": 0.28
+          }
+        }
+      }
+    },
+    "C_W_G": {
+      "modalities": [
+        "Clinical",
+        "Wearable",
+        "Gut"
+      ],
+      "dimension": 3,
+      "diseases": {
+        "Type2_Diabetes": {
+          "disease": "Type2_Diabetes",
+          "pathway": "C_W_G",
+          "modalities": [
+            "Clinical",
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -7.644329,
+          "coefficients": {
+            "clinical": 10.105217,
+            "wearable": 3.132886,
+            "gut": 2.001356
+          },
+          "platt_scaling": {
+            "A": 1.314799,
+            "B": 1.031833
+          },
+          "threshold": 0.21,
+          "formula": "sigmoid(-7.6443 + 10.1052 * Clinical + 3.1329 * Wearable + 2.0014 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9991,
+            "pr_auc": 0.999,
+            "f1": 0.9963,
+            "precision": 0.9991,
+            "recall": 0.9936,
+            "specificity": 0.9995,
+            "brier_score": 0.0026,
+            "ece": 0.0008,
+            "threshold": 0.21
+          },
+          "test_metrics": {
+            "roc_auc": 0.9994,
+            "pr_auc": 0.9992,
+            "f1": 0.9932,
+            "precision": 0.9936,
+            "recall": 0.9927,
+            "specificity": 0.9963,
+            "brier_score": 0.0041,
+            "ece": 0.0019,
+            "threshold": 0.21
+          }
+        },
+        "Prediabetes": {
+          "disease": "Prediabetes",
+          "pathway": "C_W_G",
+          "modalities": [
+            "Clinical",
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -7.15406,
+          "coefficients": {
+            "clinical": 8.895214,
+            "wearable": 2.282268,
+            "gut": 1.806326
+          },
+          "platt_scaling": {
+            "A": 1.130676,
+            "B": -0.26115
+          },
+          "threshold": 0.73,
+          "formula": "sigmoid(-7.1541 + 8.8952 * Clinical + 2.2823 * Wearable + 1.8063 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9985,
+            "pr_auc": 0.9957,
+            "f1": 0.9913,
+            "precision": 0.9887,
+            "recall": 0.9938,
+            "specificity": 0.9946,
+            "brier_score": 0.0054,
+            "ece": 0.0017,
+            "threshold": 0.73
+          },
+          "test_metrics": {
+            "roc_auc": 0.9982,
+            "pr_auc": 0.9953,
+            "f1": 0.9861,
+            "precision": 0.9893,
+            "recall": 0.983,
+            "specificity": 0.9951,
+            "brier_score": 0.0084,
+            "ece": 0.0046,
+            "threshold": 0.73
+          }
+        },
+        "High_Adiposity_Risk": {
+          "disease": "High_Adiposity_Risk",
+          "pathway": "C_W_G",
+          "modalities": [
+            "Clinical",
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -5.454597,
+          "coefficients": {
+            "clinical": 6.335136,
+            "wearable": -0.026373,
+            "gut": 2.990557
+          },
+          "platt_scaling": {
+            "A": 1.038531,
+            "B": -0.024386
+          },
+          "threshold": 0.46,
+          "formula": "sigmoid(-5.4546 + 6.3351 * Clinical + -0.0264 * Wearable + 2.9906 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9677,
+            "pr_auc": 0.9319,
+            "f1": 0.8683,
+            "precision": 0.8453,
+            "recall": 0.8925,
+            "specificity": 0.9244,
+            "brier_score": 0.0643,
+            "ece": 0.0119,
+            "threshold": 0.46
+          },
+          "test_metrics": {
+            "roc_auc": 0.9689,
+            "pr_auc": 0.9344,
+            "f1": 0.8573,
+            "precision": 0.8473,
+            "recall": 0.8675,
+            "specificity": 0.9258,
+            "brier_score": 0.0649,
+            "ece": 0.0167,
+            "threshold": 0.46
+          }
+        },
+        "Metabolic_Syndrome": {
+          "disease": "Metabolic_Syndrome",
+          "pathway": "C_W_G",
+          "modalities": [
+            "Clinical",
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -5.990042,
+          "coefficients": {
+            "clinical": 4.692825,
+            "wearable": -0.828019,
+            "gut": 3.496741
+          },
+          "platt_scaling": {
+            "A": 1.141564,
+            "B": 0.170877
+          },
+          "threshold": 0.28,
+          "formula": "sigmoid(-5.9900 + 4.6928 * Clinical + -0.8280 * Wearable + 3.4967 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.92,
+            "pr_auc": 0.5515,
+            "f1": 0.5348,
+            "precision": 0.4733,
+            "recall": 0.6147,
+            "specificity": 0.9429,
+            "brier_score": 0.0481,
+            "ece": 0.011,
+            "threshold": 0.28
+          },
+          "test_metrics": {
+            "roc_auc": 0.8974,
+            "pr_auc": 0.4515,
+            "f1": 0.4961,
+            "precision": 0.4565,
+            "recall": 0.5431,
+            "specificity": 0.9458,
+            "brier_score": 0.053,
+            "ece": 0.0104,
+            "threshold": 0.28
+          }
+        },
+        "NAFLD": {
+          "disease": "NAFLD",
+          "pathway": "C_W_G",
+          "modalities": [
+            "Clinical",
+            "Wearable",
+            "Gut"
+          ],
+          "intercept": -2.682767,
+          "coefficients": {
+            "clinical": 4.77493,
+            "wearable": -7.350085,
+            "gut": 4.821432
+          },
+          "platt_scaling": {
+            "A": 1.117774,
+            "B": 0.000244
+          },
+          "threshold": 0.39,
+          "formula": "sigmoid(-2.6828 + 4.7749 * Clinical + -7.3501 * Wearable + 4.8214 * Gut)",
+          "validation_metrics": {
+            "roc_auc": 0.9375,
+            "pr_auc": 0.7338,
+            "f1": 0.6721,
+            "precision": 0.6614,
+            "recall": 0.6831,
+            "specificity": 0.9421,
+            "brier_score": 0.0645,
+            "ece": 0.0125,
+            "threshold": 0.39
+          },
+          "test_metrics": {
+            "roc_auc": 0.9302,
+            "pr_auc": 0.7217,
+            "f1": 0.6813,
+            "precision": 0.6556,
+            "recall": 0.7091,
+            "specificity": 0.94,
+            "brier_score": 0.0647,
+            "ece": 0.013,
+            "threshold": 0.39
+          }
+        }
+      }
+    }
+  }
+}

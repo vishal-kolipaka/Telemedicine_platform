@@ -1,0 +1,113 @@
+{
+  "manifest_version": "1.0.0",
+  "timestamp_utc": "2026-08-09T06:39:43.914769+00:00",
+  "architecture_name": "Fusion V1 Frozen Architecture",
+  "status": "FROZEN_LOCKED",
+  "seed": 42,
+  "runtime_environment": {
+    "python_version": "3.13.5",
+    "scikit_learn_version": "1.8.0",
+    "xgboost_version": "3.3.0",
+    "joblib_version": "1.5.3",
+    "pandas_version": "3.0.0",
+    "numpy_version": "2.4.1"
+  },
+  "artifact_hashes": {
+    "clinical_xgboost_Type2_Diabetes": "9255a2892216582bab5be6d0735e68dda13d0812f1a79bb9a83d4d8a9189036d",
+    "clinical_xgboost_Prediabetes": "553f44af3c1c62a3a54d5412464c67b97c1af78980043255c8d9dcf6fbd57b2b",
+    "clinical_xgboost_High_Adiposity_Risk": "649331a7943fb8ab23ee90e527ad6b31de585134ee4d1e7157417f47f50b3a18",
+    "clinical_xgboost_Metabolic_Syndrome": "548fac4d3bf689dca8cd903a979491496db9b1107837b370f0473c9aa932e38d",
+    "clinical_xgboost_NAFLD": "97ea9a1ace420244c39026a1812835f47416640912026e3cabcf4f0024b5b56f",
+    "wearable_xgboost_Type2_Diabetes": "cd83c41b69231f5f58a4ba99218f9e4eb9fdabd12276e2ea13eba7eb61b1c4d2",
+    "wearable_xgboost_Prediabetes": "ece447786a4a469f0f43be73e42ac533025afd9b20f07c362cda0847fee2fb1a",
+    "wearable_xgboost_High_Adiposity_Risk": "be387424351c7c9ce8f60d5d5cbce175e8b86e5f1ca0ca7442b28568c4375607",
+    "wearable_xgboost_Metabolic_Syndrome": "eb1012933c6c1161db3700ca78cf7bc51b7a96959a780b05936c6a9bd6bd5030",
+    "wearable_xgboost_NAFLD": "552233be5b2bc4ea800c41e8fb9bf6f494720a33c81a5514a9f9eda06082fc54",
+    "gut_xgboost_Type2_Diabetes": "147e5e1ccbcdcecc6fef537302cb87f01433c690ba9c4ea19df293b7cb3edf8d",
+    "gut_xgboost_Prediabetes": "3a22f71bd4c1db7bf0a52430efd43c611dc9b489400d1ebed212e57c494d8464",
+    "gut_xgboost_High_Adiposity_Risk": "0f907ea4db581d0c6c68479253b99e1b198793167078f3050b18454f4b585d49",
+    "gut_xgboost_Metabolic_Syndrome": "6ac1a661b70a8c256939cc7a5e4ff7ef7a03a140aceb38896a23513f4e17089a",
+    "gut_xgboost_NAFLD": "840c0060e3c68510522d6e6a04e38aad6ae33bad18167109b6b4bd4949f5dda0",
+    "metsyn_stacker_joblib": "7467b27b54fb2fb8df20310e6700c393b2159386528daf4ce5acff34053635fb",
+    "nafld_stacker_joblib": "c11e0e9869125482175e3561df94d035a4bd5ea551c33f53b1736a2d9a93f303"
+  },
+  "level0_models": {
+    "Clinical": {
+      "version": "v4",
+      "features": 18,
+      "passthrough_labels": [
+        "Type2_Diabetes",
+        "Prediabetes",
+        "High_Adiposity_Risk"
+      ]
+    },
+    "Wearable": {
+      "version": "v3",
+      "features": 15,
+      "status": "Independent Level-0 Modality Only (Excluded from Level-1 Fusion)"
+    },
+    "Gut": {
+      "version": "v3",
+      "features": 21,
+      "transform": "CLR (delta=1e-5)",
+      "imputation": "Train-only median"
+    }
+  },
+  "fusion_heads": {
+    "Type2_Diabetes": {
+      "type": "Clinical Passthrough",
+      "threshold": 0.5,
+      "suppression": null
+    },
+    "Prediabetes": {
+      "type": "Clinical Passthrough",
+      "threshold": 0.5,
+      "suppression": "IF T2D_pred == 1 THEN Prediabetes_pred = 0"
+    },
+    "High_Adiposity_Risk": {
+      "type": "Clinical Passthrough",
+      "threshold": 0.5,
+      "suppression": null
+    },
+    "Metabolic_Syndrome": {
+      "type": "Clinical + Gut L2 Logistic Regression Stacker",
+      "coefficients": {
+        "intercept": -4.369712401216641,
+        "coef_clinical": 2.57985321887219,
+        "coef_gut": 1.963880768222702,
+        "platt_intercept": 1.5006,
+        "platt_slope": 1.8243,
+        "threshold": 0.2
+      },
+      "calibration": "Platt Scaling (Slope=1.8243, Intercept=1.5006)",
+      "decision_threshold": 0.2,
+      "threshold_provenance": "Selected on OOF Train predictions only; evaluated on Validation"
+    },
+    "NAFLD": {
+      "type": "Clinical + Gut L2 Logistic Regression Stacker",
+      "coefficients": {
+        "intercept": -4.7670735247396525,
+        "coef_clinical": 3.792412866780818,
+        "coef_gut": 2.833998435484477,
+        "threshold": 0.5
+      },
+      "calibration": null,
+      "decision_threshold": 0.5,
+      "threshold_provenance": "Default 0.50"
+    }
+  },
+  "test_isolation": "Test data HAS NOT been used for final evaluation in this freeze operation.",
+  "future_v2_research": [
+    "Real-world missingness patterns",
+    "Modality reliability & quality scoring",
+    "Modality conflict detection",
+    "Uncertainty quantification (UQ)",
+    "Decision-curve / clinical-utility analysis",
+    "Subgroup & fairness analysis",
+    "Longitudinal multimodal modeling",
+    "Calibration drift monitoring",
+    "Constrained non-negative Wearable experiment",
+    "External real-world clinical validation",
+    "Future Wearable reintegration if real-world evidence supports it"
+  ]
+}

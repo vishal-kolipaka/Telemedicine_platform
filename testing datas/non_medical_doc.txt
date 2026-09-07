@@ -1,0 +1,16 @@
+============================================================
+ACME PHARMACY INVOICE & RECEIPT
+============================================================
+Order ID: ORD-992144
+Date: 29-Aug-2026
+
+Items Purchased:
+1. Vitamin D3 60K Capsules - Qty 4 - $24.00
+2. Digital Thermometer - Qty 1 - $15.50
+3. Hand Sanitizer 500ml - Qty 2 - $8.00
+
+Total Amount Paid: $47.50
+Payment Method: Credit Card ending 4412
+
+Thank you for your business!
+============================================================

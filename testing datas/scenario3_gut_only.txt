@@ -1,0 +1,35 @@
+============================================================
+GUT MICROBIOME ANALYSIS REPORT
+============================================================
+
+Patient : Arjun Mehta
+Lab     : MicrobioLabs India
+Date    : 29-Aug-2026
+
+Akkermansia                : 2.1 %
+Faecalibacterium           : 7.3 %
+Roseburia                  : 3.8 %
+Bifidobacterium            : 4.2 %
+Bacteroides                : 18.6 %
+Prevotella                 : 9.4 %
+Ruminococcus               : 5.1 %
+Blautia                    : 6.2 %
+Collinsella                : 3.7 %
+Escherichia/Shigella       : 2.8 %
+Coprococcus                : 2.4 %
+Alistipes                  : 4.1 %
+Subdoligranulum            : 1.9 %
+Enterococcus               : 1.2 %
+Eubacterium                : 3.3 %
+Parabacteroides            : 2.6 %
+Lactobacillus              : 1.8 %
+Klebsiella                 : 1.1 %
+Streptococcus              : 2.3 %
+Eggerthella                : 1.5 %
+Other_Taxa                 : 14.6 %
+
+Shannon Diversity Index    : 3.41
+
+============================================================
+End of Report
+============================================================

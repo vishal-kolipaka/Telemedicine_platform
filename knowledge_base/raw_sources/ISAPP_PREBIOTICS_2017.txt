@@ -1,0 +1,15 @@
+ISAPP CONSENSUS STATEMENT ON THE DEFINITION AND SCOPE OF PREBIOTICS (2017)
+Published by: International Scientific Association for Probiotics and Prebiotics, Gibson GR, Hutkins R, Sanders ME, et al. Nat Rev Gastroenterol Hepatol 2017;14:491-502.
+RESTRICTION NOTICE: Permitted exclusively for scientific explanation of prebiotic fiber mechanisms and microbial ecology. Strictly prohibited from justifying taxon-specific medical or dietary cures.
+
+SECTION 1: PREBIOTIC DEFINITION AND MECHANISMS
+- Definition: A prebiotic is defined as 'a substrate that is selectively utilized by host microorganisms conferring a health benefit.'
+- Biochemical Scope: Established prebiotics include non-digestible fructo-oligosaccharides (FOS), inulin, galacto-oligosaccharides (GOS), and specific resistant starches found in whole plant foods (leeks, asparagus, onions, garlic, oats, legumes, chicory root).
+- Metabolic Outputs: Fermentation of prebiotic substrates by colonic anaerobic bacteria generates short-chain fatty acids (SCFAs: acetate, propionate, and butyrate).
+- Physiological Roles of SCFAs:
+  1. Butyrate serves as the primary metabolic fuel for colonocytes and supports gut epithelial barrier integrity.
+  2. Propionate is transported to the liver where it participates in gluconeogenesis and lipid metabolism regulation.
+  3. Acetate acts systemically on adipose tissue, peripheral metabolism, and central appetite regulation.
+
+SAFETY AND GOVERNANCE PROHIBITION:
+- Individual taxon abundances in fecal metagenomics fluctuate based on complex ecological dynamics. Prebiotic dietary substrates support overall microbial metabolic activity and diversity, but should not be prescribed as targeted cures to restore or suppress isolated bacterial genera.

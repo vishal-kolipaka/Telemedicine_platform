@@ -1,0 +1,668 @@
+[
+  {
+    "chunk_id": "CDC_DPP_2024_CHUNK_01",
+    "source_id": "CDC_DPP_CURRICULUM_2024",
+    "chunk_text": "The National Diabetes Prevention Program (National DPP) is an evidence-based lifestyle change program. Core Lifestyle Goals: Goal 1: Weight Reduction. Participants work to lose at least 5% to 7% of their starting body weight. Clinical evidence from the DPP trial demonstrates that achieving a 5% to 7% weight reduction reduces the risk of developing type 2 diabetes by 58% in adults (and by 71% in adults aged 60 and older).",
+    "document_title": "National Diabetes Prevention Program (National DPP) PreventT2 Curriculum",
+    "publication_year": 2024,
+    "section": "Module 1",
+    "subsection": "Core Goals - Weight Reduction",
+    "page": 4,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Prediabetes",
+      "Type2_Diabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome"
+    ],
+    "allowed_recommendation_categories": [
+      "weight_management",
+      "behavioral_habituation"
+    ],
+    "allowed_intervention_types": [
+      "caloric_reduction",
+      "weight_loss_goal_setting"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing",
+      "insulin_titration",
+      "diagnostic_adjudication",
+      "microbiome_taxon_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "5% to 7%",
+      "5% to 7% weight loss",
+      "5% to 7% of starting body weight",
+      "58%",
+      "71%"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "CDC_DPP_2024_CHUNK_02",
+    "source_id": "CDC_DPP_CURRICULUM_2024",
+    "chunk_text": "Goal 2: Physical Activity. Participants work up to at least 150 minutes of moderate-intensity physical activity per week (about 30 minutes a day, 5 days a week). Moderate-intensity activity is movement that makes you breathe faster and your heart beat faster, while still being able to carry on a conversation (such as brisk walking at 3 to 4 miles per hour).",
+    "document_title": "National Diabetes Prevention Program (National DPP) PreventT2 Curriculum",
+    "publication_year": 2024,
+    "section": "Module 1",
+    "subsection": "Core Goals - Physical Activity",
+    "page": 4,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Prediabetes",
+      "Type2_Diabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome"
+    ],
+    "allowed_recommendation_categories": [
+      "physical_activity",
+      "behavioral_habituation"
+    ],
+    "allowed_intervention_types": [
+      "moderate_aerobic_exercise",
+      "brisk_walking"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing",
+      "microbiome_taxon_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "150 minutes",
+      "150 minutes per week",
+      "30 minutes a day",
+      "5 days a week",
+      "3 to 4 miles per hour"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "CDC_DPP_2024_CHUNK_03",
+    "source_id": "CDC_DPP_CURRICULUM_2024",
+    "chunk_text": "Healthy eating focuses on sustainable changes: Reduce daily caloric intake by 500 to 750 calories per day to achieve a steady, safe weight loss of 1 to 2 pounds per week. Fill half your plate with non-starchy vegetables, one quarter with lean protein, and one quarter with whole grains or complex high-fiber carbohydrates. Replace sugar-sweetened beverages with water.",
+    "document_title": "National Diabetes Prevention Program (National DPP) PreventT2 Curriculum",
+    "publication_year": 2024,
+    "section": "Module 3",
+    "subsection": "Eat Well to Prevent T2",
+    "page": 12,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Prediabetes",
+      "Type2_Diabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "dietary_nutrition",
+      "weight_management"
+    ],
+    "allowed_intervention_types": [
+      "caloric_reduction",
+      "portion_control",
+      "plate_method",
+      "beverage_substitution"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing",
+      "microbiome_taxon_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "500 to 750 calories per day",
+      "500 to 750 kcal/day",
+      "1 to 2 pounds per week",
+      "half your plate",
+      "one quarter"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "CDC_DPP_2024_CHUNK_04",
+    "source_id": "CDC_DPP_CURRICULUM_2024",
+    "chunk_text": "Self-monitoring: Weigh yourself at least once a week at the same time of day on the same scale, recording the weight in your tracking log. Track daily food intake and daily physical activity minutes to recognize personal triggers and maintain behavioral accountability. Establish progressive weekly SMART goals.",
+    "document_title": "National Diabetes Prevention Program (National DPP) PreventT2 Curriculum",
+    "publication_year": 2024,
+    "section": "Module 4",
+    "subsection": "Self-Monitoring and Accountability",
+    "page": 18,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Prediabetes",
+      "Type2_Diabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome"
+    ],
+    "allowed_recommendation_categories": [
+      "behavioral_habituation",
+      "self_monitoring"
+    ],
+    "allowed_intervention_types": [
+      "weight_tracking",
+      "activity_tracking",
+      "smart_goal_setting"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "once a week",
+      "at least once a week"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "WHO_PA_2020_CHUNK_01",
+    "source_id": "WHO_PA_SEDENTARY_2020",
+    "chunk_text": "All adults should undertake regular physical activity. Adults should do at least 150\u2013300 minutes of moderate-intensity aerobic physical activity, or at least 75\u2013150 minutes of vigorous-intensity aerobic physical activity, or an equivalent combination of moderate-intensity and vigorous-intensity activity throughout the week for substantial health benefits (Strong recommendation, moderate-certainty evidence). Bouts of any duration now count toward total physical activity.",
+    "document_title": "World Health Organization 2020 guidelines on physical activity and sedentary behaviour",
+    "publication_year": 2020,
+    "section": "Recommendations for Adults",
+    "subsection": "Aerobic Physical Activity",
+    "page": 1454,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Type2_Diabetes",
+      "Prediabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "physical_activity"
+    ],
+    "allowed_intervention_types": [
+      "moderate_aerobic_exercise",
+      "vigorous_aerobic_exercise"
+    ],
+    "prohibited_claim_types": [
+      "dietary_prescribing",
+      "pharmacotherapy_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "150\u2013300 minutes",
+      "150-300 min",
+      "75\u2013150 minutes",
+      "75-150 min",
+      "150 minutes",
+      "300 minutes"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "WHO_PA_2020_CHUNK_02",
+    "source_id": "WHO_PA_SEDENTARY_2020",
+    "chunk_text": "Adults should also do muscle-strengthening activities at moderate or greater intensity that involve all major muscle groups on 2 or more days a week, as these provide additional health benefits (Strong recommendation, moderate-certainty evidence).",
+    "document_title": "World Health Organization 2020 guidelines on physical activity and sedentary behaviour",
+    "publication_year": 2020,
+    "section": "Recommendations for Adults",
+    "subsection": "Muscle-Strengthening Activity",
+    "page": 1454,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Type2_Diabetes",
+      "Prediabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "physical_activity"
+    ],
+    "allowed_intervention_types": [
+      "resistance_training",
+      "muscle_strengthening"
+    ],
+    "prohibited_claim_types": [
+      "dietary_prescribing",
+      "pharmacotherapy_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "2 or more days a week",
+      "2 days a week",
+      ">= 2 days/week"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "WHO_PA_2020_CHUNK_03",
+    "source_id": "WHO_PA_SEDENTARY_2020",
+    "chunk_text": "All adults should limit the amount of time spent being sedentary. Replacing sedentary time with physical activity of any intensity (including light intensity) provides health benefits. To help reduce the detrimental effects of high levels of sedentary behaviour on health, adults should aim to do more than the recommended levels of moderate-to-vigorous physical activity.",
+    "document_title": "World Health Organization 2020 guidelines on physical activity and sedentary behaviour",
+    "publication_year": 2020,
+    "section": "Recommendations for Adults",
+    "subsection": "Sedentary Behaviour",
+    "page": 1454,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Type2_Diabetes",
+      "Prediabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "physical_activity",
+      "sedentary_reduction"
+    ],
+    "allowed_intervention_types": [
+      "sedentary_interruption",
+      "light_activity_replacement"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing"
+    ],
+    "approved_numerical_anchors": [],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": false,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "WHO_FIBER_2023_CHUNK_01",
+    "source_id": "WHO_CARB_FIBER_2023",
+    "chunk_text": "WHO recommends that dietary carbohydrate intake should come primarily from whole grains, vegetables, fruits and pulses (Strong recommendation, moderate-certainty evidence). Higher intake of whole grains, vegetables, fruits, and legumes is consistently associated with significantly lower risk of all-cause mortality, type 2 diabetes, cardiovascular disease, coronary heart disease, and colorectal cancer.",
+    "document_title": "Carbohydrate intake for adults and children: WHO guideline",
+    "publication_year": 2023,
+    "section": "Executive Summary",
+    "subsection": "Recommendation 1 - Carbohydrate Quality",
+    "page": 12,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Type2_Diabetes",
+      "Prediabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "dietary_nutrition",
+      "microbiome_support_diet"
+    ],
+    "allowed_intervention_types": [
+      "whole_grain_selection",
+      "pulse_and_legume_intake",
+      "vegetable_intake"
+    ],
+    "prohibited_claim_types": [
+      "isolated_taxon_restoration",
+      "probiotic_supplement_prescribing"
+    ],
+    "approved_numerical_anchors": [],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": false,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "WHO_FIBER_2023_CHUNK_02",
+    "source_id": "WHO_CARB_FIBER_2023",
+    "chunk_text": "WHO recommends that adults consume at least 25 g per day of naturally occurring dietary fibre in foods (Strong recommendation, moderate-certainty evidence). Consuming at least 25 g/day of dietary fibre provides substantial protective effects on glycemic regulation, fasting glucose, insulin sensitivity, lipid clearance (lowering LDL and triglycerides), and normal stool physiology.",
+    "document_title": "Carbohydrate intake for adults and children: WHO guideline",
+    "publication_year": 2023,
+    "section": "Executive Summary",
+    "subsection": "Recommendation 2 - Quantitative Fiber Target",
+    "page": 15,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Type2_Diabetes",
+      "Prediabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "dietary_nutrition",
+      "microbiome_support_diet"
+    ],
+    "allowed_intervention_types": [
+      "naturally_occurring_fiber_intake"
+    ],
+    "prohibited_claim_types": [
+      "isolated_taxon_restoration",
+      "probiotic_supplement_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "25 g per day",
+      "25 g/day",
+      "at least 25 g",
+      "25 grams"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "EASL_MASLD_2024_CHUNK_01",
+    "source_id": "EASL_EASD_EASO_MASLD_2024",
+    "chunk_text": "Lifestyle modification encompassing dietary changes, physical activity, and weight loss is the fundamental first-line therapy for all patients with MASLD. A weight loss of at least 5% of body weight is recommended to reduce hepatic steatosis and improve hepatic insulin resistance (Level of evidence 1, Grade: Strong). A weight loss of 7% to 10% is recommended to induce resolution of steatohepatitis (MASH) and stabilize or reverse hepatic fibrosis.",
+    "document_title": "EASL\u2013EASD\u2013EASO Clinical Practice Guidelines on the management of metabolic dysfunction-associated steatotic liver disease (MASLD)",
+    "publication_year": 2024,
+    "section": "Section 4.1",
+    "subsection": "Lifestyle Interventions & Weight Targets",
+    "page": 505,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "NAFLD",
+      "Metabolic_Syndrome",
+      "High_Adiposity_Risk"
+    ],
+    "allowed_recommendation_categories": [
+      "weight_management",
+      "dietary_nutrition"
+    ],
+    "allowed_intervention_types": [
+      "caloric_reduction",
+      "weight_loss_goal_setting"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing",
+      "biopsy_adjudication"
+    ],
+    "approved_numerical_anchors": [
+      "5%",
+      "at least 5%",
+      "7% to 10%",
+      "7-10%"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "EASL_MASLD_2024_CHUNK_02",
+    "source_id": "EASL_EASD_EASO_MASLD_2024",
+    "chunk_text": "The Mediterranean dietary pattern is recommended for all patients with MASLD to reduce liver fat and decrease cardiovascular risk (Level of evidence 1, Grade: Strong). The Mediterranean diet emphasizes extra virgin olive oil, vegetables, legumes, whole grains, nuts, fruits, and moderate fish intake, while minimizing red meat, saturated fats, and ultra-processed foods. Avoid sugar-sweetened beverages and foods high in added fructose, as fructose specifically stimulates de novo lipogenesis in the liver and accelerates steatosis.",
+    "document_title": "EASL\u2013EASD\u2013EASO Clinical Practice Guidelines on the management of metabolic dysfunction-associated steatotic liver disease (MASLD)",
+    "publication_year": 2024,
+    "section": "Section 4.1",
+    "subsection": "Dietary Pattern - Mediterranean Diet",
+    "page": 505,
+    "evidence_role": "PRIMARY_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "NAFLD",
+      "Metabolic_Syndrome",
+      "High_Adiposity_Risk"
+    ],
+    "allowed_recommendation_categories": [
+      "dietary_nutrition"
+    ],
+    "allowed_intervention_types": [
+      "mediterranean_dietary_pattern",
+      "fructose_reduction",
+      "saturated_fat_reduction"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing"
+    ],
+    "approved_numerical_anchors": [],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": false,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "AHA_CKM_2023_CHUNK_01",
+    "source_id": "AHA_CKM_ADVISORY_2023",
+    "chunk_text": "Cardiovascular-Kidney-Metabolic (CKM) syndrome reflects systemic pathological interactions among obesity, insulin resistance, type 2 diabetes, hypertension, dyslipidemia, and chronic kidney disease. Stage 1 reflects excess or dysfunctional adiposity and impaired glucose tolerance (prediabetes). Stage 2 reflects established metabolic risk factors including hypertension, hypertriglyceridemia (>= 150 mg/dL), low HDL (< 40 mg/dL men, < 50 mg/dL women), or type 2 diabetes.",
+    "document_title": "Cardiovascular-Kidney-Metabolic Health: A Presidential Advisory From the American Heart Association",
+    "publication_year": 2023,
+    "section": "Section 1",
+    "subsection": "CKM Syndrome Concept and Staging",
+    "page": 1610,
+    "evidence_role": "SUPPORTING_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Metabolic_Syndrome",
+      "High_Adiposity_Risk",
+      "Type2_Diabetes",
+      "Prediabetes"
+    ],
+    "allowed_recommendation_categories": [
+      "diagnostic_explanation",
+      "multi_condition_synergy"
+    ],
+    "allowed_intervention_types": [
+      "risk_factor_explanation",
+      "cross_system_synergy"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      ">= 150 mg/dL",
+      "< 40 mg/dL",
+      "< 50 mg/dL",
+      ">= 25 kg/m2"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": false,
+    "contains_diagnostic_definition": true,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "AHA_CKM_2023_CHUNK_02",
+    "source_id": "AHA_CKM_ADVISORY_2023",
+    "chunk_text": "Cross-Condition Synergy: Interventions that simultaneously target central adiposity, glycemic excursion, and atherogenic dyslipidemia produce compounding risk reduction. Adopt an overall heart-healthy dietary pattern (Mediterranean or DASH) characterized by vegetables, whole grains, and lean protein, while accumulating at least 150 minutes of physical activity weekly and maintaining 7 to 9 hours of restorative sleep.",
+    "document_title": "Cardiovascular-Kidney-Metabolic Health: A Presidential Advisory From the American Heart Association",
+    "publication_year": 2023,
+    "section": "Section 4",
+    "subsection": "Multi-System Lifestyle Synergy",
+    "page": 1622,
+    "evidence_role": "SUPPORTING_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Metabolic_Syndrome",
+      "High_Adiposity_Risk",
+      "Type2_Diabetes",
+      "Prediabetes",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "multi_condition_synergy",
+      "dietary_nutrition",
+      "physical_activity",
+      "sleep_stress"
+    ],
+    "allowed_intervention_types": [
+      "heart_healthy_diet",
+      "moderate_aerobic_exercise",
+      "sleep_hygiene"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing"
+    ],
+    "approved_numerical_anchors": [
+      "150 minutes",
+      "7 to 9 hours"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "AHA_OBESITY_2013_CHUNK_01",
+    "source_id": "AHA_ACC_TOS_OBESITY_2013",
+    "chunk_text": "Energy Deficit Prescription: An energy deficit of 500 to 750 kcal/day is recommended to achieve a clinically meaningful and safe rate of weight loss (typically 1 to 2 lbs per week). Initial Weight Loss Goal: Prescribe an initial weight loss goal of 5% to 10% of baseline body weight over a 6-month period, which produces significant improvements in blood pressure, triglyceride levels, HDL cholesterol, and fasting blood glucose.",
+    "document_title": "2013 AHA/ACC/TOS Guideline for the Management of Overweight and Obesity in Adults",
+    "publication_year": 2014,
+    "section": "Section 3.2 & 3.3",
+    "subsection": "Diets for Weight Loss and Goals",
+    "page": 110,
+    "evidence_role": "SUPPORTING_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "Prediabetes",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "weight_management",
+      "dietary_nutrition"
+    ],
+    "allowed_intervention_types": [
+      "caloric_deficit",
+      "weight_loss_goal_setting"
+    ],
+    "prohibited_claim_types": [
+      "pharmacotherapy_prescribing",
+      "anti_obesity_drug_prescribing",
+      "bariatric_surgery_evaluation"
+    ],
+    "approved_numerical_anchors": [
+      "500 to 750 kcal/day",
+      "500-750 kcal/day",
+      "500 to 750 calories",
+      "1 to 2 lbs per week",
+      "5% to 10%",
+      "5-10%"
+    ],
+    "recommendation_generation_allowed": true,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": true,
+    "contains_diagnostic_definition": false,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "ISAPP_PREBIOTICS_2017_CHUNK_01",
+    "source_id": "ISAPP_PREBIOTICS_2017",
+    "chunk_text": "A prebiotic is defined as 'a substrate that is selectively utilized by host microorganisms conferring a health benefit.' Prebiotic substrates include non-digestible inulin, FOS, and resistant starches found in whole plant foods (leeks, asparagus, onions, garlic, oats, legumes). Microbial fermentation of prebiotics generates short-chain fatty acids (acetate, propionate, butyrate) which support epithelial barrier integrity and metabolic homeostasis. Prebiotic foods support general microbial diversity but should not be prescribed as isolated cures for specific bacterial taxa.",
+    "document_title": "Expert consensus document: The International Scientific Association for Probiotics and Prebiotics (ISAPP) consensus statement on the definition and scope of prebiotics",
+    "publication_year": 2017,
+    "section": "Section 1",
+    "subsection": "Prebiotic Definition and Fermentation",
+    "page": 493,
+    "evidence_role": "SUPPORTING_RECOMMENDATION_SOURCE",
+    "allowed_condition_scopes": [
+      "Type2_Diabetes",
+      "Prediabetes",
+      "High_Adiposity_Risk",
+      "Metabolic_Syndrome",
+      "NAFLD"
+    ],
+    "allowed_recommendation_categories": [
+      "microbiome_support_diet",
+      "scientific_explanation"
+    ],
+    "allowed_intervention_types": [
+      "prebiotic_food_intake",
+      "dietary_diversity"
+    ],
+    "prohibited_claim_types": [
+      "isolated_taxon_restoration",
+      "taxon_specific_cure",
+      "probiotic_supplement_prescribing"
+    ],
+    "approved_numerical_anchors": [],
+    "recommendation_generation_allowed": false,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": false,
+    "contains_recommendation": false,
+    "contains_diagnostic_definition": true,
+    "contains_microbiome_taxon_reference": true,
+    "taxon_specific_intervention_allowed": false
+  },
+  {
+    "chunk_id": "AHA_METSYN_2005_CHUNK_01",
+    "source_id": "AHA_NHLBI_METSYN_2005",
+    "chunk_text": "Metabolic syndrome is clinically identified when a patient presents with 3 or more of the following 5 risk factors: 1. Elevated Waist Circumference: >= 102 cm (>= 40 inches) in men, >= 88 cm (>= 35 inches) in women (or >= 90 cm men / >= 80 cm women in Asian populations); 2. Elevated Triglycerides: >= 150 mg/dL (>= 1.7 mmol/L); 3. Reduced HDL Cholesterol: < 40 mg/dL in men, < 50 mg/dL in women; 4. Elevated Blood Pressure: Systolic >= 130 mmHg and/or Diastolic >= 85 mmHg; 5. Elevated Fasting Glucose: >= 100 mg/dL (>= 5.6 mmol/L).",
+    "document_title": "Diagnosis and Management of the Metabolic Syndrome: An American Heart Association/National Heart, Lung, and Blood Institute Scientific Statement",
+    "publication_year": 2005,
+    "section": "Criteria for Clinical Diagnosis",
+    "subsection": "Table 1 - 5 Components",
+    "page": 2737,
+    "evidence_role": "DIAGNOSTIC_EXPLANATORY_SOURCE",
+    "allowed_condition_scopes": [
+      "Metabolic_Syndrome"
+    ],
+    "allowed_recommendation_categories": [
+      "diagnostic_explanation",
+      "biomarker_context"
+    ],
+    "allowed_intervention_types": [
+      "diagnostic_component_review"
+    ],
+    "prohibited_claim_types": [
+      "new_intervention_justification",
+      "drug_prescribing",
+      "primary_lifestyle_recommendation_generation"
+    ],
+    "approved_numerical_anchors": [
+      ">= 102 cm",
+      ">= 88 cm",
+      ">= 90 cm",
+      ">= 80 cm",
+      ">= 150 mg/dL",
+      "< 40 mg/dL",
+      "< 50 mg/dL",
+      ">= 130 mmHg",
+      ">= 85 mmHg",
+      ">= 100 mg/dL"
+    ],
+    "recommendation_generation_allowed": false,
+    "explanation_generation_allowed": true,
+    "contains_numerical_claim": true,
+    "contains_recommendation": false,
+    "contains_diagnostic_definition": true,
+    "contains_microbiome_taxon_reference": false,
+    "taxon_specific_intervention_allowed": false
+  }
+]

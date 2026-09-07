@@ -1,0 +1,20 @@
+EASL-EASD-EASO CLINICAL PRACTICE GUIDELINES ON THE MANAGEMENT OF METABOLIC DYSFUNCTION-ASSOCIATED STEATOTIC LIVER DISEASE (MASLD)
+Published by: European Association for the Study of the Liver (EASL), European Association for the Study of Diabetes (EASD), European Association for the Study of Obesity (EASO). Journal of Hepatology 2024;81(3):492-542.
+
+SECTION 1: NOMENCLATURE AND DEFINITION
+- MASLD (metabolic dysfunction-associated steatotic liver disease, formerly termed non-alcoholic fatty liver disease / NAFLD) is defined as the presence of hepatic steatosis in conjunction with at least one cardiometabolic risk factor (overweight/obesity, dysglycemia, hypertension, hypertriglyceridemia, or low HDL) and the absence of harmful alcohol consumption.
+
+SECTION 4.1: LIFESTYLE INTERVENTIONS & DIETARY RECOMMENDATIONS
+- Lifestyle modification encompassing dietary changes, physical activity, and weight loss is the fundamental first-line therapy for all patients with MASLD.
+- Weight Loss Targets:
+  1. A weight loss of at least 5% of body weight is recommended to reduce hepatic steatosis and improve hepatic insulin resistance (Level of evidence 1, Grade: Strong).
+  2. A weight loss of 7% to 10% is recommended to induce resolution of steatohepatitis (MASH) and stabilize or reverse hepatic fibrosis (Level of evidence 1, Grade: Strong).
+- Dietary Pattern:
+  1. The Mediterranean dietary pattern is recommended for all patients with MASLD to reduce liver fat and decrease cardiovascular risk (Level of evidence 1, Grade: Strong).
+  2. The Mediterranean diet emphasizes extra virgin olive oil, vegetables, legumes, whole grains, nuts, fruits, and moderate fish intake, while minimizing red meat, saturated fats, and ultra-processed foods.
+  3. Avoid sugar-sweetened beverages and foods high in added fructose, as fructose specifically stimulates de novo lipogenesis in the liver and accelerates steatosis.
+  4. Alcohol consumption should be strictly minimized or avoided entirely in patients with MASLD.
+
+SECTION 4.2: PHYSICAL ACTIVITY AND EXERCISE
+- Both aerobic exercise and resistance training reduce hepatic steatosis even in the absence of significant weight loss.
+- Patients with MASLD should aim for 150 to 300 minutes of moderate-intensity aerobic physical activity per week, complemented by resistance training 2 to 3 days per week.

@@ -21,6 +21,7 @@ Entry-point functions (Section 16):
 from __future__ import annotations
 
 import copy
+import re
 import uuid
 from datetime import datetime, timezone
 
@@ -510,6 +511,48 @@ class FeatureMapper:
             else:
                 model_state["status"] = "not_available"
 
+        # ── Stage 6: patient_info (UI metadata — not a domain) ───
+        # patient_info is populated after all domain passes are done.
+        # It shares Age/Gender from the clinical domain values so there
+        # is exactly ONE extraction path for those shared fields.
+        # It never produces a status, missing_fields, or conflict_log.
+        patient_info_schema = schema.get("patient_info")
+        if patient_info_schema is not None:
+            if "patient_info" not in state:
+                state["patient_info"] = {}
+            pi = state["patient_info"]
+
+            # ── Name: extract directly from candidates via aliases ──
+            if "Name" not in pi:
+                name_field = patient_info_schema.get("fields", {}).get("Name", {})
+                name_aliases = [
+                    a.lower() for a in name_field.get("aliases", [])
+                ]
+                for cand in candidates:
+                    label_lower = cand.label_text.strip().lower()
+                    if label_lower in name_aliases:
+                        raw_name = cand.value_text.strip()
+                        # Reject pure-numeric values (Patient ID leak etc.)
+                        if raw_name and not re.match(r"^[\d\s\-]+$", raw_name):
+                            pi["Name"] = raw_name
+                            log(
+                                "INFO",
+                                "FeatureMapper",
+                                f"patient_info.Name extracted: '{raw_name}'",
+                            )
+                            break
+
+            # ── Age / Gender: mirror from clinical domain values ──
+            # We intentionally do NOT re-run the extraction pipeline.
+            # The clinical domain already resolved these from the same
+            # candidates; we simply read from there.
+            clinical_vals = state.get("clinical", {}).get("values", {})
+            for shared_field in ("Age", "Gender"):
+                if shared_field not in pi and shared_field in clinical_vals:
+                    pi[shared_field] = clinical_vals[shared_field].get(
+                        "canonical_value"
+                    )
+
         # Attach mapper log to state
         state["_mapper_log"] = state.get("_mapper_log", []) + mapper_log
 
@@ -673,6 +716,16 @@ class FeatureMapper:
                 model_state["status"] = "complete"
             elif model_state["values"]:
                 model_state["status"] = "incomplete"
+
+        # ── patient_info: allow user to supply Name directly ──
+        # Age/Gender in patient_info are always mirrored from the clinical
+        # domain (map_features does this); they are not accepted here as
+        # user-entered values to avoid two independent update paths.
+        patient_info_schema = schema.get("patient_info")
+        if patient_info_schema is not None and field_name == "Name":
+            if "patient_info" not in state:
+                state["patient_info"] = {}
+            state["patient_info"]["Name"] = str(value).strip()
 
         return state
 

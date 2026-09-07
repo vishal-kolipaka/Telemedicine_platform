@@ -1,0 +1,61 @@
+                    APOLLO DIAGNOSTICS
+          Comprehensive Metabolic Health Profile
+------------------------------------------------------------
+
+Patient Name      : Sunita Rao
+Patient ID        : P001004
+Age               : 51 Years
+Gender            : Female
+
+Collection Date   : 29-Aug-2026
+
+============================================================
+PATIENT MEASUREMENTS
+============================================================
+
+Height            : 158 cm
+Weight            : 72 kg
+Waist Circumference : 88 cm
+
+Blood Pressure    : 128/82 mmHg
+
+============================================================
+BIOCHEMISTRY
+============================================================
+
+Fasting Blood Glucose : 118 mg/dL
+HbA1c                 : 6.2 %
+
+HDL Cholesterol       : 46 mg/dL
+Triglycerides         : 185 mg/dL
+
+ALT (SGPT)            : 38 U/L
+AST (SGOT)            : 29 U/L
+
+NOTE: LDL value unavailable — sample haemolysed, repeat test required.
+
+------------------------------------------------------------
+Verified By:
+Dr. Priya Menon
+
+============================================================
+FAMILY HISTORY QUESTIONNAIRE
+============================================================
+
+Does a close blood relative have diabetes?
+
+NO
+
+------------------------------------------------------------
+
+Does a close blood relative have high blood pressure?
+
+YES
+
+------------------------------------------------------------
+
+Does a close blood relative have cardiovascular disease (heart attack, stroke)?
+
+NO
+
+============================================================

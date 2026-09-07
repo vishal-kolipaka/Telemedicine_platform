@@ -1,0 +1,212 @@
+{
+  "Type2_Diabetes": [
+    {
+      "Pattern": "C0 W0 G0",
+      "Count": 1373,
+      "Percentage": 45.77
+    },
+    {
+      "Pattern": "C0 W0 G1",
+      "Count": 413,
+      "Percentage": 13.77
+    },
+    {
+      "Pattern": "C0 W1 G0",
+      "Count": 85,
+      "Percentage": 2.83
+    },
+    {
+      "Pattern": "C1 W0 G0",
+      "Count": 16,
+      "Percentage": 0.53
+    },
+    {
+      "Pattern": "C0 W1 G1",
+      "Count": 44,
+      "Percentage": 1.47
+    },
+    {
+      "Pattern": "C1 W0 G1",
+      "Count": 23,
+      "Percentage": 0.77
+    },
+    {
+      "Pattern": "C1 W1 G0",
+      "Count": 294,
+      "Percentage": 9.8
+    },
+    {
+      "Pattern": "C1 W1 G1",
+      "Count": 752,
+      "Percentage": 25.07
+    }
+  ],
+  "Prediabetes": [
+    {
+      "Pattern": "C0 W0 G0",
+      "Count": 828,
+      "Percentage": 27.6
+    },
+    {
+      "Pattern": "C0 W0 G1",
+      "Count": 992,
+      "Percentage": 33.07
+    },
+    {
+      "Pattern": "C0 W1 G0",
+      "Count": 65,
+      "Percentage": 2.17
+    },
+    {
+      "Pattern": "C1 W0 G0",
+      "Count": 37,
+      "Percentage": 1.23
+    },
+    {
+      "Pattern": "C0 W1 G1",
+      "Count": 134,
+      "Percentage": 4.47
+    },
+    {
+      "Pattern": "C1 W0 G1",
+      "Count": 63,
+      "Percentage": 2.1
+    },
+    {
+      "Pattern": "C1 W1 G0",
+      "Count": 243,
+      "Percentage": 8.1
+    },
+    {
+      "Pattern": "C1 W1 G1",
+      "Count": 638,
+      "Percentage": 21.27
+    }
+  ],
+  "High_Adiposity_Risk": [
+    {
+      "Pattern": "C0 W0 G0",
+      "Count": 1033,
+      "Percentage": 34.43
+    },
+    {
+      "Pattern": "C0 W0 G1",
+      "Count": 391,
+      "Percentage": 13.03
+    },
+    {
+      "Pattern": "C0 W1 G0",
+      "Count": 270,
+      "Percentage": 9.0
+    },
+    {
+      "Pattern": "C1 W0 G0",
+      "Count": 117,
+      "Percentage": 3.9
+    },
+    {
+      "Pattern": "C0 W1 G1",
+      "Count": 199,
+      "Percentage": 6.63
+    },
+    {
+      "Pattern": "C1 W0 G1",
+      "Count": 158,
+      "Percentage": 5.27
+    },
+    {
+      "Pattern": "C1 W1 G0",
+      "Count": 226,
+      "Percentage": 7.53
+    },
+    {
+      "Pattern": "C1 W1 G1",
+      "Count": 606,
+      "Percentage": 20.2
+    }
+  ],
+  "Metabolic_Syndrome": [
+    {
+      "Pattern": "C0 W0 G0",
+      "Count": 1332,
+      "Percentage": 44.4
+    },
+    {
+      "Pattern": "C0 W0 G1",
+      "Count": 300,
+      "Percentage": 10.0
+    },
+    {
+      "Pattern": "C0 W1 G0",
+      "Count": 362,
+      "Percentage": 12.07
+    },
+    {
+      "Pattern": "C1 W0 G0",
+      "Count": 146,
+      "Percentage": 4.87
+    },
+    {
+      "Pattern": "C0 W1 G1",
+      "Count": 266,
+      "Percentage": 8.87
+    },
+    {
+      "Pattern": "C1 W0 G1",
+      "Count": 111,
+      "Percentage": 3.7
+    },
+    {
+      "Pattern": "C1 W1 G0",
+      "Count": 156,
+      "Percentage": 5.2
+    },
+    {
+      "Pattern": "C1 W1 G1",
+      "Count": 327,
+      "Percentage": 10.9
+    }
+  ],
+  "NAFLD": [
+    {
+      "Pattern": "C0 W0 G0",
+      "Count": 1061,
+      "Percentage": 35.37
+    },
+    {
+      "Pattern": "C0 W0 G1",
+      "Count": 230,
+      "Percentage": 7.67
+    },
+    {
+      "Pattern": "C0 W1 G0",
+      "Count": 474,
+      "Percentage": 15.8
+    },
+    {
+      "Pattern": "C1 W0 G0",
+      "Count": 207,
+      "Percentage": 6.9
+    },
+    {
+      "Pattern": "C0 W1 G1",
+      "Count": 398,
+      "Percentage": 13.27
+    },
+    {
+      "Pattern": "C1 W0 G1",
+      "Count": 137,
+      "Percentage": 4.57
+    },
+    {
+      "Pattern": "C1 W1 G0",
+      "Count": 146,
+      "Percentage": 4.87
+    },
+    {
+      "Pattern": "C1 W1 G1",
+      "Count": 347,
+      "Percentage": 11.57
+    }
+  ]
+}

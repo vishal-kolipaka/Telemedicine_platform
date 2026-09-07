@@ -1,0 +1,6 @@
+Disease,Best Modality,Clinical AUC,Wearable AUC,Gut AUC,Cl-We r,Cl-Gu r,We-Gu r,Fusion Potential
+Type2_Diabetes,Clinical,0.9996,0.9909,0.8236,0.92,0.54,0.54,NONE / NOT JUSTIFIED
+Prediabetes,Clinical,0.9993,0.9648,0.6170,0.84,0.18,0.18,NONE / NOT JUSTIFIED
+High_Adiposity_Risk,Clinical,0.9665,0.7959,0.8061,0.61,0.50,0.44,MODERATE
+Metabolic_Syndrome,Clinical,0.9089,0.7387,0.8359,0.46,0.49,0.49,HIGH
+NAFLD,Clinical,0.9109,0.5914,0.8150,0.23,0.37,0.51,HIGH

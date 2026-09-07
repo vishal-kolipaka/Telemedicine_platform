@@ -1,0 +1,19 @@
+Disease,Model 1,Model 2 (Baseline),dAUC Point,95% CI dAUC,dAUC Excludes 0
+High_Adiposity_Risk,Clinical+Gut (Weighted),Clinical,-0.0047,"[-0.0090, -0.0005]",True
+High_Adiposity_Risk,Clinical+Gut (LRStacker),Clinical,0.0016,"[-0.0006, +0.0040]",False
+High_Adiposity_Risk,Full Fusion (Weighted),Clinical,-0.0157,"[-0.0209, -0.0110]",True
+High_Adiposity_Risk,Full Fusion (LRStacker),Clinical,0.0012,"[-0.0014, +0.0037]",False
+High_Adiposity_Risk,Full Fusion (Weighted),Clinical+Gut (Weighted),-0.011,"[-0.0143, -0.0079]",True
+High_Adiposity_Risk,Full Fusion (LRStacker),Clinical+Gut (LRStacker),-0.0005,"[-0.0008, -0.0002]",True
+Metabolic_Syndrome,Clinical+Gut (Weighted),Clinical,0.0075,"[-0.0037, +0.0183]",False
+Metabolic_Syndrome,Clinical+Gut (LRStacker),Clinical,0.0108,"[+0.0016, +0.0200]",True
+Metabolic_Syndrome,Full Fusion (Weighted),Clinical,0.005,"[-0.0064, +0.0157]",False
+Metabolic_Syndrome,Full Fusion (LRStacker),Clinical,0.0112,"[+0.0020, +0.0202]",True
+Metabolic_Syndrome,Full Fusion (Weighted),Clinical+Gut (Weighted),-0.0025,"[-0.0047, -0.0003]",True
+Metabolic_Syndrome,Full Fusion (LRStacker),Clinical+Gut (LRStacker),0.0004,"[-0.0000, +0.0008]",False
+NAFLD,Clinical+Gut (Weighted),Clinical,0.0151,"[+0.0072, +0.0232]",True
+NAFLD,Clinical+Gut (LRStacker),Clinical,0.0168,"[+0.0105, +0.0231]",True
+NAFLD,Full Fusion (Weighted),Clinical,0.0043,"[-0.0047, +0.0133]",False
+NAFLD,Full Fusion (LRStacker),Clinical,0.0279,"[+0.0201, +0.0350]",True
+NAFLD,Full Fusion (Weighted),Clinical+Gut (Weighted),-0.0108,"[-0.0132, -0.0086]",True
+NAFLD,Full Fusion (LRStacker),Clinical+Gut (LRStacker),0.0111,"[+0.0073, +0.0149]",True

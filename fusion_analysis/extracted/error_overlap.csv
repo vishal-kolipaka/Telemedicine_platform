@@ -1,0 +1,16 @@
+Disease,Pair,Both_Correct,Both_Correct_pct,Clinical_Correct_Wearable_Wrong,pct1,Clinical_Wrong_Wearable_Correct,pct2,Both_Wrong,Both_Wrong_pct,Clinical_Correct_Gut_Wrong,Clinical_Wrong_Gut_Correct,Wearable_Correct_Gut_Wrong,Wearable_Wrong_Gut_Correct
+Type2_Diabetes,Clinical vs Wearable,2826,94.2,166.0,5.5,2.0,0.1,6,0.2,,,,
+Type2_Diabetes,Clinical vs Gut,2231,74.4,,25.4,,0.2,2,0.1,761.0,6.0,,
+Type2_Diabetes,Wearable vs Gut,2125,70.8,,23.4,,3.7,60,2.0,,,703.0,112.0
+Prediabetes,Clinical vs Wearable,2689,89.6,294.0,9.8,5.0,0.2,12,0.4,,,,
+Prediabetes,Clinical vs Gut,1587,52.9,,46.5,,0.3,7,0.2,1396.0,10.0,,
+Prediabetes,Wearable vs Gut,1464,48.8,,41.0,,4.4,173,5.8,,,1230.0,133.0
+High_Adiposity_Risk,Clinical vs Wearable,2033,67.8,643.0,21.4,101.0,3.4,223,7.4,,,,
+High_Adiposity_Risk,Clinical vs Gut,1932,64.4,,24.8,,6.3,135,4.5,744.0,189.0,,
+High_Adiposity_Risk,Wearable vs Gut,1605,53.5,,17.6,,17.2,350,11.7,,,529.0,516.0
+Metabolic_Syndrome,Clinical vs Wearable,1758,58.6,673.0,22.4,212.0,7.1,357,11.9,,,,
+Metabolic_Syndrome,Clinical vs Gut,1841,61.4,,19.7,,9.3,291,9.7,590.0,278.0,,
+Metabolic_Syndrome,Wearable vs Gut,1580,52.7,,13.0,,18.0,491,16.4,,,390.0,539.0
+NAFLD,Clinical vs Wearable,1462,48.7,981.0,32.7,235.0,7.8,322,10.7,,,,
+NAFLD,Clinical vs Gut,1785,59.5,,21.9,,10.8,234,7.8,658.0,323.0,,
+NAFLD,Wearable vs Gut,1409,47.0,,9.6,,23.3,604,20.1,,,288.0,699.0

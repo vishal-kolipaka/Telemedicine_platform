@@ -1,0 +1,40 @@
+                    APOLLO DIAGNOSTICS
+          Comprehensive Metabolic Health Profile
+------------------------------------------------------------
+
+Patient Name      : Arjun Mehta
+Patient ID        : P001001
+Age               : 47 Years
+Gender            : Male
+
+Collection Date   : 29-Aug-2026
+
+============================================================
+PATIENT MEASUREMENTS
+============================================================
+
+Height            : 174 cm
+Weight            : 88 kg
+Waist Circumference : 99 cm
+
+Blood Pressure    : 134/86 mmHg
+
+============================================================
+BIOCHEMISTRY
+============================================================
+
+Fasting Blood Glucose : 126 mg/dL
+HbA1c                 : 6.5 %
+
+LDL Cholesterol       : 138 mg/dL
+HDL Cholesterol       : 38 mg/dL
+Triglycerides         : 210 mg/dL
+
+ALT (SGPT)            : 44 U/L
+AST (SGOT)            : 36 U/L
+
+------------------------------------------------------------
+Verified By:
+Dr. Priya Menon
+MBBS, MD (Internal Medicine)
+============================================================

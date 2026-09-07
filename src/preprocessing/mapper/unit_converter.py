@@ -260,7 +260,11 @@ def convert_value(
     """
     if from_unit == to_unit:
         return value
-    if (from_unit, to_unit) in (("%", "% CV"), ("% CV", "%"), ("%", "relative abundance %"), ("relative abundance %", "%")):
+    if (from_unit, to_unit) in (
+        ("%", "% CV"), ("% CV", "%"),
+        ("%", "relative abundance %"), ("relative abundance %", "%"),
+        ("%", "score"), ("score", "%"),
+    ):
         return value
 
     func = get_conversion_func(from_unit, to_unit, field_name)

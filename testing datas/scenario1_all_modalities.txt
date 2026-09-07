@@ -1,0 +1,137 @@
+                    APOLLO DIAGNOSTICS
+          Comprehensive Metabolic Health Profile
+------------------------------------------------------------
+
+Patient Name      : Arjun Mehta
+Patient ID        : P001001
+Age               : 47 Years
+Gender            : Male
+
+Collection Date   : 29-Aug-2026
+
+============================================================
+PATIENT MEASUREMENTS
+============================================================
+
+Height            : 174 cm
+Weight            : 88 kg
+Waist Circumference : 99 cm
+
+Blood Pressure    : 134/86 mmHg
+
+============================================================
+BIOCHEMISTRY
+============================================================
+
+Fasting Blood Glucose : 126 mg/dL
+HbA1c                 : 6.5 %
+
+LDL Cholesterol       : 138 mg/dL
+HDL Cholesterol       : 38 mg/dL
+Triglycerides         : 210 mg/dL
+
+ALT (SGPT)            : 44 U/L
+AST (SGOT)            : 36 U/L
+
+------------------------------------------------------------
+Verified By:
+Dr. Priya Menon
+MBBS, MD (Internal Medicine)
+
+============================================================
+FAMILY HISTORY QUESTIONNAIRE
+============================================================
+
+Does a close blood relative have diabetes?
+
+YES
+
+------------------------------------------------------------
+
+Does a close blood relative have high blood pressure?
+
+YES
+
+------------------------------------------------------------
+
+Does a close blood relative have cardiovascular disease (heart attack, stroke)?
+
+NO
+
+============================================================
+
+============================================================
+FITBIT HEALTH SUMMARY
+============================================================
+
+Reporting Period : Last 30 Days
+
+Average Daily Steps              : 6200 steps/day
+
+Active Minutes                   : 38 minutes/day
+
+Sedentary Time                   : 680 minutes/day
+
+Resting Heart Rate               : 74 bpm
+
+Heart Rate Variability (RMSSD)   : 28 ms
+
+Sleep Duration                   : 6.4 hours
+
+Sleep Efficiency Score           : 71 %
+
+Autonomic Stress Score           : 62
+
+Activity Energy Expenditure      : 2180 kcal/day
+
+Exercise Frequency               : 2 days/week
+
+Average Glucose (CGM)            : 134 mg/dL
+
+Glucose CV (CGM)                 : 22 %
+
+Time In Range (CGM)              : 71 %
+
+Time Above Range (CGM)           : 26 %
+
+Time Below Range (CGM)           : 3 %
+
+============================================================
+END FITBIT REPORT
+============================================================
+
+============================================================
+GUT MICROBIOME ANALYSIS REPORT
+============================================================
+
+Patient : Arjun Mehta
+Lab     : MicrobioLabs India
+Date    : 29-Aug-2026
+
+Akkermansia                : 2.1 %
+Faecalibacterium           : 7.3 %
+Roseburia                  : 3.8 %
+Bifidobacterium            : 4.2 %
+Bacteroides                : 18.6 %
+Prevotella                 : 9.4 %
+Ruminococcus               : 5.1 %
+Blautia                    : 6.2 %
+Collinsella                : 3.7 %
+Escherichia/Shigella       : 2.8 %
+Coprococcus                : 2.4 %
+Alistipes                  : 4.1 %
+Subdoligranulum            : 1.9 %
+Enterococcus               : 1.2 %
+Eubacterium                : 3.3 %
+Parabacteroides            : 2.6 %
+Lactobacillus              : 1.8 %
+Klebsiella                 : 1.1 %
+Streptococcus              : 2.3 %
+Eggerthella                : 1.5 %
+Other_Taxa                 : 14.6 %
+
+Shannon Diversity Index    : 3.41
+
+============================================================
+End of Report
+============================================================
