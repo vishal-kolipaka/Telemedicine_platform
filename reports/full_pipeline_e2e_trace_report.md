@@ -1,6 +1,6 @@
 # Comprehensive End-to-End Pipeline Trace Report
 
-**Execution Timestamp (UTC):** 2026-09-07 14:02:24
+**Execution Timestamp (UTC):** 2026-09-07 14:44:49
 **Pipeline Architecture:**
 ```
 Raw Input Files → DocumentReader → FeatureMapper
@@ -19,7 +19,7 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Modalities Intentionally Absent:** None
 
 ### STAGE 1 — DOCUMENTREADER / CONTRACT 1
-- **Total Pages Extracted:** 3 (elapsed: 0.0028s)
+- **Total Pages Extracted:** 3 (elapsed: 0.0030s)
   - **File `clinical_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1103 chars, OCR confidence=N/A
     *Text Preview:* "APOLLO DIAGNOSTICS           Comprehensive Metabolic Health Profile ------------------------------------------------------------  Patient Name      : Arjun Mehta Patient ID        ..."
   - **File `gut_microbiome_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1137 chars, OCR confidence=N/A
@@ -43,8 +43,8 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Total Clinical Features Present:** 18 / 18
   *Injected Values:*
     - `Family_History_CVD`: canonical_value=`False`, source=`user_form`, validation=`USER_ENTERED`
-    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
     - `Family_History_Diabetes`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
+    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
 
 ### STAGE 4 — MODELROUTER + LEVEL-0 MODELS
 - **`clinical` Dispatch:** status = **`success`**
@@ -93,7 +93,7 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Modalities Intentionally Absent:** `wearable`
 
 ### STAGE 1 — DOCUMENTREADER / CONTRACT 1
-- **Total Pages Extracted:** 2 (elapsed: 0.0030s)
+- **Total Pages Extracted:** 2 (elapsed: 0.0024s)
   - **File `clinical_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1103 chars, OCR confidence=N/A
     *Text Preview:* "APOLLO DIAGNOSTICS           Comprehensive Metabolic Health Profile ------------------------------------------------------------  Patient Name      : Arjun Mehta Patient ID        ..."
   - **File `gut_microbiome_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1137 chars, OCR confidence=N/A
@@ -114,8 +114,8 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Total Clinical Features Present:** 18 / 18
   *Injected Values:*
     - `Family_History_CVD`: canonical_value=`False`, source=`user_form`, validation=`USER_ENTERED`
-    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
     - `Family_History_Diabetes`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
+    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
 
 ### STAGE 4 — MODELROUTER + LEVEL-0 MODELS
 - **`clinical` Dispatch:** status = **`success`**
@@ -159,7 +159,7 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Modalities Intentionally Absent:** `gut`
 
 ### STAGE 1 — DOCUMENTREADER / CONTRACT 1
-- **Total Pages Extracted:** 2 (elapsed: 0.0026s)
+- **Total Pages Extracted:** 2 (elapsed: 0.0017s)
   - **File `clinical_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1103 chars, OCR confidence=N/A
     *Text Preview:* "APOLLO DIAGNOSTICS           Comprehensive Metabolic Health Profile ------------------------------------------------------------  Patient Name      : Arjun Mehta Patient ID        ..."
   - **File `fitbit_wearable_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1007 chars, OCR confidence=N/A
@@ -180,8 +180,8 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Total Clinical Features Present:** 18 / 18
   *Injected Values:*
     - `Family_History_CVD`: canonical_value=`False`, source=`user_form`, validation=`USER_ENTERED`
-    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
     - `Family_History_Diabetes`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
+    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
 
 ### STAGE 4 — MODELROUTER + LEVEL-0 MODELS
 - **`clinical` Dispatch:** status = **`success`**
@@ -225,7 +225,7 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Modalities Intentionally Absent:** `clinical`
 
 ### STAGE 1 — DOCUMENTREADER / CONTRACT 1
-- **Total Pages Extracted:** 2 (elapsed: 0.0028s)
+- **Total Pages Extracted:** 2 (elapsed: 0.0022s)
   - **File `gut_microbiome_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1137 chars, OCR confidence=N/A
     *Text Preview:* "============================================================ GUT MICROBIOME ANALYSIS REPORT ============================================================  Patient : Arjun Mehta Lab ..."
   - **File `fitbit_wearable_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1007 chars, OCR confidence=N/A
@@ -284,7 +284,7 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Modalities Intentionally Absent:** `gut`, `wearable`
 
 ### STAGE 1 — DOCUMENTREADER / CONTRACT 1
-- **Total Pages Extracted:** 1 (elapsed: 0.0013s)
+- **Total Pages Extracted:** 1 (elapsed: 0.0009s)
   - **File `clinical_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1103 chars, OCR confidence=N/A
     *Text Preview:* "APOLLO DIAGNOSTICS           Comprehensive Metabolic Health Profile ------------------------------------------------------------  Patient Name      : Arjun Mehta Patient ID        ..."
 
@@ -302,8 +302,8 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Total Clinical Features Present:** 18 / 18
   *Injected Values:*
     - `Family_History_CVD`: canonical_value=`False`, source=`user_form`, validation=`USER_ENTERED`
-    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
     - `Family_History_Diabetes`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
+    - `Family_History_Hypertension`: canonical_value=`True`, source=`user_form`, validation=`USER_ENTERED`
 
 ### STAGE 4 — MODELROUTER + LEVEL-0 MODELS
 - **`clinical` Dispatch:** status = **`success`**
@@ -342,7 +342,7 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Modalities Intentionally Absent:** `clinical`, `wearable`
 
 ### STAGE 1 — DOCUMENTREADER / CONTRACT 1
-- **Total Pages Extracted:** 1 (elapsed: 0.0014s)
+- **Total Pages Extracted:** 1 (elapsed: 0.0009s)
   - **File `gut_microbiome_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1137 chars, OCR confidence=N/A
     *Text Preview:* "============================================================ GUT MICROBIOME ANALYSIS REPORT ============================================================  Patient : Arjun Mehta Lab ..."
 
@@ -393,7 +393,7 @@ Raw Input Files → DocumentReader → FeatureMapper
 - **Modalities Intentionally Absent:** `clinical`, `gut`
 
 ### STAGE 1 — DOCUMENTREADER / CONTRACT 1
-- **Total Pages Extracted:** 1 (elapsed: 0.0018s)
+- **Total Pages Extracted:** 1 (elapsed: 0.0012s)
   - **File `fitbit_wearable_report.txt` (Page 0):** status=`unknown`, method=`plain_text`, length=1007 chars, OCR confidence=N/A
     *Text Preview:* "============================================================ FITBIT HEALTH SUMMARY ============================================================  Patient          : Arjun Mehta Repo..."
 
