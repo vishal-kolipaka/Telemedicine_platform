@@ -24,6 +24,9 @@ ENV PYTHONUNBUFFERED=1 \
 
 # Install required system packages for OCR (Tesseract), PDF rendering (Poppler), and OpenCV
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    g++ \
     tesseract-ocr \
     poppler-utils \
     libgl1 \
@@ -52,6 +55,6 @@ RUN mkdir -p /app/uploads /app/data
 # Copy pre-built React frontend assets from Stage 1
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-EXPOSE 8000
+EXPOSE 8000 10000
 
-CMD ["python", "api_server.py"]
+CMD ["python", "-u", "api_server.py"]
