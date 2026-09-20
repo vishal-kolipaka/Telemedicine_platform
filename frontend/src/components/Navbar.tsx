@@ -2,8 +2,8 @@ import React from 'react';
 import { Activity, FileText, LayoutDashboard, Info, Mail, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'dashboard' | 'analyze' | 'about' | 'contact';
-  setActiveTab: (tab: 'dashboard' | 'analyze' | 'about' | 'contact') => void;
+  activeTab: 'dashboard' | 'analyze' | 'about' | 'contact' | 'guided-demo';
+  setActiveTab: (tab: 'dashboard' | 'analyze' | 'about' | 'contact' | 'guided-demo') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {

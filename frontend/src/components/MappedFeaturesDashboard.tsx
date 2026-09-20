@@ -52,6 +52,10 @@ interface MappedFeaturesDashboardProps {
   onUserAddedValuesChange?: (values: Record<string, MappedFeatureValue>) => void;
   triggerCategoryQueue?: 'clinical' | 'wearable' | 'gut' | 'family' | null;
   onQueueDismissed?: () => void;
+  isGuidedDemo?: boolean;
+  guidedSubStep?: 'quality' | 'extraction' | 'modalities' | 'family_history' | 'features' | 'assessment';
+  onSetGuidedSubStep?: (step: 'quality' | 'extraction' | 'modalities' | 'family_history' | 'features' | 'assessment') => void;
+  onNextGuidedStep?: () => void;
 }
 
 interface FieldMeta {
@@ -142,6 +146,10 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
   onUserAddedValuesChange,
   triggerCategoryQueue,
   onQueueDismissed,
+  isGuidedDemo = false,
+  guidedSubStep = 'modalities',
+  onSetGuidedSubStep,
+  onNextGuidedStep,
 }) => {
   // Local state to store user-entered values live
   const [internalUserAddedValues, setInternalUserAddedValues] = useState<Record<string, MappedFeatureValue>>({});
@@ -389,11 +397,14 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
     } else {
       // Sequence complete — close modal
       handleCloseModal();
+      if (isGuidedDemo && guidedSubStep === 'family_history') {
+        onSetGuidedSubStep?.('features');
+      }
     }
   };
 
   return (
-    <div className="space-y-8 mt-8 border-t border-slate-200 pt-8">
+    <div id="guided-mapped-dashboard" className="space-y-8 mt-8 border-t border-slate-200 pt-8">
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
@@ -410,10 +421,129 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
         </div>
       </div>
 
+      {/* Guided Demo Step 3C / 3D Callout: Modalities Explanation - High Visibility Vibrant Blue/Indigo Design */}
+      {isGuidedDemo && guidedSubStep === 'modalities' && (
+        <div className="p-6 rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white border-2 border-cyan-400 shadow-2xl shadow-blue-950/50 space-y-4 animate-fade-in guided-blink-glow-card">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center space-x-2.5">
+              <span className="px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black tracking-wider uppercase shadow-md">
+                🎯 GUIDED DEMO • STEP 03
+              </span>
+              <span className="text-sm font-black text-cyan-200 tracking-wide">
+                Standardized Multimodal Modalities
+              </span>
+            </div>
+            <span className="text-xs font-extrabold text-white bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">
+              Contract 2 Schemas
+            </span>
+          </div>
+
+          <p className="text-sm text-slate-100 leading-relaxed font-medium">
+            The Document Reader and Feature Mapper mapped the report into standardized schemas required by each AI model:
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-cyan-300/30 space-y-1.5 shadow-inner">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-black text-cyan-300">Clinical Features</span>
+                <span className="text-xs font-black text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded-md font-mono">{clinFoundCount} / {CLINICAL_FIELDS.length}</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed">
+                These are the clinical features extracted and mapped from the uploaded report into the standardized clinical schema used by the prediction pipeline.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-rose-300/30 space-y-1.5 shadow-inner">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-black text-rose-300">Wearable / CGM Features</span>
+                <span className="text-xs font-black text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded-md font-mono">{wearFoundCount} / {WEARABLE_FIELDS.length}</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed">
+                These are physiological and glucose-related measurements extracted from the report and mapped to the wearable model's expected feature schema.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-teal-300/30 space-y-1.5 shadow-inner">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-black text-teal-300">Gut Microbiome Features</span>
+                <span className="text-xs font-black text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded-md font-mono">{gutFoundCount} / {GUT_FIELDS.length}</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed">
+                These are microbiome taxa measurements extracted from the report and mapped into the format required by the gut microbiome model.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 border-t border-white/15">
+            <span className="text-xs text-cyan-200 font-semibold">
+              All displayed feature counts reflect actual pipeline mapping results.
+            </span>
+            <button
+              type="button"
+              onClick={onNextGuidedStep}
+              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs rounded-2xl shadow-xl shadow-amber-500/30 transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0 guided-blink-glow-orange"
+            >
+              <span>Next: Family History Questionnaire</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Guided Demo Step 3E / 3F Callout: Family History Input Required - High Visibility Orange Theme */}
+      {isGuidedDemo && guidedSubStep === 'family_history' && (
+        <div className="p-6 rounded-3xl bg-gradient-to-r from-orange-600 via-amber-600 to-rose-600 text-white border-2 border-amber-300 shadow-2xl shadow-orange-600/30 space-y-3 animate-fade-in guided-blink-glow-card">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center space-x-2.5">
+              <span className="px-3 py-1 rounded-full bg-slate-950 text-amber-300 text-xs font-black tracking-wider uppercase shadow-md border border-amber-400">
+                🎯 GUIDED DEMO • STEP 03
+              </span>
+              <span className="text-sm font-black text-white">One more input is required</span>
+            </div>
+            <span className="text-xs font-black text-orange-950 bg-amber-200 px-3 py-1 rounded-full shadow-xs">
+              {familyFoundCount} / {FAMILY_HISTORY_FIELDS.length} Completed
+            </span>
+          </div>
+
+          <p className="text-sm text-amber-50 leading-relaxed font-medium">
+            The report provides the available clinical, wearable, and gut microbiome information. The remaining family-history information is collected directly from the user.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 border-t border-white/20">
+            <span className="text-xs font-black text-amber-100">
+              👉 For demonstration purposes, select <strong className="text-white underline underline-offset-4">YES</strong> for each of the three family-history questions.
+            </span>
+            {familyMissingCount > 0 ? (
+              <button
+                type="button"
+                onClick={() => handleStartQueue('family')}
+                className="flex items-center space-x-2 px-6 py-3 bg-white hover:bg-amber-50 text-orange-700 font-black text-xs rounded-2xl shadow-xl shadow-black/25 transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0 guided-blink-glow-orange"
+              >
+                <span>Open Questionnaire Now</span>
+                <ArrowRight className="w-4 h-4 text-orange-600" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={onNextGuidedStep}
+                className="flex items-center space-x-2 px-6 py-3 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs rounded-2xl shadow-xl shadow-emerald-500/30 transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0 guided-blink-glow-orange"
+              >
+                <span>Next: View Detailed Feature Tables</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* 4 Summary Cards Grid (ALWAYS VISIBLE - Pic 3) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Clinical */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+        <div className={`bg-white p-5 rounded-2xl border transition-all flex flex-col justify-between space-y-4 ${
+          isGuidedDemo && guidedSubStep === 'modalities'
+            ? 'border-sky-400 ring-2 ring-sky-400/80 shadow-md shadow-sky-500/10'
+            : 'border-slate-200 shadow-xs'
+        }`}>
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Clinical Model</span>
             <Activity className="w-5 h-5 text-sky-600" />
@@ -444,7 +574,11 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
         </div>
 
         {/* Card 2: Wearable */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+        <div className={`bg-white p-5 rounded-2xl border transition-all flex flex-col justify-between space-y-4 ${
+          isGuidedDemo && guidedSubStep === 'modalities'
+            ? 'border-rose-400 ring-2 ring-rose-400/80 shadow-md shadow-rose-500/10'
+            : 'border-slate-200 shadow-xs'
+        }`}>
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Wearable Model</span>
             <Heart className="w-5 h-5 text-rose-600" />
@@ -475,7 +609,11 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
         </div>
 
         {/* Card 3: Gut Microbiome */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+        <div className={`bg-white p-5 rounded-2xl border transition-all flex flex-col justify-between space-y-4 ${
+          isGuidedDemo && guidedSubStep === 'modalities'
+            ? 'border-teal-400 ring-2 ring-teal-400/80 shadow-md shadow-teal-500/10'
+            : 'border-slate-200 shadow-xs'
+        }`}>
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Gut Microbiome</span>
             <Dna className="w-5 h-5 text-teal-600" />
@@ -506,7 +644,14 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
         </div>
 
         {/* Card 4: Family History */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+        <div
+          id="guided-family-history"
+          className={`bg-white p-5 rounded-2xl border transition-all flex flex-col justify-between space-y-4 ${
+            isGuidedDemo && guidedSubStep === 'family_history'
+              ? 'border-orange-400 ring-4 ring-orange-400/80 ring-offset-2 animate-pulse shadow-xl shadow-orange-500/20'
+              : 'border-slate-200 shadow-xs'
+          }`}
+        >
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Family History</span>
             <UserCheck className="w-5 h-5 text-orange-600" />
@@ -526,7 +671,11 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
             ) : (
               <button
                 onClick={() => handleStartQueue('family')}
-                className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-orange-100 text-orange-900 border border-orange-300 text-xs font-bold animate-pulse hover:scale-105 transition-all shadow-2xs cursor-pointer"
+                className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-orange-100 text-orange-900 border border-orange-300 text-xs font-bold transition-all shadow-2xs cursor-pointer ${
+                  isGuidedDemo && guidedSubStep === 'family_history'
+                    ? 'ring-2 ring-orange-500 scale-105 shadow-md shadow-orange-500/30'
+                    : 'animate-pulse hover:scale-105'
+                }`}
               >
                 <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping inline-block" />
                 <Clock className="w-3.5 h-3.5 text-orange-700" />
@@ -537,8 +686,50 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
         </div>
       </div>
 
+      {/* Guided Demo Step 3G Callout (when tables are not yet opened) - High Visibility Vibrant Electric Blue Theme */}
+      {isGuidedDemo && guidedSubStep === 'features' && !showTables && (
+        <div className="p-6 rounded-3xl bg-gradient-to-r from-blue-950 via-sky-900 to-indigo-950 text-white border-2 border-cyan-400 shadow-2xl shadow-cyan-500/20 space-y-4 animate-fade-in guided-blink-glow-card">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center space-x-2.5">
+              <span className="px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black tracking-wider uppercase shadow-md">
+                🎯 GUIDED DEMO • STEP 03
+              </span>
+              <span className="text-sm font-black text-cyan-200">View Detailed Feature Tables</span>
+            </div>
+            <span className="text-xs font-extrabold text-white bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">
+              Detailed Inspection
+            </span>
+          </div>
+
+          <p className="text-sm text-slate-100 leading-relaxed font-medium">
+            Open the detailed feature tables to see the values extracted and prepared for the prediction models.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 border-t border-white/20">
+            <span className="text-xs font-black text-amber-200">
+              👉 Click <strong>"View Detailed Feature Tables"</strong> below to view extracted and derived parameters.
+            </span>
+            <button
+              type="button"
+              onClick={() => setShowTables(true)}
+              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs rounded-2xl shadow-xl shadow-amber-500/40 transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0 guided-blink-glow-orange"
+            >
+              <span>Open Tables Now</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Master Toggle Dropdown Button for Detailed Feature Tables (Collapsible) */}
-      <div className="flex items-center justify-between bg-slate-50 p-4 rounded-2xl border border-slate-200">
+      <div
+        id="guided-feature-tables"
+        className={`flex items-center justify-between bg-slate-50 p-4 rounded-2xl border transition-all ${
+          isGuidedDemo && guidedSubStep === 'features'
+            ? 'border-2 border-sky-400 ring-4 ring-sky-400/30 bg-sky-50/50 shadow-xl shadow-sky-500/10 guided-blink-glow-card'
+            : 'border-slate-200'
+        }`}
+      >
         <div className="flex items-center space-x-3">
           <div className="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
             <Table className="w-5 h-5" />
@@ -553,16 +744,80 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
 
         <button
           onClick={() => setShowTables(!showTables)}
-          className="flex items-center space-x-2 px-5 py-2.5 bg-white hover:bg-slate-100 text-slate-800 text-xs font-extrabold rounded-xl border border-slate-300 shadow-2xs transition-all"
+          className={`flex items-center space-x-2 px-6 py-3 rounded-2xl transition-all cursor-pointer ${
+            isGuidedDemo && guidedSubStep === 'features' && !showTables
+              ? 'bg-gradient-to-r from-orange-500 via-amber-500 to-sky-600 text-white font-black border-2 border-amber-300 ring-4 ring-orange-400/80 guided-blink-glow-orange shadow-xl shadow-orange-500/40 scale-105'
+              : 'bg-white hover:bg-slate-100 text-slate-800 text-xs font-extrabold border border-slate-300 shadow-2xs'
+          }`}
         >
           <span>{showTables ? 'Hide Feature Tables' : 'View Detailed Feature Tables'}</span>
-          {showTables ? <ChevronUp className="w-4 h-4 text-slate-600" /> : <ChevronDown className="w-4 h-4 text-slate-600" />}
+          {showTables ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
       </div>
 
       {/* 4 Feature Tables (Rendered ONLY when showTables === true) */}
       {showTables && (
         <div className="space-y-8 animate-fade-in">
+          
+          {/* Guided Demo Step 3H Callout: Extracted vs Derived Values - High Visibility Dark Glass Theme */}
+          {isGuidedDemo && guidedSubStep === 'features' && (
+            <div className="p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border-2 border-cyan-400 shadow-2xl shadow-indigo-950/50 space-y-4 animate-fade-in guided-blink-glow-card">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center space-x-2.5">
+                  <span className="px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black tracking-wider uppercase shadow-md">
+                    🎯 GUIDED DEMO • STEP 03
+                  </span>
+                  <span className="text-sm font-black text-cyan-200">Extracted &amp; Derived Features</span>
+                </div>
+                <span className="text-xs font-extrabold text-white bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">
+                  Standardized Verification
+                </span>
+              </div>
+
+              <p className="text-sm text-slate-100 leading-relaxed font-medium">
+                Some values are directly extracted from the uploaded report. Other values are derived or transformed from related information in the report according to the system's feature-mapping and preprocessing rules.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="p-4 rounded-2xl bg-emerald-950/70 border-2 border-emerald-400 space-y-1.5 shadow-inner">
+                  <div className="flex items-center space-x-2">
+                    <span className="px-2.5 py-1 rounded-full bg-emerald-400 text-emerald-950 font-black text-xs">
+                      ✅ Extracted Successfully
+                    </span>
+                  </div>
+                  <p className="text-xs text-emerald-100 leading-relaxed font-medium">
+                    Value directly identified from the source report (e.g. Fasting Blood Glucose, Blood Pressure, Heart Rate).
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-amber-950/70 border-2 border-amber-400 space-y-1.5 shadow-inner">
+                  <div className="flex items-center space-x-2">
+                    <span className="px-2.5 py-1 rounded-full bg-amber-400 text-amber-950 font-black text-xs">
+                      🟡 Derived Value
+                    </span>
+                  </div>
+                  <p className="text-xs text-amber-100 leading-relaxed font-medium">
+                    Value calculated or transformed using relevant information from the report (such as BMI, calculated from Height and Weight according to schema rules).
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 border-t border-white/20">
+                <span className="text-xs text-cyan-200 font-semibold">
+                  Notice the highlighted status badges in the tables below.
+                </span>
+                <button
+                  type="button"
+                  onClick={onNextGuidedStep}
+                  className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs rounded-2xl shadow-xl shadow-amber-500/30 transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0 guided-blink-glow-orange"
+                >
+                  <span>Next: Ready for Health Assessment</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Feature Group 1: Clinical Features */}
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
             <div className="px-6 py-4 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between">
@@ -932,6 +1187,26 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
               </button>
             </div>
 
+            {/* Guided Demo Instruction Banner in Questionnaire Modal */}
+            {isGuidedDemo && (
+              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-orange-500/5 border-2 border-orange-400/80 shadow-sm flex items-start space-x-3 animate-fade-in">
+                <div className="w-7 h-7 rounded-lg bg-orange-500 text-white flex items-center justify-center font-bold shrink-0 text-xs shadow-xs">
+                  🎯
+                </div>
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-[10px] uppercase font-extrabold tracking-wider px-2 py-0.5 rounded-full bg-orange-100 text-orange-900 border border-orange-200">
+                      GUIDED DEMO INSTRUCTION
+                    </span>
+                    <span className="text-xs font-bold text-slate-800">User Questionnaire</span>
+                  </div>
+                  <p className="text-xs text-slate-700 mt-1 leading-relaxed font-medium">
+                    For demonstration purposes, select <strong>"YES"</strong> for each of the three family-history questions, then click <strong>"{queueIndex < queue.length - 1 ? 'Validate & Next Question' : 'Validate & Save All'}"</strong>.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Target Feature Metadata Card */}
             <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
               <div className="flex items-center justify-between text-xs">
@@ -983,10 +1258,12 @@ export const MappedFeaturesDashboard: React.FC<MappedFeaturesDashboardProps> = (
                       className={`py-3.5 px-4 rounded-2xl font-bold text-sm border transition-all cursor-pointer ${
                         inputValue === 'Yes'
                           ? 'bg-emerald-600 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400'
+                          : isGuidedDemo
+                          ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border-emerald-300 ring-2 ring-emerald-400/80 animate-pulse font-extrabold'
                           : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200'
                       }`}
                     >
-                      Yes
+                      Yes {isGuidedDemo && <span className="text-xs ml-1 font-semibold text-emerald-700">(Select)</span>}
                     </button>
                     <button
                       type="button"

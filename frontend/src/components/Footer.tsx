@@ -2,7 +2,7 @@ import React from 'react';
 import { Activity, ShieldCheck, Lock, Heart } from 'lucide-react';
 
 interface FooterProps {
-  setActiveTab: (tab: 'dashboard' | 'analyze' | 'about' | 'contact') => void;
+  setActiveTab: (tab: 'dashboard' | 'analyze' | 'about' | 'contact' | 'guided-demo') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {

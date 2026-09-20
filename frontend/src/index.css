@@ -45,3 +45,194 @@
   transform: translateY(-2px);
   box-shadow: 0 12px 28px -4px rgba(14, 165, 233, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
 }
+
+/* ──── Guided Demo Animations & Utilities ──── */
+
+@keyframes guidedFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes guidedFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes guidedShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes guidedBlink {
+  0%, 100% {
+    box-shadow: 0 0 8px 2px rgba(249, 115, 22, 0.4), 0 0 0 0 rgba(249, 115, 22, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 6px rgba(249, 115, 22, 0.6), 0 0 40px 12px rgba(249, 115, 22, 0.2);
+  }
+}
+
+@keyframes guidedBorderGlow {
+  0%, 100% {
+    border-color: rgba(249, 115, 22, 0.6);
+    box-shadow: 0 4px 30px -4px rgba(249, 115, 22, 0.15), 0 0 0 1px rgba(249, 115, 22, 0.1);
+  }
+  50% {
+    border-color: rgba(234, 88, 12, 0.9);
+    box-shadow: 0 4px 40px -4px rgba(249, 115, 22, 0.3), 0 0 0 2px rgba(249, 115, 22, 0.15);
+  }
+}
+
+.guided-fade-in-up {
+  animation: guidedFadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.guided-fade-in {
+  animation: guidedFadeIn 0.5s ease both;
+}
+
+.guided-stagger-1 { animation-delay: 0.08s; }
+.guided-stagger-2 { animation-delay: 0.16s; }
+.guided-stagger-3 { animation-delay: 0.24s; }
+.guided-stagger-4 { animation-delay: 0.32s; }
+.guided-stagger-5 { animation-delay: 0.40s; }
+.guided-stagger-6 { animation-delay: 0.48s; }
+
+/* Guided Demo entry card — dark gradient, bold & unmissable */
+.guided-demo-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0c4a6e 100%);
+  border: 2px solid rgba(249, 115, 22, 0.6);
+  border-radius: 1.25rem;
+  animation: guidedBorderGlow 2.5s ease-in-out infinite;
+}
+
+/* Blinking CTA button for the guided demo */
+.guided-blink-btn {
+  animation: guidedBlink 1.8s ease-in-out infinite;
+}
+
+/* Page section spacing within guided demo */
+.guided-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.guided-section + .guided-section {
+  border-top: 1px solid #E2E8F0;
+}
+
+/* Prism gradient for the ! visual element */
+.prism-gradient-text {
+  background: linear-gradient(135deg, #0284c7 0%, #06b6d4 30%, #8b5cf6 60%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Prism spectrum bar */
+.prism-spectrum {
+  background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #8b5cf6);
+  border-radius: 9999px;
+}
+
+/* Shimmer effect for the prism visual */
+.guided-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: guidedShimmer 2.5s ease-in-out infinite;
+}
+
+/* Guided Spotlight Animation for Target Elements */
+@keyframes guidedSpotlightPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4), 0 10px 25px -5px rgba(249, 115, 22, 0.2);
+    border-color: rgba(249, 115, 22, 0.9);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(249, 115, 22, 0.2), 0 20px 35px -5px rgba(249, 115, 22, 0.35);
+    border-color: rgba(234, 88, 12, 1);
+  }
+}
+
+.guided-spotlight-active {
+  position: relative;
+  animation: guidedSpotlightPulse 2s ease-in-out infinite;
+}
+
+@keyframes guidedBounceAttention {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.guided-bounce-attention {
+  animation: guidedBounceAttention 1.4s ease-in-out infinite;
+}
+
+@keyframes guidedProcessPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6), 0 10px 20px -5px rgba(14, 165, 233, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0.2), 0 15px 30px -5px rgba(249, 115, 22, 0.5);
+    transform: scale(1.03);
+  }
+}
+
+.guided-process-pulse {
+  animation: guidedProcessPulse 1.8s ease-in-out infinite;
+}
+
+/* ──── High-Visibility Eye-Catching Guided Demo Animations ──── */
+@keyframes guidedBlinkGlowOrange {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7), 0 6px 20px rgba(249, 115, 22, 0.35);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0), 0 12px 30px rgba(249, 115, 22, 0.65);
+  }
+}
+
+@keyframes guidedBlinkGlowBlue {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.75), 0 6px 20px rgba(14, 165, 233, 0.4);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 0 0 10px rgba(14, 165, 233, 0), 0 12px 30px rgba(14, 165, 233, 0.7);
+  }
+}
+
+@keyframes guidedBlinkGlowCard {
+  0%, 100% {
+    box-shadow: 0 10px 30px -5px rgba(249, 115, 22, 0.25), 0 0 0 1px rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 20px 45px -5px rgba(249, 115, 22, 0.45), 0 0 0 3px rgba(249, 115, 22, 0.85);
+  }
+}
+
+.guided-blink-glow-orange {
+  animation: guidedBlinkGlowOrange 1.6s ease-in-out infinite;
+}
+
+.guided-blink-glow-blue {
+  animation: guidedBlinkGlowBlue 1.6s ease-in-out infinite;
+}
+
+.guided-blink-glow-card {
+  animation: guidedBlinkGlowCard 2s ease-in-out infinite;
+}

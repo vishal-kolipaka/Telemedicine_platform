@@ -1,13 +1,62 @@
 import React from 'react';
-import { Sparkles, ArrowRight, ShieldCheck, Zap, Database, Brain, CheckCircle2, Stethoscope, FileSearch } from 'lucide-react';
+import { Sparkles, ArrowRight, ShieldCheck, Zap, Database, Brain, CheckCircle2, Stethoscope, FileSearch, Compass, Layers, Eye } from 'lucide-react';
 
 interface Props {
   onStartAnalysis: () => void;
+  onStartGuidedDemo: () => void;
 }
 
-export const DashboardPage: React.FC<Props> = ({ onStartAnalysis }) => {
+export const DashboardPage: React.FC<Props> = ({ onStartAnalysis, onStartGuidedDemo }) => {
   return (
     <div className="space-y-16 py-8">
+
+      {/* ───── Guided Demo Entry Card — FIRST, so judges see it immediately ───── */}
+      <section className="guided-fade-in-up">
+        <div className="guided-demo-card relative overflow-hidden p-6 sm:p-8">
+
+          {/* Ambient glow orbs */}
+          <div className="absolute -top-16 -right-16 w-56 h-56 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+
+            {/* Left: Info */}
+            <div className="flex items-start space-x-4 max-w-2xl">
+              <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center shadow-lg shadow-orange-500/30">
+                <Compass className="w-6 h-6" />
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center space-x-3">
+                  <h3 className="text-xl font-extrabold text-white">🎯 Guided Demo</h3>
+                  <span className="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-orange-500 text-white rounded-full animate-pulse">
+                    New
+                  </span>
+                </div>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Follow the recommended workflow to understand <strong className="text-white">!Health Prism</strong>. 
+                  Explore how we integrate <strong className="text-sky-400">Clinical</strong>, <strong className="text-cyan-400">Wearable</strong>, 
+                  and <strong className="text-violet-400">Gut Microbiome</strong> data to provide explainable metabolic health insights.
+                </p>
+                <div className="flex items-center space-x-4 text-xs text-slate-400 pt-0.5">
+                  <span className="flex items-center space-x-1"><Layers className="w-3.5 h-3.5" /><span>Multimodal Data</span></span>
+                  <span className="flex items-center space-x-1"><Eye className="w-3.5 h-3.5" /><span>Explainable AI</span></span>
+                  <span className="flex items-center space-x-1"><Compass className="w-3.5 h-3.5" /><span>Step-by-Step</span></span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Blinking CTA */}
+            <button
+              onClick={onStartGuidedDemo}
+              className="guided-blink-btn group flex-shrink-0 flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold text-sm rounded-2xl transition-all transform hover:scale-[1.03] active:scale-[0.97]"
+            >
+              <span>Start Guided Demo</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+          </div>
+        </div>
+      </section>
       
       {/* Large Hero Section */}
       <section className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-sky-50/80 via-white to-sky-50/30 border border-sky-100 p-8 md:p-16 shadow-xl shadow-sky-500/5">
@@ -165,3 +214,5 @@ export const DashboardPage: React.FC<Props> = ({ onStartAnalysis }) => {
     </div>
   );
 };
+
+
