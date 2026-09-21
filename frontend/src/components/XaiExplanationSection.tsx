@@ -17,10 +17,16 @@ import type {
 } from '../types/reader';
 import { formatRiskPercentage } from '../utils/formatters';
 
+import type { Stage4SubStep } from '../pages/AnalyzePage';
+import { GuidedCalloutCard } from './guided-demo/GuidedCalloutCard';
+
 interface Props {
   xai: XaiResponse;
   activeDiseaseKey: string;
   onSelectDisease: (diseaseKey: string) => void;
+  isGuidedDemo?: boolean;
+  guidedSubStep?: Stage4SubStep;
+  onNextGuidedStep?: (target?: Stage4SubStep) => void;
 }
 
 const DISEASE_KEYS = [
@@ -45,6 +51,9 @@ export const XaiExplanationSection: React.FC<Props> = ({
   xai,
   activeDiseaseKey,
   onSelectDisease,
+  isGuidedDemo = false,
+  guidedSubStep,
+  onNextGuidedStep,
 }) => {
   const [activeFilterTab, setActiveFilterTab] = useState<ModalitySourceKey>('all');
 
@@ -112,10 +121,11 @@ export const XaiExplanationSection: React.FC<Props> = ({
     return (explanation.protective_factors || []).filter((f) => f.source_modality === activeFilterTab);
   }, [explanation, activeFilterTab]);
 
-  const renderFeatureRow = (feature: FeatureContribution, type: 'risk' | 'protective') => {
+  const renderFeatureRow = (feature: FeatureContribution, type: 'risk' | 'protective', isFirst: boolean = false) => {
     const isRisk = type === 'risk';
     const barBg = isRisk ? 'bg-rose-500' : 'bg-emerald-500';
     const textColor = isRisk ? 'text-rose-700' : 'text-emerald-700';
+    const isTarget = isFirst && isRisk && isGuidedDemo && guidedSubStep === 'contributing_features';
 
     // Modality-specific badge
     const getModalityBadge = () => {
@@ -148,10 +158,32 @@ export const XaiExplanationSection: React.FC<Props> = ({
     };
 
     return (
-      <div
-        key={`${feature.source_modality || 'src'}-${feature.feature_key}`}
-        className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition-all space-y-3"
-      >
+      <React.Fragment key={`${feature.source_modality || 'src'}-${feature.feature_key}`}>
+        {isTarget && (
+          <div className="pb-2">
+            <GuidedCalloutCard
+              badge="🎯 Contributing Health Signals"
+              title={`Feature Signal: ${feature.display_name}`}
+              description={
+                <span>
+                  This individual signal contributed to the model's assessment for <strong>{explanation.display_name}</strong>. Measured value: <strong className="text-amber-300 font-mono">{feature.formatted_value}</strong>{feature.normal_range ? ` (Ref: ${feature.normal_range})` : ''} with a relative influence of <strong className="text-amber-300 font-mono">{feature.relative_impact_percentage}%</strong>. <em>Note: features are associated with the model's prediction without making unsupported causal claims.</em>
+                </span>
+              }
+              nextLabel="Next: Evidence by Source"
+              onNext={() => onNextGuidedStep?.('evidence_sources')}
+              pointerDirection="down"
+            />
+          </div>
+        )}
+
+        <div
+          id={isTarget ? 'guided-contributing-feature-card' : undefined}
+          className={`p-4 rounded-2xl bg-white border transition-all space-y-3 ${
+            isTarget
+              ? 'border-2 border-orange-400 ring-4 ring-orange-400/80 shadow-2xl shadow-orange-500/30 guided-blink-glow-card scale-[1.01]'
+              : 'border-slate-200/80 shadow-xs hover:shadow-md'
+          }`}
+        >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2">
@@ -213,7 +245,8 @@ export const XaiExplanationSection: React.FC<Props> = ({
             />
           </div>
         </div>
-      </div>
+        </div>
+      </React.Fragment>
     );
   };
 
@@ -243,29 +276,70 @@ export const XaiExplanationSection: React.FC<Props> = ({
           </div>
 
           {/* Disease Selector Navigation Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-slate-100/80 p-1.5 rounded-2xl shrink-0">
-            {DISEASE_KEYS.map((key) => {
-              const isSelected = key === activeDiseaseKey;
-              return (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => {
-                    onSelectDisease(key);
-                    setActiveFilterTab('all');
-                  }}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    isSelected
-                      ? 'bg-white text-sky-800 shadow-xs border border-slate-200/80 font-extrabold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
-                  }`}
-                >
-                  {DISEASE_LABELS[key]}
-                </button>
-              );
-            })}
+          <div className="relative">
+            {isGuidedDemo && guidedSubStep === 'disease_tabs' && (
+              <div className="mb-3">
+                <GuidedCalloutCard
+                  badge="🎯 Multiple Metabolic Outcomes"
+                  title="Cross-Condition Assessment"
+                  description={
+                    <span>
+                      <strong>!Health Prism</strong> evaluates multiple metabolic disease and risk outcomes ({DISEASE_KEYS.map((k) => DISEASE_LABELS[k]).join(', ')}) using the available health evidence across modalities.
+                    </span>
+                  }
+                  nextLabel="Next: Multimodal Evidence"
+                  onNext={() => onNextGuidedStep?.('multimodal_signals')}
+                  pointerDirection="down"
+                />
+              </div>
+            )}
+            <div
+              id="guided-disease-category-tabs"
+              className={`flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl shrink-0 transition-all ${
+                isGuidedDemo && guidedSubStep === 'disease_tabs'
+                  ? 'bg-amber-50 border-2 border-orange-400 ring-4 ring-orange-400/70 guided-blink-glow-card shadow-lg shadow-orange-500/20'
+                  : 'bg-slate-100/80'
+              }`}
+            >
+              {DISEASE_KEYS.map((key) => {
+                const isSelected = key === activeDiseaseKey;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => {
+                      onSelectDisease(key);
+                      setActiveFilterTab('all');
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      isSelected
+                        ? 'bg-white text-sky-800 shadow-xs border border-slate-200/80 font-extrabold'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                    }`}
+                  >
+                    {DISEASE_LABELS[key]}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
+
+        {/* Guided Demo Step 4D Callout: Multimodal Signal Summary */}
+        {isGuidedDemo && guidedSubStep === 'multimodal_signals' && (
+          <GuidedCalloutCard
+            badge="🎯 Multimodal Evidence"
+            title="Evidence by Data Modality"
+            description={
+              <span>
+                These indicators summarize the model's evidence and risk contribution associated with the available health-data sources ({clinSignal !== null ? `Clinical Lab: ${formatRiskPercentage(clinSignal)}` : ''}{gutSignal !== null ? ` • Gut Microbiome: ${formatRiskPercentage(gutSignal)}` : ''}{wearSignal !== null ? ` • Wearable/CGM: ${formatRiskPercentage(wearSignal)}` : ''}) for <strong>{explanation.display_name}</strong>.
+              </span>
+            }
+            nextLabel="Next: Contributing Signals"
+            onNext={() => onNextGuidedStep?.('contributing_features')}
+            pointerDirection="down"
+          />
+        )}
 
         {/* Assessment Provenance & Signal Cards */}
         <div className="p-5 rounded-2xl bg-gradient-to-r from-sky-50/80 via-slate-50 to-indigo-50/40 border border-sky-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -283,9 +357,13 @@ export const XaiExplanationSection: React.FC<Props> = ({
           </div>
 
           {/* Modality Signal Pills on the Right */}
-          <div className="flex flex-wrap items-center gap-2 shrink-0 self-start md:self-auto">
+          <div id="guided-multimodal-signals" className="flex flex-wrap items-center gap-2 shrink-0 self-start md:self-auto">
             {clinSignal !== null && clinSignal !== undefined && (
-              <div className="px-3.5 py-1.5 rounded-xl bg-white border border-sky-200 text-center shadow-xs">
+              <div className={`px-3.5 py-1.5 rounded-xl border text-center shadow-xs transition-all ${
+                isGuidedDemo && guidedSubStep === 'multimodal_signals'
+                  ? 'bg-amber-50 border-2 border-orange-500 ring-4 ring-orange-400/80 guided-blink-glow-box scale-105'
+                  : 'bg-white border-sky-200'
+              }`}>
                 <span className="block text-[10px] uppercase font-bold text-slate-400">Clinical Signal</span>
                 <span className="text-xs font-mono font-extrabold text-slate-800">
                   {formatRiskPercentage(clinSignal)}
@@ -293,7 +371,11 @@ export const XaiExplanationSection: React.FC<Props> = ({
               </div>
             )}
             {gutSignal !== null && gutSignal !== undefined && (
-              <div className="px-3.5 py-1.5 rounded-xl bg-white border border-teal-200 text-center shadow-xs">
+              <div className={`px-3.5 py-1.5 rounded-xl border text-center shadow-xs transition-all ${
+                isGuidedDemo && guidedSubStep === 'multimodal_signals'
+                  ? 'bg-amber-50 border-2 border-orange-500 ring-4 ring-orange-400/80 guided-blink-glow-box scale-105'
+                  : 'bg-white border-teal-200'
+              }`}>
                 <span className="block text-[10px] uppercase font-bold text-slate-400">Gut Signal</span>
                 <span className="text-xs font-mono font-extrabold text-slate-800">
                   {formatRiskPercentage(gutSignal)}
@@ -301,7 +383,11 @@ export const XaiExplanationSection: React.FC<Props> = ({
               </div>
             )}
             {wearSignal !== null && wearSignal !== undefined && (
-              <div className="px-3.5 py-1.5 rounded-xl bg-white border border-purple-200 text-center shadow-xs">
+              <div className={`px-3.5 py-1.5 rounded-xl border text-center shadow-xs transition-all ${
+                isGuidedDemo && guidedSubStep === 'multimodal_signals'
+                  ? 'bg-amber-50 border-2 border-orange-500 ring-4 ring-orange-400/80 guided-blink-glow-box scale-105'
+                  : 'bg-white border-purple-200'
+              }`}>
                 <span className="block text-[10px] uppercase font-bold text-slate-400">Wearable Signal</span>
                 <span className="text-xs font-mono font-extrabold text-slate-800">
                   {formatRiskPercentage(wearSignal)}
@@ -340,8 +426,27 @@ export const XaiExplanationSection: React.FC<Props> = ({
         {/* Available Explanation Breakdown */}
         {explanation.available && (
           <div className="space-y-8">
+            {/* Guided Demo Step 4F Callout: Evidence by Source */}
+            {isGuidedDemo && guidedSubStep === 'evidence_sources' && (
+              <GuidedCalloutCard
+                badge="🎯 Evidence by Source"
+                title="Filter Signals by Modality"
+                description="The evidence can be filtered and inspected across the available health-data sources, including clinical laboratory markers, continuous wearable/CGM metrics, and gut microbiome taxa. Explore the filters or continue to review the assessment."
+                nextLabel="Next: Review Assessment"
+                onNext={() => onNextGuidedStep?.('review_assessment')}
+                pointerDirection="down"
+              />
+            )}
+
             {/* Dynamic Signal Source Filter Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+            <div
+              id="guided-signal-source-filter"
+              className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3 rounded-2xl p-2 transition-all ${
+                isGuidedDemo && guidedSubStep === 'evidence_sources'
+                  ? 'bg-amber-50/70 border-2 border-orange-400 ring-4 ring-orange-400/70 guided-blink-glow-card shadow-lg shadow-orange-500/20'
+                  : ''
+              }`}
+            >
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Signal Source Filter
               </span>
@@ -416,7 +521,7 @@ export const XaiExplanationSection: React.FC<Props> = ({
 
               {activeRiskDrivers.length > 0 ? (
                 <div className="grid grid-cols-1 gap-3">
-                  {activeRiskDrivers.map((feat) => renderFeatureRow(feat, 'risk'))}
+                  {activeRiskDrivers.map((feat, idx) => renderFeatureRow(feat, 'risk', idx === 0))}
                 </div>
               ) : (
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-500 italic">
@@ -439,7 +544,7 @@ export const XaiExplanationSection: React.FC<Props> = ({
 
               {activeProtectiveFactors.length > 0 ? (
                 <div className="grid grid-cols-1 gap-3">
-                  {activeProtectiveFactors.map((feat) => renderFeatureRow(feat, 'protective'))}
+                  {activeProtectiveFactors.map((feat) => renderFeatureRow(feat, 'protective', false))}
                 </div>
               ) : (
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-500 italic">
@@ -447,6 +552,19 @@ export const XaiExplanationSection: React.FC<Props> = ({
                 </div>
               )}
             </div>
+
+            {/* Guided Demo Step 4G Callout: Review the Full Assessment */}
+            {isGuidedDemo && guidedSubStep === 'review_assessment' && (
+              <div className="pt-4">
+                <GuidedCalloutCard
+                  badge="🎯 Review the Assessment"
+                  title="Consolidated Multimodal Assessment"
+                  description="Review the risk indicators, multimodal signal contributions, and supporting evidence above. This is the consolidated view produced from your integrated clinical, wearable, gut microbiome, and user-reported information."
+                  nextLabel="Continue to Personalized Plan"
+                  onNext={() => onNextGuidedStep?.('plan_button')}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

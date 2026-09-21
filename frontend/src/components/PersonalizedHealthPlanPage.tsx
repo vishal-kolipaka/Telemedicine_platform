@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import type { HealthAssessmentResponse } from '../types/reader';
+import { GuidedCalloutCard } from './guided-demo/GuidedCalloutCard';
+import type { Stage5SubStep } from '../pages/AnalyzePage';
 import {
   Sparkles,
   ArrowLeft,
@@ -24,6 +26,9 @@ interface Props {
   onBack: () => void;
   onReset: () => void;
   onCreateProgressPlan: (duration: '1_week' | '1_month' | '3_months') => void;
+  isGuidedDemo?: boolean;
+  guidedSubStep?: Stage5SubStep;
+  onNextGuidedStep?: (target?: Stage5SubStep) => void;
 }
 
 // Known reference ranges for visual indicator calculations
@@ -52,6 +57,9 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
   onBack,
   onReset,
   onCreateProgressPlan,
+  isGuidedDemo = false,
+  guidedSubStep,
+  onNextGuidedStep,
 }) => {
   // Always scroll to top when page opens
   useEffect(() => {
@@ -170,7 +178,32 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
         </div>
 
         {/* Hero Banner Header */}
-        <div className="space-y-3">
+        <div
+          id="guided-plan-header"
+          className={`space-y-3 relative transition-all duration-300 ${
+            isGuidedDemo && guidedSubStep === 'plan_summary'
+              ? 'p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-sky-50/70 via-white to-sky-50/40 border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-card shadow-2xl shadow-orange-500/20 z-20'
+              : ''
+          } ${
+            isGuidedDemo && guidedSubStep && guidedSubStep !== 'plan_summary'
+              ? 'opacity-60'
+              : ''
+          }`}
+        >
+          {/* Floating Guided Demo Callout for Sub-Step 1 */}
+          {isGuidedDemo && guidedSubStep === 'plan_summary' && (
+            <div className="absolute top-2 right-2 sm:right-6 z-30 w-[92vw] sm:w-[420px] max-w-full">
+              <GuidedCalloutCard
+                badge="🎯 GUIDED DEMO"
+                title="Your Personalized Health Plan"
+                description="This section turns the assessment findings into personalized health guidance based on the available health evidence."
+                nextLabel="Next →"
+                onNext={() => onNextGuidedStep?.('recommendations')}
+                pointerDirection="none"
+              />
+            </div>
+          )}
+
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold">
             <Sparkles className="w-3.5 h-3.5 text-sky-600" />
             <span>Personalized Health Guide</span>
@@ -214,7 +247,32 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
         </div>
 
         {/* ── 📅 YOUR PROGRESS PLAN CREATION COMPONENT ──────────────────────── */}
-        <div className="mt-6 p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-sky-50 via-indigo-50/50 to-teal-50/40 border-2 border-sky-200 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div
+          id="guided-progress-plan-section"
+          className={`mt-6 p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-sky-50 via-indigo-50/50 to-teal-50/40 transition-all duration-300 relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 ${
+            isGuidedDemo && (guidedSubStep === 'progress_plan' || guidedSubStep === 'select_plan')
+              ? 'border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-card shadow-2xl shadow-orange-500/20 z-20'
+              : 'border-2 border-sky-200 shadow-sm'
+          } ${
+            isGuidedDemo && (guidedSubStep === 'plan_summary' || guidedSubStep === 'recommendations')
+              ? 'opacity-60'
+              : ''
+          }`}
+        >
+          {/* Floating Guided Demo Callout for Sub-Step 3 */}
+          {isGuidedDemo && guidedSubStep === 'progress_plan' && (
+            <div className="absolute top-full mt-3 left-4 sm:left-6 z-30 w-[92vw] sm:w-[440px] max-w-full">
+              <GuidedCalloutCard
+                badge="🎯 GUIDED DEMO"
+                title="Turn Recommendations Into a Routine"
+                description="This section lets you convert the personalized recommendations into a structured routine and track your progress over time."
+                nextLabel="Next →"
+                onNext={() => onNextGuidedStep?.('select_plan')}
+                pointerDirection="up"
+              />
+            </div>
+          )}
+
           <div className="space-y-1.5 max-w-xl">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-100 text-sky-900 text-xs font-black border border-sky-200">
               <Calendar className="w-3.5 h-3.5 text-sky-700" />
@@ -228,25 +286,57 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
             </p>
           </div>
 
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0">
+          <div
+            id="guided-progress-plan-buttons"
+            className={`flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0 relative transition-all duration-300 ${
+              isGuidedDemo && guidedSubStep === 'select_plan'
+                ? 'p-2.5 rounded-3xl bg-amber-50/90 border-2 border-amber-400 ring-4 ring-orange-400/80 shadow-2xl shadow-orange-500/30'
+                : ''
+            }`}
+          >
+            {/* Floating Guided Demo Callout for Sub-Step 4 */}
+            {isGuidedDemo && guidedSubStep === 'select_plan' && (
+              <div className="absolute top-full mt-4 right-0 sm:right-2 z-30 w-[92vw] sm:w-[420px] max-w-full">
+                <GuidedCalloutCard
+                  badge="🎯 GUIDED DEMO"
+                  title="Choose Your Plan"
+                  description="Select a duration to turn your personalized recommendations into a structured routine."
+                  actionInstruction="👉 Choose any plan to continue."
+                  pointerDirection="up"
+                />
+              </div>
+            )}
+
             <button
               type="button"
               onClick={() => onCreateProgressPlan('1_week')}
-              className="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md shadow-sky-600/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              className={`flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md shadow-sky-600/20 transition-all cursor-pointer ${
+                isGuidedDemo && guidedSubStep === 'select_plan'
+                  ? 'ring-4 ring-orange-400/90 guided-blink-glow-orange scale-105 font-black border border-white shadow-xl'
+                  : 'transform hover:scale-[1.02] active:scale-[0.98]'
+              }`}
             >
               <span>Create 1 Week Plan →</span>
             </button>
             <button
               type="button"
               onClick={() => onCreateProgressPlan('1_month')}
-              className="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md shadow-emerald-600/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              className={`flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md shadow-emerald-600/20 transition-all cursor-pointer ${
+                isGuidedDemo && guidedSubStep === 'select_plan'
+                  ? 'ring-4 ring-emerald-400/90 guided-blink-glow-orange scale-105 font-black border border-white shadow-xl'
+                  : 'transform hover:scale-[1.02] active:scale-[0.98]'
+              }`}
             >
               <span>Create 1 Month Plan →</span>
             </button>
             <button
               type="button"
               onClick={() => onCreateProgressPlan('3_months')}
-              className="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md shadow-indigo-600/20 transition-all transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              className={`flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md shadow-indigo-600/20 transition-all cursor-pointer ${
+                isGuidedDemo && guidedSubStep === 'select_plan'
+                  ? 'ring-4 ring-indigo-400/90 guided-blink-glow-orange scale-105 font-black border border-white shadow-xl'
+                  : 'transform hover:scale-[1.02] active:scale-[0.98]'
+              }`}
             >
               <span>Create 3 Months Plan →</span>
             </button>
@@ -256,7 +346,9 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
 
       {/* ── 1. 🩺 A. YOUR ASSESSMENT SUMMARY ─────────────────────────────────── */}
       {section_a_your_results && (
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-4">
+        <div className={`bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-4 transition-opacity duration-300 ${
+          isGuidedDemo ? 'opacity-60' : ''
+        }`}>
           <div className="flex items-center space-x-3 pb-3 border-b border-slate-100">
             <div className="p-2.5 rounded-2xl bg-sky-50 text-sky-700 border border-sky-200">
               <TrendingUp className="w-6 h-6 text-sky-600" />
@@ -300,7 +392,9 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
 
       {/* ── 2. 🔍 B. KEY FACTORS CONTRIBUTING TO YOUR RESULTS ────────────────── */}
       {section_b_what_is_contributing && (
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6">
+        <div className={`bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6 transition-opacity duration-300 ${
+          isGuidedDemo ? 'opacity-60' : ''
+        }`}>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
             <div className="flex items-center space-x-3">
               <div className="p-2.5 rounded-2xl bg-amber-50 text-amber-700 border border-amber-200">
@@ -445,7 +539,9 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
 
       {/* ── 3. 🎯 C. WHAT SHOULD YOU FOCUS ON FIRST? ─────────────────────────── */}
       {section_c_what_to_focus_on_first && (
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6">
+        <div className={`bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6 transition-opacity duration-300 ${
+          isGuidedDemo ? 'opacity-60' : ''
+        }`}>
           <div className="flex items-center space-x-3 pb-3 border-b border-slate-100">
             <div className="p-2.5 rounded-2xl bg-indigo-50 text-indigo-700 border border-indigo-200">
               <Target className="w-6 h-6 text-indigo-600" />
@@ -499,7 +595,32 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
 
       {/* ── 4. ✅ D. YOUR ACTIONABLE RECOMMENDATIONS ────────────────────────── */}
       {section_d_personalized_recommendations && (
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6">
+        <div
+          id="guided-actionable-recommendations"
+          className={`bg-white p-6 sm:p-8 rounded-3xl border transition-all duration-300 relative space-y-6 ${
+            isGuidedDemo && guidedSubStep === 'recommendations'
+              ? 'border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-card shadow-2xl shadow-orange-500/20 z-20'
+              : 'border-slate-200 shadow-xl shadow-sky-500/5'
+          } ${
+            isGuidedDemo && guidedSubStep && guidedSubStep !== 'recommendations'
+              ? 'opacity-60'
+              : ''
+          }`}
+        >
+          {/* Floating Guided Demo Callout for Sub-Step 2 */}
+          {isGuidedDemo && guidedSubStep === 'recommendations' && (
+            <div className="absolute top-4 right-4 sm:right-8 z-30 w-[92vw] sm:w-[440px] max-w-full">
+              <GuidedCalloutCard
+                badge="🎯 GUIDED DEMO"
+                title="Actionable Recommendations"
+                description="These recommendations translate the assessment findings into practical actions that can be incorporated into everyday life."
+                nextLabel="Next →"
+                onNext={() => onNextGuidedStep?.('progress_plan')}
+                pointerDirection="none"
+              />
+            </div>
+          )}
+
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
             <div className="flex items-center space-x-3">
               <div className="p-2.5 rounded-2xl bg-emerald-50 text-emerald-700 border border-emerald-200">
@@ -520,7 +641,9 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+          <div className={`grid grid-cols-1 md:grid-cols-2 gap-5 pt-1 transition-opacity duration-300 ${
+            isGuidedDemo && guidedSubStep === 'recommendations' ? 'opacity-75' : ''
+          }`}>
             {section_d_personalized_recommendations.recommendations.map((rec, idx) => (
               <div
                 key={idx}
@@ -567,7 +690,9 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
 
       {/* ── 5. 💡 E. WHY THESE ACTIONS WERE CHOSEN FOR YOU ─────────────────── */}
       {section_e_why_suggested && section_e_why_suggested.items.length > 0 && (
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-4">
+        <div className={`bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-4 transition-opacity duration-300 ${
+          isGuidedDemo ? 'opacity-60' : ''
+        }`}>
           <div className="flex items-center space-x-3 pb-3 border-b border-slate-100">
             <div className="p-2.5 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200">
               <ShieldCheck className="w-6 h-6 text-teal-600" />
@@ -603,7 +728,9 @@ export const PersonalizedHealthPlanPage: React.FC<Props> = ({
       )}
 
       {/* ── BOTTOM MEDICAL ADVISORY & ACTIONS ──────────────────────────────── */}
-      <div className="p-5 rounded-2xl bg-sky-50/70 border border-sky-200 text-xs sm:text-sm text-slate-700 flex items-start space-x-3 leading-relaxed">
+      <div className={`p-5 rounded-2xl bg-sky-50/70 border border-sky-200 text-xs sm:text-sm text-slate-700 flex items-start space-x-3 leading-relaxed transition-opacity duration-300 ${
+        isGuidedDemo ? 'opacity-60' : ''
+      }`}>
         <ShieldCheck className="w-5 h-5 text-sky-700 shrink-0 mt-0.5" />
         <p>
           <strong className="text-slate-900 font-bold">Medical Advisory:</strong> This personalized health plan is generated using verified clinical practice guidelines for informational and lifestyle support. It is not a substitute for professional clinical medical advice, diagnosis, or treatment. Always discuss major lifestyle changes with your healthcare provider.

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import type { HealthAssessmentResponse } from '../types/reader';
 import type { ProgressPlanRecord } from '../types/progress_plan';
+import { GuidedCalloutCard } from './guided-demo/GuidedCalloutCard';
+import { GuidedDemoCompletionScreen } from './guided-demo/GuidedDemoCompletionScreen';
+import type { ProgressPlanSubStep } from '../pages/AnalyzePage';
 import {
   generateProgressPlan,
   getProgressPlan,
@@ -32,12 +35,20 @@ interface Props {
   initialDuration?: '1_week' | '1_month' | '3_months';
   onBack: () => void;
   onReset?: () => void;
+  isGuidedDemo?: boolean;
+  guidedSubStep?: ProgressPlanSubStep;
+  onNextGuidedStep?: (target?: ProgressPlanSubStep) => void;
+  onExitGuidedDemo?: () => void;
 }
 
 export const PersonalizedProgressPlanPage: React.FC<Props> = ({
   assessment,
   initialDuration = '1_week',
   onBack,
+  isGuidedDemo = false,
+  guidedSubStep,
+  onNextGuidedStep,
+  onExitGuidedDemo,
 }) => {
   const [duration, setDuration] = useState<'1_week' | '1_month' | '3_months'>(initialDuration);
   const [planRecord, setPlanRecord] = useState<ProgressPlanRecord | null>(null);
@@ -172,6 +183,10 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
     return <Clock className="w-5 h-5 text-amber-600" />;
   };
 
+  if (isGuidedDemo && guidedSubStep === 'completion_screen') {
+    return <GuidedDemoCompletionScreen onReturnToDashboard={onExitGuidedDemo || onBack} />;
+  }
+
   if (loading) {
     return (
       <div className="max-w-5xl mx-auto py-12 text-center space-y-4">
@@ -237,13 +252,37 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
           </button>
 
           {/* Duration Selector Tabs */}
-          <div className="flex items-center bg-slate-100 p-1 rounded-2xl border border-slate-200 self-start sm:self-auto">
+          <div
+            id="guided-duration-selector"
+            className={`flex items-center bg-slate-100 p-1 rounded-2xl border border-slate-200 self-start sm:self-auto relative transition-all ${
+              isGuidedDemo && guidedSubStep === 'duration'
+                ? 'p-2 bg-amber-50/90 border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-card shadow-2xl shadow-orange-500/20 z-30'
+                : ''
+            } ${
+              isGuidedDemo && guidedSubStep && guidedSubStep !== 'duration'
+                ? 'opacity-70 transition-opacity duration-300'
+                : ''
+            }`}
+          >
+            {/* Floating Callout for Sub-Step 2: duration */}
+            {isGuidedDemo && guidedSubStep === 'duration' && (
+              <div className="absolute top-12 left-0 sm:left-auto sm:right-0 z-40 w-[92vw] sm:w-[380px] max-w-full">
+                <GuidedCalloutCard
+                  badge="🎯 GUIDED DEMO"
+                  title="Plan Duration"
+                  description="You can choose different time horizons for turning your personalized recommendations into a structured routine."
+                  nextLabel="Next →"
+                  onNext={() => onNextGuidedStep?.('overall_progress')}
+                  pointerDirection="up"
+                />
+              </div>
+            )}
             <button
               type="button"
               onClick={() => setDuration('1_week')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 duration === '1_week'
-                  ? 'bg-white text-sky-900 shadow-xs border border-slate-200/80'
+                  ? `bg-white text-sky-900 shadow-xs border border-slate-200/80 ${isGuidedDemo && guidedSubStep === 'duration' ? 'ring-2 ring-amber-400 bg-sky-100 text-sky-950 font-black shadow-md guided-blink-glow-orange' : ''}`
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -254,7 +293,7 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
               onClick={() => setDuration('1_month')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 duration === '1_month'
-                  ? 'bg-white text-sky-900 shadow-xs border border-slate-200/80'
+                  ? `bg-white text-sky-900 shadow-xs border border-slate-200/80 ${isGuidedDemo && guidedSubStep === 'duration' ? 'ring-2 ring-amber-400 bg-sky-100 text-sky-950 font-black shadow-md guided-blink-glow-orange' : ''}`
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -265,7 +304,7 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
               onClick={() => setDuration('3_months')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 duration === '3_months'
-                  ? 'bg-white text-sky-900 shadow-xs border border-slate-200/80'
+                  ? `bg-white text-sky-900 shadow-xs border border-slate-200/80 ${isGuidedDemo && guidedSubStep === 'duration' ? 'ring-2 ring-amber-400 bg-sky-100 text-sky-950 font-black shadow-md guided-blink-glow-orange' : ''}`
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -275,15 +314,41 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
 
           {/* Right Action Buttons */}
           <div className="flex items-center space-x-2.5">
-            <button
-              type="button"
-              onClick={handleDownloadPdf}
-              disabled={downloadingPdf}
-              className="flex items-center space-x-2 px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold rounded-2xl shadow-md shadow-sky-600/20 transition-all cursor-pointer disabled:opacity-50"
+            <div
+              id="guided-download-pdf-btn"
+              className={`relative transition-all rounded-2xl ${
+                isGuidedDemo && guidedSubStep === 'download_pdf'
+                  ? 'ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-orange shadow-2xl shadow-orange-500/30 z-30'
+                  : ''
+              } ${
+                isGuidedDemo && guidedSubStep && guidedSubStep !== 'download_pdf'
+                  ? 'opacity-70 transition-opacity duration-300'
+                  : ''
+              }`}
             >
-              <Download className="w-4 h-4" />
-              <span>{downloadingPdf ? 'Generating PDF...' : 'Download My Plan PDF'}</span>
-            </button>
+              {/* Floating Callout for Sub-Step 6: download_pdf */}
+              {isGuidedDemo && guidedSubStep === 'download_pdf' && (
+                <div className="absolute top-12 right-0 z-40 w-[92vw] sm:w-[380px] max-w-full">
+                  <GuidedCalloutCard
+                    badge="🎯 GUIDED DEMO"
+                    title="Your Plan"
+                    description="The generated plan can also be saved as a PDF for reference while following the routine."
+                    nextLabel="Next →"
+                    onNext={() => onNextGuidedStep?.('workflow_summary')}
+                    pointerDirection="up"
+                  />
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={handleDownloadPdf}
+                disabled={downloadingPdf}
+                className="flex items-center space-x-2 px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold rounded-2xl shadow-md shadow-sky-600/20 transition-all cursor-pointer disabled:opacity-50"
+              >
+                <Download className="w-4 h-4" />
+                <span>{downloadingPdf ? 'Generating PDF...' : 'Download My Plan PDF'}</span>
+              </button>
+            </div>
             <button
               type="button"
               onClick={handleResetProgress}
@@ -296,7 +361,46 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
         </div>
 
         {/* Hero Title & Meta */}
-        <div className="space-y-3">
+        <div
+          id="guided-progress-header"
+          className={`space-y-3 relative transition-all ${
+            isGuidedDemo && (guidedSubStep === 'plan_header' || guidedSubStep === 'workflow_summary')
+              ? 'p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-sky-50/70 via-white to-sky-50/40 border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-card shadow-2xl shadow-orange-500/20 z-20'
+              : ''
+          } ${
+            isGuidedDemo && guidedSubStep && guidedSubStep !== 'plan_header' && guidedSubStep !== 'workflow_summary'
+              ? 'opacity-70 transition-opacity duration-300'
+              : ''
+          }`}
+        >
+          {/* Floating Guided Demo Callout for Sub-Step 1: plan_header */}
+          {isGuidedDemo && guidedSubStep === 'plan_header' && (
+            <div className="absolute top-2 right-2 sm:right-6 z-30 w-[92vw] sm:w-[420px] max-w-full">
+              <GuidedCalloutCard
+                badge="🎯 GUIDED DEMO"
+                title="Your Personalized Progress Plan"
+                description="This turns the recommendations from !Health Prism into a structured day-by-day routine that can be followed and tracked."
+                nextLabel="Next →"
+                onNext={() => onNextGuidedStep?.('duration')}
+                pointerDirection="none"
+              />
+            </div>
+          )}
+
+          {/* Floating Guided Demo Callout for Sub-Step 7: workflow_summary */}
+          {isGuidedDemo && guidedSubStep === 'workflow_summary' && (
+            <div className="absolute top-2 right-2 sm:right-6 z-30 w-[92vw] sm:w-[440px] max-w-full">
+              <GuidedCalloutCard
+                badge="🎯 GUIDED DEMO"
+                title="You've seen the complete !Health Prism workflow"
+                description="You've now seen how !Health Prism moves from multimodal health data and metabolic risk assessment to explainable evidence, personalized recommendations, and a structured health plan."
+                nextLabel="Finish Guided Demo →"
+                onNext={() => onNextGuidedStep?.('completion_screen')}
+                pointerDirection="none"
+              />
+            </div>
+          )}
+
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-extrabold border border-emerald-300">
             <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
             <span>Personalized Daily Progress Tracker</span>
@@ -343,7 +447,32 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
       </div>
 
       {/* ── OVERALL PROGRESS & DURATION TIMELINE ────────────────────────────── */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6">
+      <div
+        id="guided-overall-progress"
+        className={`bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6 relative transition-all ${
+          isGuidedDemo && guidedSubStep === 'overall_progress'
+            ? 'border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-card shadow-2xl shadow-orange-500/20 z-20'
+            : ''
+        } ${
+          isGuidedDemo && guidedSubStep && guidedSubStep !== 'overall_progress'
+            ? 'opacity-70 transition-opacity duration-300'
+            : ''
+        }`}
+      >
+        {/* Floating Callout for Sub-Step 3: overall_progress */}
+        {isGuidedDemo && guidedSubStep === 'overall_progress' && (
+          <div className="absolute -top-12 right-2 sm:right-6 z-30 w-[92vw] sm:w-[420px] max-w-full">
+            <GuidedCalloutCard
+              badge="🎯 GUIDED DEMO"
+              title="Track Your Progress"
+              description="This section shows how much of your personalized routine has been completed, including completed tasks and days."
+              nextLabel="Next →"
+              onNext={() => onNextGuidedStep?.('daily_checklist')}
+              pointerDirection="none"
+            />
+          </div>
+        )}
+
         {/* Overall Completion Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
@@ -359,7 +488,13 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
           </div>
 
           <div className="w-full sm:w-64">
-            <div className="h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+            <div
+              className={`h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200 transition-all ${
+                isGuidedDemo && guidedSubStep === 'overall_progress'
+                  ? 'ring-2 ring-emerald-400 ring-offset-1 guided-blink-glow-blue'
+                  : ''
+              }`}
+            >
               <div
                 className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500 rounded-full"
                 style={{ width: `${Math.max(2, overall_progress)}%` }}
@@ -416,10 +551,37 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
         )}
 
         {/* ── DAY-BY-DAY NAVIGATION STRIP ────────────────────────────────────── */}
-        <div className="space-y-2 pt-2 border-t border-slate-100">
+        <div
+          id="guided-day-selector-strip"
+          className={`space-y-2 pt-2 border-t border-slate-100 relative transition-all rounded-2xl ${
+            isGuidedDemo && guidedSubStep === 'daily_checklist'
+              ? 'p-4 bg-sky-50/50 border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-2 ring-offset-slate-50 guided-blink-glow-card shadow-xl z-20'
+              : ''
+          }`}
+        >
+          {/* Floating Callout for Sub-Step 4: daily_checklist */}
+          {isGuidedDemo && guidedSubStep === 'daily_checklist' && (
+            <div className="absolute -top-28 right-2 sm:right-6 z-30 w-[92vw] sm:w-[420px] max-w-full">
+              <GuidedCalloutCard
+                badge="🎯 GUIDED DEMO"
+                title="Daily Guided Routine"
+                description="The plan breaks your recommendations into daily tasks. Complete the current day's checklist to progress through the routine."
+                nextLabel="Next →"
+                onNext={() => onNextGuidedStep?.('daily_tasks')}
+                pointerDirection="down"
+              />
+            </div>
+          )}
+
           <div className="flex items-center justify-between text-xs font-bold text-slate-600">
             <span>SELECT DAY TO VIEW CHECKLIST</span>
-            <span className="text-[11px] font-semibold text-slate-500">
+            <span
+              className={`text-[11px] font-semibold text-slate-500 ${
+                isGuidedDemo && guidedSubStep === 'daily_checklist'
+                  ? 'font-black text-sky-900 bg-sky-100 px-2.5 py-0.5 rounded-full ring-1 ring-sky-300'
+                  : ''
+              }`}
+            >
               Current Active: Day {current_day}
             </span>
           </div>
@@ -429,6 +591,7 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
               const isSelected = d.day_number === selectedDayNumber;
               const isDone = completedDaySet.has(d.day_number);
               const isUnlocked = d.day_number <= current_day || d.is_unlocked;
+              const isCurrentActive = d.day_number === current_day;
 
               let btnStyle = 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed opacity-75';
               if (isDone) {
@@ -446,7 +609,11 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
                   key={d.day_number}
                   type="button"
                   onClick={() => setSelectedDayNumber(d.day_number)}
-                  className={`flex flex-col items-center justify-center min-w-[76px] py-2.5 px-3 rounded-2xl border font-bold text-xs transition-all shrink-0 cursor-pointer ${btnStyle}`}
+                  className={`flex flex-col items-center justify-center min-w-[76px] py-2.5 px-3 rounded-2xl border font-bold text-xs transition-all shrink-0 cursor-pointer ${btnStyle} ${
+                    isGuidedDemo && guidedSubStep === 'daily_checklist' && isCurrentActive
+                      ? 'ring-4 ring-amber-400 ring-offset-2 guided-blink-glow-box scale-105'
+                      : ''
+                  }`}
                 >
                   <span className="text-[10px] uppercase font-mono tracking-tighter opacity-80">
                     DAY {d.day_number}
@@ -468,7 +635,32 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
       </div>
 
       {/* ── SELECTED DAY FOCUS & TASK CHECKLIST ──────────────────────────────── */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6">
+      <div
+        id="guided-task-checklist"
+        className={`bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-sky-500/5 space-y-6 relative transition-all ${
+          isGuidedDemo && guidedSubStep === 'daily_tasks'
+            ? 'border-2 border-orange-400 ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 guided-blink-glow-card shadow-2xl shadow-orange-500/20 z-20'
+            : ''
+        } ${
+          isGuidedDemo && guidedSubStep && guidedSubStep !== 'daily_tasks'
+            ? 'opacity-70 transition-opacity duration-300'
+            : ''
+        }`}
+      >
+        {/* Floating Callout for Sub-Step 5: daily_tasks */}
+        {isGuidedDemo && guidedSubStep === 'daily_tasks' && (
+          <div className="absolute -top-12 right-2 sm:right-6 z-30 w-[92vw] sm:w-[420px] max-w-full">
+            <GuidedCalloutCard
+              badge="🎯 GUIDED DEMO"
+              title="Actionable Daily Steps"
+              description="These tasks turn the personalized recommendations into practical actions that can be followed consistently."
+              nextLabel="Next →"
+              onNext={() => onNextGuidedStep?.('download_pdf')}
+              pointerDirection="none"
+            />
+          </div>
+        )}
+
         {/* Selected Day Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
           <div className="space-y-1">
@@ -542,8 +734,9 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
 
         {/* ── TASK CARDS LIST (4 to 6 Tasks) ─────────────────────────────────── */}
         <div className="space-y-4 pt-1">
-          {dayTasks.map((task) => {
+          {dayTasks.map((task, idx) => {
             const isChecked = completedTaskSet.has(task.id);
+            const isFirst = idx === 0;
 
             return (
               <div
@@ -559,6 +752,10 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
                     : isSelectedDayUnlocked
                     ? 'bg-white border-slate-200 hover:border-sky-300 shadow-sm cursor-pointer'
                     : 'bg-slate-50 border-slate-200 opacity-60'
+                } ${
+                  isGuidedDemo && guidedSubStep === 'daily_tasks' && isFirst
+                    ? 'border-orange-400 ring-2 ring-orange-400 bg-orange-50/30'
+                    : ''
                 }`}
               >
                 {/* Large Custom Checkbox */}
@@ -623,7 +820,11 @@ export const PersonalizedProgressPlanPage: React.FC<Props> = ({
       </div>
 
       {/* ── MEDICAL ADVISORY DISCLAIMER ────────────────────────────────────── */}
-      <div className="p-5 rounded-2xl bg-sky-50/70 border border-sky-200 text-xs sm:text-sm text-slate-700 flex items-start space-x-3 leading-relaxed">
+      <div
+        className={`p-5 rounded-2xl bg-sky-50/70 border border-sky-200 text-xs sm:text-sm text-slate-700 flex items-start space-x-3 leading-relaxed transition-opacity ${
+          isGuidedDemo && guidedSubStep ? 'opacity-70' : ''
+        }`}
+      >
         <ShieldCheck className="w-5 h-5 text-sky-700 shrink-0 mt-0.5" />
         <p>
           <strong className="text-slate-900 font-bold">Medical Advisory:</strong> This personalized progress plan is generated using verified clinical practice guidelines (CDC National DPP, WHO Physical Activity, EASL Clinical Guidance) for informational and lifestyle support. It is not a substitute for professional medical advice, diagnosis, or treatment.

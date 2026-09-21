@@ -16,6 +16,29 @@ import type { DocumentAnalysisResult, HealthAssessmentResponse } from '../types/
 import { RefreshCw, Sparkles, AlertCircle, Layers, FileText, CheckCircle2, Brain, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export type Stage3SubStep = 'quality' | 'extraction' | 'modalities' | 'family_history' | 'features' | 'assessment';
+export type Stage4SubStep =
+  | 'prediction'
+  | 'why_result'
+  | 'disease_tabs'
+  | 'multimodal_signals'
+  | 'contributing_features'
+  | 'evidence_sources'
+  | 'review_assessment'
+  | 'plan_button';
+export type Stage5SubStep =
+  | 'plan_summary'
+  | 'recommendations'
+  | 'progress_plan'
+  | 'select_plan';
+export type ProgressPlanSubStep =
+  | 'plan_header'
+  | 'duration'
+  | 'overall_progress'
+  | 'daily_checklist'
+  | 'daily_tasks'
+  | 'download_pdf'
+  | 'workflow_summary'
+  | 'completion_screen';
 
 interface AnalyzePageProps {
   isGuidedDemo?: boolean;
@@ -38,6 +61,12 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
 
   // Guided Demo Stage 3 Sub-step tracking
   const [stage3SubStep, setStage3SubStep] = useState<Stage3SubStep>('quality');
+  // Guided Demo Stage 4 Sub-step tracking
+  const [stage4SubStep, setStage4SubStep] = useState<Stage4SubStep>('prediction');
+  // Guided Demo Stage 5 Sub-step tracking
+  const [stage5SubStep, setStage5SubStep] = useState<Stage5SubStep>('plan_summary');
+  // Guided Demo Progress Plan Sub-step tracking
+  const [progressPlanSubStep, setProgressPlanSubStep] = useState<ProgressPlanSubStep>('plan_header');
 
   // Notify guided demo when documents reach review state
   React.useEffect(() => {
@@ -69,6 +98,124 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
       else if (target === 'family_history') targetId = 'guided-family-history';
       else if (target === 'features') targetId = 'guided-feature-tables';
       else if (target === 'assessment') targetId = 'guided-assessment-cta';
+
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 120);
+  };
+
+  const handleStage4Advance = (nextStep?: Stage4SubStep) => {
+    const order: Stage4SubStep[] = [
+      'prediction',
+      'why_result',
+      'disease_tabs',
+      'multimodal_signals',
+      'contributing_features',
+      'evidence_sources',
+      'review_assessment',
+      'plan_button',
+    ];
+    let target: Stage4SubStep = 'prediction';
+    if (nextStep) {
+      target = nextStep;
+    } else {
+      const idx = order.indexOf(stage4SubStep);
+      target = idx < order.length - 1 ? order[idx + 1] : 'plan_button';
+    }
+    setStage4SubStep(target);
+
+    // Smooth scroll to target
+    setTimeout(() => {
+      let targetId = '';
+      if (target === 'prediction') targetId = 'guided-prediction-card';
+      else if (target === 'why_result') targetId = 'guided-why-this-result-btn';
+      else if (target === 'disease_tabs') targetId = 'guided-disease-category-tabs';
+      else if (target === 'multimodal_signals') targetId = 'guided-multimodal-signals';
+      else if (target === 'contributing_features') targetId = 'guided-contributing-feature-card';
+      else if (target === 'evidence_sources') targetId = 'guided-signal-source-filter';
+      else if (target === 'review_assessment') targetId = 'xai-explanation-section';
+      else if (target === 'plan_button') targetId = 'guided-personalized-plan-btn';
+
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 120);
+  };
+
+  const handleStage5Advance = (nextStep?: Stage5SubStep) => {
+    const order: Stage5SubStep[] = [
+      'plan_summary',
+      'recommendations',
+      'progress_plan',
+      'select_plan',
+    ];
+    let target: Stage5SubStep = 'plan_summary';
+    if (nextStep) {
+      target = nextStep;
+    } else {
+      const idx = order.indexOf(stage5SubStep);
+      target = idx < order.length - 1 ? order[idx + 1] : 'select_plan';
+    }
+    setStage5SubStep(target);
+
+    // Smooth scroll to target
+    setTimeout(() => {
+      let targetId = '';
+      if (target === 'plan_summary') targetId = 'guided-plan-header';
+      else if (target === 'recommendations') targetId = 'guided-actionable-recommendations';
+      else if (target === 'progress_plan') targetId = 'guided-progress-plan-section';
+      else if (target === 'select_plan') targetId = 'guided-progress-plan-buttons';
+
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 120);
+  };
+
+  const handleProgressPlanAdvance = (nextStep?: ProgressPlanSubStep) => {
+    const order: ProgressPlanSubStep[] = [
+      'plan_header',
+      'duration',
+      'overall_progress',
+      'daily_checklist',
+      'daily_tasks',
+      'download_pdf',
+      'workflow_summary',
+      'completion_screen',
+    ];
+    let target: ProgressPlanSubStep = 'plan_header';
+    if (nextStep) {
+      target = nextStep;
+    } else {
+      const idx = order.indexOf(progressPlanSubStep);
+      target = idx < order.length - 1 ? order[idx + 1] : 'completion_screen';
+    }
+    setProgressPlanSubStep(target);
+
+    // Smooth scroll to target
+    setTimeout(() => {
+      let targetId = '';
+      if (target === 'plan_header') targetId = 'guided-progress-header';
+      else if (target === 'duration') targetId = 'guided-duration-selector';
+      else if (target === 'overall_progress') targetId = 'guided-overall-progress';
+      else if (target === 'daily_checklist') targetId = 'guided-day-selector-strip';
+      else if (target === 'daily_tasks') targetId = 'guided-task-checklist';
+      else if (target === 'download_pdf') targetId = 'guided-download-pdf-btn';
+      else if (target === 'workflow_summary') targetId = 'guided-progress-header';
+      else if (target === 'completion_screen') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        return;
+      }
 
       if (targetId) {
         const el = document.getElementById(targetId);
@@ -246,7 +393,7 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
     <div className="space-y-4 py-2">
       
       {/* ── Guided Demo Top Bar (Shown ONLY in Guided Demo mode) ── */}
-      {isGuidedDemo && (
+      {isGuidedDemo && progressPlanSubStep !== 'completion_screen' && (
         <div className="space-y-2 py-1 px-1 guided-fade-in border-b border-slate-200/80 pb-2.5">
           <div className="flex items-center justify-between">
             {/* Left: Exit */}
@@ -263,7 +410,13 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
             <div className="flex items-center space-x-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-600 to-cyan-600 text-white text-xs font-bold shadow-md shadow-sky-600/20">
               <Sparkles className="w-3.5 h-3.5" />
               <span>
-                {state === 'review' || guidedDemoStep >= 3
+                {state === 'progress-plan'
+                  ? 'Guided Demo • Final Stage: Personalized Progress Plan'
+                  : state === 'health-plan'
+                  ? 'Guided Demo • Step 05 of 5: Personalized Health Plan & Actions'
+                  : state === 'assessment'
+                  ? 'Guided Demo • Step 04 of 5: Predictions & Multimodal Evidence'
+                  : state === 'review' || guidedDemoStep >= 3
                   ? 'Guided Demo • Step 03 of 5: Feature Mapping & Verification'
                   : 'Guided Demo • Step 02: Load & Process Report'}
               </span>
@@ -271,7 +424,15 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
 
             {/* Right: Step badge */}
             <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
-              {state === 'review' || guidedDemoStep >= 3 ? 'Step 3 of 5' : 'Step 2 of 5'}
+              {state === 'progress-plan'
+                ? 'Final Stage'
+                : state === 'health-plan'
+                ? 'Step 5 of 5'
+                : state === 'assessment'
+                ? 'Step 4 of 5'
+                : state === 'review' || guidedDemoStep >= 3
+                ? 'Step 3 of 5'
+                : 'Step 2 of 5'}
             </span>
           </div>
 
@@ -313,11 +474,152 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
               })}
             </div>
           )}
+
+          {/* Sub-stepper pills for Stage 4 */}
+          {state === 'assessment' && (
+            <div className="flex items-center justify-center space-x-1.5 overflow-x-auto py-1 text-[11px] font-bold">
+              {[
+                { id: 'prediction', label: 'Prediction' },
+                { id: 'why_result', label: 'Why Result' },
+                { id: 'disease_tabs', label: 'Categories' },
+                { id: 'multimodal_signals', label: 'Modality Signals' },
+                { id: 'contributing_features', label: 'Features' },
+                { id: 'evidence_sources', label: 'Sources' },
+                { id: 'review_assessment', label: 'Review' },
+                { id: 'plan_button', label: 'Plan' },
+              ].map((sub, idx, arr) => {
+                const subStepOrder: Stage4SubStep[] = [
+                  'prediction',
+                  'why_result',
+                  'disease_tabs',
+                  'multimodal_signals',
+                  'contributing_features',
+                  'evidence_sources',
+                  'review_assessment',
+                  'plan_button',
+                ];
+                const isCurrent = stage4SubStep === sub.id;
+                const isPast = subStepOrder.indexOf(stage4SubStep) > idx;
+
+                return (
+                  <React.Fragment key={sub.id}>
+                    <button
+                      type="button"
+                      onClick={() => handleStage4Advance(sub.id as Stage4SubStep)}
+                      className={`flex items-center space-x-1 px-2.5 py-0.5 rounded-lg transition-all cursor-pointer ${
+                        isCurrent
+                          ? 'bg-amber-500 text-white font-extrabold shadow-sm ring-2 ring-amber-300'
+                          : isPast
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : 'text-slate-400 hover:text-slate-700 bg-slate-100'
+                      }`}
+                    >
+                      <span>{sub.label}</span>
+                    </button>
+                    {idx < arr.length - 1 && (
+                      <span className="text-slate-300 font-normal">→</span>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Sub-stepper pills for Stage 5 */}
+          {state === 'health-plan' && (
+            <div className="flex items-center justify-center space-x-1.5 overflow-x-auto py-1 text-[11px] font-bold">
+              {[
+                { id: 'plan_summary', label: 'Plan Summary' },
+                { id: 'recommendations', label: 'Recommendations' },
+                { id: 'progress_plan', label: 'Progress Plan' },
+                { id: 'select_plan', label: 'Choose Duration' },
+              ].map((sub, idx, arr) => {
+                const subStepOrder: Stage5SubStep[] = [
+                  'plan_summary',
+                  'recommendations',
+                  'progress_plan',
+                  'select_plan',
+                ];
+                const isCurrent = stage5SubStep === sub.id;
+                const isPast = subStepOrder.indexOf(stage5SubStep) > idx;
+
+                return (
+                  <React.Fragment key={sub.id}>
+                    <button
+                      type="button"
+                      onClick={() => handleStage5Advance(sub.id as Stage5SubStep)}
+                      className={`flex items-center space-x-1 px-2.5 py-0.5 rounded-lg transition-all cursor-pointer ${
+                        isCurrent
+                          ? 'bg-amber-500 text-white font-extrabold shadow-sm ring-2 ring-amber-300'
+                          : isPast
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : 'text-slate-400 hover:text-slate-700 bg-slate-100'
+                      }`}
+                    >
+                      <span>{sub.label}</span>
+                    </button>
+                    {idx < arr.length - 1 && (
+                      <span className="text-slate-300 font-normal">→</span>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Sub-stepper pills for Progress Plan */}
+          {state === 'progress-plan' && (
+            <div className="flex items-center justify-center space-x-1.5 overflow-x-auto py-1 text-[11px] font-bold">
+              {[
+                { id: 'plan_header', label: 'Plan Overview' },
+                { id: 'duration', label: 'Duration' },
+                { id: 'overall_progress', label: 'Progress' },
+                { id: 'daily_checklist', label: 'Daily Routine' },
+                { id: 'daily_tasks', label: 'Actions' },
+                { id: 'download_pdf', label: 'Plan PDF' },
+                { id: 'workflow_summary', label: 'Summary' },
+              ].map((sub, idx, arr) => {
+                const subStepOrder: ProgressPlanSubStep[] = [
+                  'plan_header',
+                  'duration',
+                  'overall_progress',
+                  'daily_checklist',
+                  'daily_tasks',
+                  'download_pdf',
+                  'workflow_summary',
+                  'completion_screen',
+                ];
+                const isCurrent = progressPlanSubStep === sub.id;
+                const isPast = subStepOrder.indexOf(progressPlanSubStep) > idx;
+
+                return (
+                  <React.Fragment key={sub.id}>
+                    <button
+                      type="button"
+                      onClick={() => handleProgressPlanAdvance(sub.id as ProgressPlanSubStep)}
+                      className={`flex items-center space-x-1 px-2.5 py-0.5 rounded-lg transition-all cursor-pointer ${
+                        isCurrent
+                          ? 'bg-amber-500 text-white font-extrabold shadow-sm ring-2 ring-amber-300'
+                          : isPast
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : 'text-slate-400 hover:text-slate-700 bg-slate-100'
+                      }`}
+                    >
+                      <span>{sub.label}</span>
+                    </button>
+                    {idx < arr.length - 1 && (
+                      <span className="text-slate-300 font-normal">→</span>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
 
       {/* ── Page Header Row (Compact & Wide) ── */}
-      {state !== 'assessment' && (
+      {state !== 'assessment' && state !== 'health-plan' && state !== 'progress-plan' && (
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/80 pb-2.5">
           <div>
             <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[11px] font-bold mb-1">
@@ -560,8 +862,12 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
           onReset={handleReset}
           onViewHealthPlan={() => {
             setState('health-plan');
+            setStage5SubStep('plan_summary');
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           }}
+          isGuidedDemo={isGuidedDemo}
+          guidedSubStep={stage4SubStep}
+          onNextGuidedStep={handleStage4Advance}
         />
       )}
 
@@ -577,8 +883,12 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
           onCreateProgressPlan={(dur) => {
             setProgressPlanDuration(dur);
             setState('progress-plan');
+            setProgressPlanSubStep('plan_header');
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           }}
+          isGuidedDemo={isGuidedDemo}
+          guidedSubStep={stage5SubStep}
+          onNextGuidedStep={handleStage5Advance}
         />
       )}
 
@@ -592,6 +902,10 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           }}
           onReset={handleReset}
+          isGuidedDemo={isGuidedDemo}
+          guidedSubStep={progressPlanSubStep}
+          onNextGuidedStep={handleProgressPlanAdvance}
+          onExitGuidedDemo={onExitGuidedDemo}
         />
       )}
 

@@ -18,17 +18,25 @@ import {
 import type { HealthAssessmentResponse, AssessmentDiseaseResult } from '../types/reader';
 import { XaiExplanationSection } from './XaiExplanationSection';
 import { formatRiskPercentage } from '../utils/formatters';
+import type { Stage4SubStep } from '../pages/AnalyzePage';
+import { GuidedCalloutCard } from './guided-demo/GuidedCalloutCard';
 
 interface Props {
   assessment: HealthAssessmentResponse;
   onReset: () => void;
   onViewHealthPlan?: () => void;
+  isGuidedDemo?: boolean;
+  guidedSubStep?: Stage4SubStep;
+  onNextGuidedStep?: (target?: Stage4SubStep) => void;
 }
 
 export const HealthAssessmentResults: React.FC<Props> = ({
   assessment,
   onReset,
   onViewHealthPlan,
+  isGuidedDemo = false,
+  guidedSubStep,
+  onNextGuidedStep,
 }) => {
   // Always scroll to top when the results page mounts
   useEffect(() => {
@@ -71,6 +79,9 @@ export const HealthAssessmentResults: React.FC<Props> = ({
     const element = document.getElementById('xai-explanation-section');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (isGuidedDemo && guidedSubStep === 'why_result') {
+      onNextGuidedStep?.('disease_tabs');
     }
   };
 
@@ -258,16 +269,34 @@ export const HealthAssessmentResults: React.FC<Props> = ({
           </div>
 
           {/* Top Actions */}
-          <div className="flex items-center space-x-3 shrink-0">
+          <div className="flex items-center space-x-3 shrink-0 relative">
             {assessment.health_plan && onViewHealthPlan && (
-              <button
-                type="button"
-                onClick={onViewHealthPlan}
-                className="flex items-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 text-white text-xs font-bold rounded-2xl shadow-md shadow-sky-600/20 transition-all cursor-pointer"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-sky-200" />
-                <span>✨ Personalized Plan</span>
-              </button>
+              <div className="relative">
+                {isGuidedDemo && guidedSubStep === 'plan_button' && (
+                  <div className="absolute right-0 top-full mt-3 z-30 w-80 sm:w-96">
+                    <GuidedCalloutCard
+                      badge="🎯 GUIDED DEMO • PERSONALIZED GUIDANCE"
+                      title="Next: Personalized Health Plan"
+                      description="After reviewing the metabolic health assessment and supporting evidence, click Personalized Plan to see how the platform turns these findings into personalized preventive guidance."
+                      actionInstruction="👉 Click 'Personalized Plan' to continue."
+                      pointerDirection="up"
+                    />
+                  </div>
+                )}
+                <button
+                  id="guided-personalized-plan-btn"
+                  type="button"
+                  onClick={onViewHealthPlan}
+                  className={`flex items-center space-x-2 px-4 py-2.5 text-xs font-bold rounded-2xl transition-all cursor-pointer ${
+                    isGuidedDemo && guidedSubStep === 'plan_button'
+                      ? 'bg-gradient-to-r from-orange-500 via-amber-500 to-sky-600 hover:from-orange-600 hover:to-sky-700 text-white border-2 border-amber-300 ring-4 ring-orange-400/80 guided-blink-glow-orange scale-110 shadow-2xl shadow-orange-500/40 font-black'
+                      : 'bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 text-white shadow-md shadow-sky-600/20'
+                  }`}
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-sky-200" />
+                  <span>✨ Personalized Plan</span>
+                </button>
+              </div>
             )}
             <button
               type="button"
@@ -320,19 +349,43 @@ export const HealthAssessmentResults: React.FC<Props> = ({
           </div>
         </div>
 
+        {/* Guided Demo Step 4A Callout: Disease Prediction Card */}
+        {isGuidedDemo && guidedSubStep === 'prediction' && (
+          <div className="pb-2">
+            <GuidedCalloutCard
+              badge="🎯 GUIDED DEMO • METABOLIC RISK"
+              title={`Primary Assessment: ${sortedDiseases[0]?.display_name || 'Metabolic Condition'}`}
+              description={
+                <span>
+                  This card shows the metabolic disease risk predicted by <strong>!Health Prism</strong> from the available health evidence. Calculated risk for <strong>{sortedDiseases[0]?.display_name}</strong> is <strong className="text-amber-300">{formatRiskPercentage(sortedDiseases[0]?.risk_percentage)}</strong> ({sortedDiseases[0]?.decision ? 'Elevated Risk' : 'Moderate/Low Risk'}). The calculated risk represents the model's estimated risk for this condition based on the analyzed health features.
+                </span>
+              }
+              nextLabel="Next: 'Why this result?'"
+              onNext={() => onNextGuidedStep?.('why_result')}
+              pointerDirection="down"
+            />
+          </div>
+        )}
+
         {/* Dynamic 5 Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {sortedDiseases.map((disease, idx) => {
             const hasScore = disease.risk_percentage !== null;
             const priority = getPriorityInfo(idx);
             const isSelected = activeXaiDiseaseKey === disease.key;
+            const isPrimaryTarget = idx === 0;
 
             return (
               <div
                 key={disease.key}
+                id={isPrimaryTarget ? 'guided-prediction-card' : undefined}
                 className={`bg-white rounded-3xl p-5 border transition-all duration-200 flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md ${
                   isSelected ? 'border-sky-500 ring-2 ring-sky-500/20' : 'border-slate-200'
-                } ${priority.accentBorder}`}
+                } ${priority.accentBorder} ${
+                  isGuidedDemo && guidedSubStep === 'prediction' && isPrimaryTarget
+                    ? 'ring-4 ring-orange-400 ring-offset-4 ring-offset-slate-50 border-2 border-orange-400 guided-blink-glow-card shadow-2xl shadow-orange-500/30'
+                    : ''
+                }`}
               >
                 {/* Top Row: Disease Title & Modality/Data Status Badge */}
                 <div className="space-y-2">
@@ -393,12 +446,28 @@ export const HealthAssessmentResults: React.FC<Props> = ({
                   {disease.explanation}
                 </p>
 
+                {/* Guided Demo Step 4B Callout */}
+                {isGuidedDemo && guidedSubStep === 'why_result' && isPrimaryTarget && (
+                  <div className="pt-2">
+                    <GuidedCalloutCard
+                      badge="🎯 'Why this result?'"
+                      title="Evidence Entry Point"
+                      description="This option lets you inspect the multimodal evidence, laboratory biomarkers, sensor features, and explainable AI reasoning behind the prediction."
+                      actionInstruction="👉 Click 'Why this result?' below to view the evidence."
+                      pointerDirection="down"
+                    />
+                  </div>
+                )}
+
                 {/* Action: Why this result? */}
                 <button
+                  id={isPrimaryTarget ? 'guided-why-this-result-btn' : undefined}
                   type="button"
                   onClick={() => handleWhyThisResult(disease.key)}
                   className={`w-full flex items-center justify-center space-x-1.5 py-2 px-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
-                    isSelected
+                    isGuidedDemo && guidedSubStep === 'why_result' && isPrimaryTarget
+                      ? 'bg-gradient-to-r from-orange-500 via-amber-500 to-sky-600 text-white font-black ring-4 ring-orange-400/80 guided-blink-glow-orange scale-105 shadow-xl shadow-orange-500/30'
+                      : isSelected
                       ? 'bg-sky-600 text-white shadow-xs'
                       : 'bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200'
                   }`}
@@ -426,6 +495,9 @@ export const HealthAssessmentResults: React.FC<Props> = ({
           xai={xai}
           activeDiseaseKey={activeXaiDiseaseKey}
           onSelectDisease={setActiveXaiDiseaseKey}
+          isGuidedDemo={isGuidedDemo}
+          guidedSubStep={guidedSubStep}
+          onNextGuidedStep={onNextGuidedStep}
         />
       )}
 
