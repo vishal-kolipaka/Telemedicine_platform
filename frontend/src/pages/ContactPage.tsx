@@ -24,10 +24,10 @@ export const ContactPage: React.FC = () => {
           <span>Get in Touch</span>
         </div>
         <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-          Contact TeleMed Support
+          Contact !Health Prism Support
         </h2>
         <p className="text-slate-500 text-sm">
-          Have questions or feedback about our AI healthcare platform? Reach out to our clinical engineering team.
+          Have questions or feedback about !Health Prism? Reach out to our clinical engineering team.
         </p>
       </div>
 
@@ -106,7 +106,7 @@ export const ContactPage: React.FC = () => {
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="How can TeleMed assist your medical workflow?"
+                  placeholder="How can !Health Prism assist your clinical or wellness workflow?"
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all resize-none"
                 />
               </div>

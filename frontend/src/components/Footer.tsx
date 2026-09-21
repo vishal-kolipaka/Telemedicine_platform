@@ -17,10 +17,13 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
               <div className="w-9 h-9 rounded-lg bg-sky-600 flex items-center justify-center text-white">
                 <Activity className="w-5 h-5" />
               </div>
-              <span className="text-xl font-bold text-white tracking-tight">TeleMed</span>
+              <div>
+                <span className="text-xl font-black text-white tracking-tight block">!Health Prism</span>
+                <span className="text-xs text-sky-400 font-semibold tracking-wide">Not Just One View of Health.</span>
+              </div>
             </div>
             <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-              An AI-driven decision support platform assisting healthcare professionals with automated medical report processing, structured data extraction, and clinical analysis.
+              A multimodal metabolic health decision support platform bringing together Clinical, Wearable, and Gut Microbiome signals for explainable risk assessment and personalized care routines.
             </p>
             <div className="flex items-center space-x-4 text-xs text-slate-400 pt-2">
               <div className="flex items-center space-x-1.5">
@@ -50,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
               </li>
               <li>
                 <button onClick={() => setActiveTab('about')} className="hover:text-sky-400 transition-colors">
-                  About TeleMed
+                  About !Health Prism
                 </button>
               </li>
               <li>
@@ -65,7 +68,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Support & Trust</h4>
             <p className="text-slate-400 text-xs leading-relaxed mb-4">
-              TeleMed provides clinical decision support tools designed for professional medical document extraction and data standardization.
+              !Health Prism provides multimodal metabolic health decision support tools designed for explainable risk assessment and personalized clinical routines.
             </p>
             <span className="inline-block px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded-full border border-slate-700">
               Phase 1 Release v1.0
@@ -75,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
         </div>
 
         <div className="pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} TeleMed Healthcare Platform. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} !Health Prism. All rights reserved.</p>
           <div className="flex items-center space-x-1">
             <span>Engineered with care for clinical excellence</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />

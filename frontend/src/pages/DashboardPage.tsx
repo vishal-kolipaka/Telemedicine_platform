@@ -73,20 +73,20 @@ export const DashboardPage: React.FC<Props> = ({ onStartAnalysis, onStartGuidedD
             {/* Platform Badge */}
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-sky-100/90 text-sky-800 text-xs font-bold border border-sky-200 shadow-2xs">
               <Sparkles className="w-4 h-4 text-sky-600" />
-              <span>Next-Gen Telemedicine Support</span>
+              <span>!Health Prism Multimodal Support</span>
             </div>
 
             {/* Title */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-              AI-Powered Healthcare <br className="hidden sm:inline" />
+              !Health Prism <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-500 bg-clip-text text-transparent">
-                Analysis Platform
+                Not Just One View of Health.
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl text-slate-600 max-w-2xl font-normal leading-relaxed">
-              Upload medical reports and receive structured analysis through our intelligent processing platform.
+              Synthesize clinical lab reports, wearable biometrics, and gut microbiome ecology into an explainable metabolic health assessment and personalized action routine.
             </p>
 
             {/* CTA Button */}
@@ -118,7 +118,7 @@ export const DashboardPage: React.FC<Props> = ({ onStartAnalysis, onStartGuidedD
                     <Brain className="w-6 h-6 animate-pulse" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900 text-sm">TeleMed Engine</h4>
+                    <h4 className="font-bold text-slate-900 text-sm">!Health Prism Engine</h4>
                     <span className="text-xs text-emerald-600 font-semibold flex items-center space-x-1">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" />
                       <span>Processing Active</span>
@@ -169,10 +169,10 @@ export const DashboardPage: React.FC<Props> = ({ onStartAnalysis, onStartGuidedD
       <section className="space-y-8 text-center">
         <div className="space-y-2">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-            Engineered for Modern Telemedicine
+            Engineered by !Health Prism
           </h2>
           <p className="text-slate-500 text-sm max-w-xl mx-auto">
-            Combining state-of-the-art document processing with seamless medical data organization.
+            Not just one view of health — combining multimodal clinical, wearable, and microbiome signals into one clear, explainable view.
           </p>
         </div>
 

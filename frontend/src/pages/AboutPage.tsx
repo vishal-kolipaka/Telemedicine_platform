@@ -9,13 +9,13 @@ export const AboutPage: React.FC = () => {
       <div className="text-center space-y-3">
         <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold">
           <Activity className="w-3.5 h-3.5 text-sky-600" />
-          <span>About TeleMed Platform</span>
+          <span>About !Health Prism</span>
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Empowering Healthcare with Intelligent Document Intelligence
+          !Health Prism — Not Just One View of Health.
         </h2>
         <p className="text-slate-600 text-base max-w-2xl mx-auto leading-relaxed">
-          TeleMed is built to assist medical practitioners, clinicians, and researchers by turning unstructured health reports into standardized, model-ready clinical data.
+          !Health Prism is built to assist medical practitioners, clinicians, and individuals by synthesizing multimodal health signals — Clinical labs, Wearable biometrics, and Gut Microbiome ecology — into unified, explainable metabolic health assessments and actionable care plans.
         </p>
       </div>
 
@@ -29,11 +29,11 @@ export const AboutPage: React.FC = () => {
         </div>
 
         <p className="text-slate-700 text-sm leading-relaxed">
-          Healthcare data exists in disparate formats — laboratory PDFs, clinical notes, scanned reports, and device logs. TeleMed bridges these data sources into a unified, high-integrity decision support platform.
+          Healthcare data exists in disparate formats — laboratory PDFs, clinical notes, wearable streams, and microbiome profiles. !Health Prism bridges these multimodal data sources into a unified, high-integrity decision support platform.
         </p>
 
         <p className="text-slate-700 text-sm leading-relaxed">
-          By combining advanced document reading with automated quality verification, TeleMed ensures that patient information is accurately parsed and prepared for clinical decision support.
+          By combining advanced multimodal reading with automated quality verification and explainable AI, !Health Prism ensures that complex health information is accurately parsed and prepared for clinical decision support.
         </p>
       </div>
 

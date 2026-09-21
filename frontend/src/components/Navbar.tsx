@@ -22,14 +22,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5">
-                <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-sky-700 via-sky-600 to-cyan-600 bg-clip-text text-transparent">
-                  TeleMed
-                </span>
-                <span className="px-1.5 py-0.5 text-[10px] font-semibold bg-sky-100 text-sky-700 rounded-md uppercase tracking-wider">
-                  AI Platform
+                <span className="text-xl font-black tracking-tight bg-gradient-to-r from-sky-700 via-sky-600 to-cyan-600 bg-clip-text text-transparent">
+                  !Health Prism
                 </span>
               </div>
-              <span className="text-[11px] text-slate-400 font-medium">Healthcare Decision Support</span>
+              <span className="text-[11px] text-slate-500 font-medium tracking-tight">
+                Not Just One View of Health.
+              </span>
             </div>
           </div>
 
