@@ -10,6 +10,7 @@ import { HealthAssessmentResults } from '../components/HealthAssessmentResults';
 import { PersonalizedHealthPlanPage } from '../components/PersonalizedHealthPlanPage';
 import { PersonalizedProgressPlanPage } from '../components/PersonalizedProgressPlanPage';
 import { NotEnoughDataGuidance } from '../components/NotEnoughDataGuidance';
+import { DeploymentWaitNotice } from '../components/DeploymentWaitNotice';
 import type { CategoryGuidanceInfo } from '../components/NotEnoughDataGuidance';
 import { analyzeDocuments, runHealthAssessment } from '../services/api';
 import type { DocumentAnalysisResult, HealthAssessmentResponse } from '../types/reader';
@@ -662,16 +663,23 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({
 
       {/* State 3: Analyzing with ModelRouter & Fusion V2 */}
       {state === 'analyzing' && (
-        <div className="py-12 flex flex-col items-center justify-center space-y-4">
+        <div className="py-12 flex flex-col items-center justify-center space-y-5 animate-fade-in text-center max-w-xl mx-auto">
           <div className="w-16 h-16 rounded-3xl bg-sky-100 text-sky-600 flex items-center justify-center shadow-lg shadow-sky-600/10">
             <Brain className="w-8 h-8 animate-pulse" />
           </div>
-          <div className="text-center space-y-1">
+          <div className="space-y-1">
             <h3 className="text-lg font-bold text-slate-900">Synthesizing Health Assessment</h3>
-            <p className="text-xs text-slate-500 max-w-sm">
+            <p className="text-xs text-slate-500 max-w-sm mx-auto">
               Evaluating available biomarkers and clinical parameters...
             </p>
           </div>
+
+          {/* Deployment / Cold-Start Informational Notice */}
+          <DeploymentWaitNotice
+            title="Assessment may take a little longer on the first run"
+            message="Because !Health Prism is running on a free-tier deployment, the analysis service may need a moment to wake up. Please wait while we complete your health assessment."
+            subtext="Thank you for your patience."
+          />
         </div>
       )}
 

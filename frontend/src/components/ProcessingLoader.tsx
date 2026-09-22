@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Loader2, CheckCircle2, FileSearch, Cpu, Sparkles, Database } from 'lucide-react';
+import { DeploymentWaitNotice } from './DeploymentWaitNotice';
 
 export const ProcessingLoader: React.FC = () => {
   const steps = [
@@ -69,6 +70,13 @@ export const ProcessingLoader: React.FC = () => {
           );
         })}
       </div>
+
+      {/* Deployment / Cold-Start Informational Notice */}
+      <DeploymentWaitNotice
+        title="First analysis may take a little longer"
+        message="Because !Health Prism is running on a free-tier deployment, the backend service may need a moment to wake up before processing begins. Please wait while we complete the analysis."
+        subtext="Thank you for your patience."
+      />
 
       <div className="text-xs text-slate-400 font-medium">
         Please wait while we complete the structural analysis...
