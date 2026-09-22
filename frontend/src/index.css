@@ -253,3 +253,32 @@
 .guided-blink-glow-box {
   animation: guidedBlinkGlowBox 1.5s ease-in-out infinite;
 }
+
+/* ──── Deployment / Cold-Start High-Visibility Attention Keyframes ──── */
+@keyframes serviceWarmupPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.45), 0 8px 24px -4px rgba(14, 165, 233, 0.3);
+    border-color: rgba(56, 189, 248, 0.9);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(14, 165, 233, 0.22), 0 16px 36px -4px rgba(14, 165, 233, 0.55);
+    border-color: rgba(2, 132, 199, 1);
+  }
+}
+
+@keyframes noticeShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.service-warmup-card {
+  animation: serviceWarmupPulse 2s ease-in-out infinite;
+}
+
+.notice-shimmer-bar {
+  animation: noticeShimmer 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}

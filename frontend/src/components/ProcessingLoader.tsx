@@ -40,6 +40,13 @@ export const ProcessingLoader: React.FC = () => {
         </p>
       </div>
 
+      {/* Deployment / Cold-Start Informational Notice */}
+      <DeploymentWaitNotice
+        title="First analysis may take a little longer"
+        message="Because !Health Prism is running on a free-tier deployment, the backend service may need a moment to wake up before processing begins. Please wait while we complete the analysis."
+        subtext="Thank you for your patience."
+      />
+
       {/* Steps List */}
       <div className="space-y-3 max-w-sm mx-auto text-left border border-slate-200/80 bg-slate-50/50 p-4 rounded-xl">
         {steps.map((step, idx) => {
@@ -70,13 +77,6 @@ export const ProcessingLoader: React.FC = () => {
           );
         })}
       </div>
-
-      {/* Deployment / Cold-Start Informational Notice */}
-      <DeploymentWaitNotice
-        title="First analysis may take a little longer"
-        message="Because !Health Prism is running on a free-tier deployment, the backend service may need a moment to wake up before processing begins. Please wait while we complete the analysis."
-        subtext="Thank you for your patience."
-      />
 
       <div className="text-xs text-slate-400 font-medium">
         Please wait while we complete the structural analysis...
