@@ -89,6 +89,9 @@ feature_mapper = FeatureMapper(
 
 
 @app.get("/api/health")
+@app.head("/api/health", include_in_schema=False)
+@app.get("/health")
+@app.head("/health", include_in_schema=False)
 def health_check():
     """Healthcheck endpoint."""
     return {"status": "ok", "service": "TeleMed AI Healthcare Platform", "version": "1.0.0"}
@@ -503,6 +506,7 @@ if os.path.exists(DIST_DIR):
         app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 
     @app.get("/{full_path:path}")
+    @app.head("/{full_path:path}", include_in_schema=False)
     async def serve_frontend(full_path: str):
         if full_path.startswith("api/"):
             raise HTTPException(status_code=404, detail="API endpoint not found")
